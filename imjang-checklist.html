@@ -66,6 +66,7 @@ header p.lede{color:var(--muted);font-size:14px;margin-top:8px;max-width:34em}
 
 /* ── Filter chips ── */
 .chips{display:flex;gap:8px;padding:16px 0 4px;flex-wrap:wrap}
+.chips.lv{padding-top:8px}
 .chip{
   border:1px solid var(--line);background:var(--surface);color:var(--muted);
   border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;
@@ -80,6 +81,18 @@ section>h2{font-size:17px;font-weight:700;letter-spacing:-0.02em;display:flex;al
 section>h2 .count{font-size:12px;font-weight:500;color:var(--muted)}
 section>p.desc{color:var(--muted);font-size:13px;margin-top:4px}
 .items{margin-top:12px;display:grid;gap:10px}
+
+/* ── 임장 구분 (입지 / 단지) ── */
+.group{margin-top:34px}
+.group-head{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  background:var(--accent-soft);border-radius:12px;padding:12px 14px;
+}
+.group-tag{font-size:15px;font-weight:700;color:var(--accent);letter-spacing:-0.02em}
+.group-prog{margin-left:auto;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.group-prog strong{color:var(--accent);font-weight:700}
+.group-desc{flex:1 1 100%;font-size:12.5px;color:var(--muted)}
+.group>section:first-of-type{margin-top:18px}
 
 /* ── Item card ── */
 .item{
@@ -120,7 +133,7 @@ section>p.desc{color:var(--muted);font-size:13px;margin-top:4px}
 .item-body p{font-size:13.5px;color:var(--ink)}
 .item-body p+h4{margin-top:12px}
 
-/* ── 특약 ── */
+/* ── 메모 템플릿 ── */
 .note{
   background:var(--surface);border:1px solid var(--line);border-radius:14px;
   box-shadow:var(--shadow);padding:14px;
@@ -193,7 +206,13 @@ button:focus-visible,.item-head:focus-visible,summary:focus-visible{
   <div class="done-msg">필수 항목을 다 봤어요. 기억은 하루면 흐려집니다 — 단지를 떠나기 전에 메모 템플릿을 채워두세요.</div>
 </div>
 
-<div class="chips" role="group" aria-label="중요도 필터">
+<div class="chips" role="group" aria-label="임장 구분 필터">
+  <button class="chip cat" data-cat="all" aria-pressed="true">전체</button>
+  <button class="chip cat" data-cat="loc" aria-pressed="false">입지 임장</button>
+  <button class="chip cat" data-cat="apt" aria-pressed="false">단지 임장</button>
+</div>
+
+<div class="chips lv" role="group" aria-label="중요도 필터">
   <button class="chip" data-filter="all" aria-pressed="true">전체</button>
   <button class="chip" data-filter="must" aria-pressed="false">필수</button>
   <button class="chip" data-filter="imp" aria-pressed="false">중요</button>
@@ -230,7 +249,7 @@ button:focus-visible,.item-head:focus-visible,summary:focus-visible{
 <script>
 const DATA = [
 {
-  title:"입지 · 교통", desc:"입지 임장의 핵심은 '지도에 안 나오는 것'입니다. 거리는 지도로 알 수 있지만 경사와 신호등, 아침의 밀도는 발로만 알 수 있습니다.",
+  cat:"loc", title:"교통", desc:"입지 임장의 핵심은 '지도에 안 나오는 것'입니다. 거리는 지도로 알 수 있지만 경사와 신호등, 아침의 밀도는 발로만 알 수 있습니다.",
   items:[
     {id:"t1",lv:"must",q:"역까지 내 발로 걸어봤는가",
      why:"매물 정보의 도보 시간은 보통 직선거리 100m를 1분으로 환산한 값입니다. 오르막, 신호등, 돌아가는 길, 횡단보도 대기가 모두 빠져 있어 실제로는 1.5배까지 벌어집니다.",
@@ -250,7 +269,7 @@ const DATA = [
   ]
 },
 {
-  title:"입지 · 생활 인프라",
+  cat:"loc", title:"생활 인프라",
   items:[
     {id:"l1",lv:"imp",q:"장은 어디서 보게 되는가",
      why:"마트까지의 거리는 매주 반복되는 시간과 비용입니다. 차가 없으면 더 결정적입니다.",
@@ -267,7 +286,7 @@ const DATA = [
   ]
 },
 {
-  title:"입지 · 학군",
+  cat:"loc", title:"학군",
   items:[
     {id:"e1",lv:"imp",q:"초등학교 통학로가 안전한가",
      why:"이른바 '초품아'가 비싼 이유는 학교가 가까워서가 아니라 큰 길을 건너지 않아서입니다. 되팔 때도 같은 이유로 수요가 받쳐줍니다.",
@@ -281,7 +300,7 @@ const DATA = [
   ]
 },
 {
-  title:"입지 · 환경과 소음", desc:"사진에 찍히지 않는 것들입니다. 소리와 냄새는 반드시 현장에서 확인해야 합니다.",
+  cat:"loc", title:"환경과 소음", desc:"사진에 찍히지 않는 것들입니다. 소리와 냄새는 반드시 현장에서 확인해야 합니다.",
   items:[
     {id:"v1",lv:"must",q:"소음원을 직접 들어봤는가",
      why:"도로·철도·학교 운동장·공장은 지도에 보이지만 소리의 크기는 현장에서만 압니다. 창을 닫았을 때와 열었을 때가 완전히 다릅니다.",
@@ -298,7 +317,7 @@ const DATA = [
   ]
 },
 {
-  title:"입지 · 호재와 리스크",
+  cat:"loc", title:"호재와 리스크",
   items:[
     {id:"d1",lv:"imp",q:"개발 계획을 원본으로 확인했는가",
      why:"중개사가 말하는 '호재'에는 확정 계획, 검토 단계, 소문이 섞여 있습니다. '추진 중'과 '착공'은 몇 년 차이입니다.",
@@ -312,7 +331,7 @@ const DATA = [
   ]
 },
 {
-  title:"단지 · 관리 상태", desc:"단지 임장은 '관리가 되고 있는가'를 보는 일입니다. 관리 수준은 앞으로 내가 낼 돈과 직결됩니다.",
+  cat:"apt", title:"관리 상태", desc:"단지 임장은 '관리가 되고 있는가'를 보는 일입니다. 관리 수준은 앞으로 내가 낼 돈과 직결됩니다.",
   items:[
     {id:"c1",lv:"imp",q:"외벽과 지하주차장 상태는 어떤가",
      why:"외벽 균열과 누수 자국, 지하주차장 천장의 하얗게 굳은 자국(백화)은 관리 수준과 앞으로 들어갈 수선비를 보여줍니다.",
@@ -329,7 +348,7 @@ const DATA = [
   ]
 },
 {
-  title:"단지 · 주차",
+  cat:"apt", title:"주차",
   items:[
     {id:"k1",lv:"must",q:"평일 밤에 주차장을 봤는가",
      why:"낮의 주차장은 어디나 여유롭습니다. 진실은 차가 다 들어온 밤에 드러납니다. 매일 겪을 스트레스를 미리 보는 유일한 방법입니다.",
@@ -343,7 +362,7 @@ const DATA = [
   ]
 },
 {
-  title:"단지 · 동·향·층",
+  cat:"apt", title:"동·향·층",
   items:[
     {id:"b1",lv:"imp",q:"낮에 햇빛이 실제로 들어오는가",
      why:"향은 도면으로 알 수 있지만 앞 동에 가리는지는 현장에서만 압니다. 남향이어도 앞 동이 가까우면 겨울엔 종일 그늘입니다.",
@@ -360,7 +379,7 @@ const DATA = [
   ]
 },
 {
-  title:"세대 내부", desc:"집을 보는 시간은 보통 10분 남짓입니다. 무엇을 볼지 미리 정해 가지 않으면 벽지 색만 보고 나오게 됩니다.",
+  cat:"apt", title:"세대 내부", desc:"집을 보는 시간은 보통 10분 남짓입니다. 무엇을 볼지 미리 정해 가지 않으면 벽지 색만 보고 나오게 됩니다.",
   items:[
     {id:"h1",lv:"must",q:"누수·결로 흔적을 직접 봤는가",
      why:"도배로 가려도 흔적은 남습니다. 계약 후에 발견하면 수리비와 책임을 두고 분쟁이 됩니다.",
@@ -383,7 +402,7 @@ const DATA = [
   ]
 },
 {
-  title:"사람에게 묻기", desc:"중개사는 팔려는 사람입니다. 같은 질문을 다른 사람에게 해보면 답이 갈리는 지점이 보입니다.",
+  cat:"apt", title:"사람에게 묻기", desc:"중개사는 팔려는 사람입니다. 같은 질문을 다른 사람에게 해보면 답이 갈리는 지점이 보입니다.",
   items:[
     {id:"w1",lv:"imp",q:"관리사무소에 직접 물어봤는가",
      why:"예정 공사, 하자 이력, 민원은 관리사무소가 가장 정확합니다. 파는 입장이 아니기 때문에 답이 다릅니다.",
@@ -461,6 +480,11 @@ const PREP = [
  {id:"g5",q:"편한 신발 (한 번에 여러 단지를 걷게 됩니다)"},
  {id:"g6",q:"미리 뽑아둔 실거래가·시세 (스크린샷)"},
  {id:"g7",q:"재방문 시간대 계획 (평일 밤·주말 낮)"}
+];
+
+const CATS = [
+ {id:"loc", name:"입지 임장", desc:"단지 바깥을 봅니다. 교통·생활·학군·환경처럼 이사한 뒤에는 바꿀 수 없는 조건입니다."},
+ {id:"apt", name:"단지 임장", desc:"단지 안을 봅니다. 관리 상태와 세대 내부처럼 대부분 돈으로 환산되는 조건입니다."}
 ];
 
 const LV = {must:"필수",imp:"중요",chk:"확인"};
@@ -567,12 +591,23 @@ function itemHTML(it, withBody){
 }
 
 const sectionsEl = document.getElementById("sections");
-sectionsEl.innerHTML = DATA.map(sec=>`
-  <section data-sec>
-    <h2>${sec.title} <span class="count">${sec.items.length}문항</span></h2>
-    ${sec.desc?`<p class="desc">${sec.desc}</p>`:""}
-    <div class="items">${sec.items.map(it=>itemHTML(it,true)).join("")}</div>
-  </section>`).join("");
+sectionsEl.innerHTML = CATS.map(cat=>{
+  const secs = DATA.filter(s=>s.cat===cat.id);
+  const total = secs.reduce((n,s)=>n+s.items.length, 0);
+  return `<div class="group" data-cat="${cat.id}">
+    <div class="group-head">
+      <span class="group-tag">${cat.name}</span>
+      <span class="group-prog"><strong data-gdone="${cat.id}">0</strong>/${total}</span>
+      <p class="group-desc">${cat.desc}</p>
+    </div>
+    ${secs.map(sec=>`
+    <section data-sec>
+      <h2>${sec.title} <span class="count">${sec.items.length}문항</span></h2>
+      ${sec.desc?`<p class="desc">${sec.desc}</p>`:""}
+      <div class="items">${sec.items.map(it=>itemHTML(it,true)).join("")}</div>
+    </section>`).join("")}
+  </div>`;
+}).join("");
 
 document.getElementById("notes").innerHTML = NOTES.map((cl,i)=>`
   <div class="note">
@@ -598,6 +633,12 @@ function refresh(){
   document.getElementById("mustTotal").textContent = mustIds.length;
   document.getElementById("barFill").style.width = (allIds.length? done/allIds.length*100 : 0)+"%";
   document.getElementById("progress").classList.toggle("all-must-done", mustDone===mustIds.length && mustIds.length>0);
+  CATS.forEach(cat=>{
+    const el = document.querySelector(`[data-gdone="${cat.id}"]`);
+    if(!el) return;
+    el.textContent = DATA.filter(s=>s.cat===cat.id)
+      .flatMap(s=>s.items).filter(i=>state[i.id]).length;
+  });
 }
 refresh();
 
@@ -641,18 +682,28 @@ function fallbackCopy(text, ok){
   document.body.removeChild(ta);
 }
 
+let curCat = "all", curLv = "all";
+function applyFilters(){
+  document.querySelectorAll("[data-sec] .item").forEach(card=>{
+    card.classList.toggle("hidden", curLv!=="all" && card.dataset.lv!==curLv);
+  });
+  document.querySelectorAll("[data-sec]").forEach(sec=>{
+    const visible = sec.querySelectorAll(".item:not(.hidden)").length;
+    sec.style.display = visible ? "" : "none";
+  });
+  document.querySelectorAll(".group").forEach(g=>{
+    const catOk = curCat==="all" || g.dataset.cat===curCat;
+    const visible = g.querySelectorAll(".item:not(.hidden)").length;
+    g.style.display = (catOk && visible) ? "" : "none";
+  });
+}
 document.querySelectorAll(".chip").forEach(chip=>{
   chip.addEventListener("click", ()=>{
-    document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
+    const row = chip.parentElement;
+    row.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
     chip.setAttribute("aria-pressed","true");
-    const f = chip.dataset.filter;
-    document.querySelectorAll("[data-sec] .item").forEach(card=>{
-      card.classList.toggle("hidden", f!=="all" && card.dataset.lv!==f);
-    });
-    document.querySelectorAll("[data-sec]").forEach(sec=>{
-      const visible = sec.querySelectorAll(".item:not(.hidden)").length;
-      sec.style.display = visible ? "" : "none";
-    });
+    if(chip.dataset.cat) curCat = chip.dataset.cat; else curLv = chip.dataset.filter;
+    applyFilters();
   });
 });
 
