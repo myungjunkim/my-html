@@ -161,6 +161,18 @@ a.go{
 }
 a.go:hover{border-color:var(--accent);background:var(--accent-soft)}
 a.go span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.golinks{display:flex;flex-wrap:wrap;gap:6px}
+a.go.nv{color:var(--ink-2)}
+a.go.nv::before{content:"";width:7px;height:7px;border-radius:2px;background:#03c75a;flex:none}
+.idx li{flex-wrap:wrap}
+.idx .nm{display:flex;align-items:center;gap:7px;flex:1 1 auto}
+.idx .d{margin-left:auto}
+.idx a.nv{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:16px;height:16px;border-radius:3px;background:#03c75a;color:#fff;
+  font-size:10px;font-weight:600;line-height:1;text-decoration:none;
+}
+.idx a.nv:hover{text-decoration:none;filter:brightness(1.08)}
 
 .empty{padding:26px 0;color:var(--muted);font-size:14px;font-weight:300}
 
@@ -247,6 +259,7 @@ footer.note code{font-family:var(--mono);font-size:11.5px;background:var(--surfa
   <p><b>제외한 매물.</b> 19묶음 중 2묶음(구리역롯데캐슬시그니처 1억, e편한세상수택센트럴파크 2.5억)은 상세 조회에서 <code>not found item in catalog</code>가 떠 <b>생존 확인에 실패해 제외</b>했습니다. 목록에만 남아 있고 실제로는 내려간 매물로 보입니다 — 같은 단지의 다른 전용 59㎡대가 10억 전후인 점에 비추어도 정상 매매가로 보기 어렵습니다.</p>
   <p><b>거리에 대하여.</b> 표기한 m는 역 좌표에서 단지 좌표까지의 <b>직선거리</b>입니다. 실제 도보 경로는 이보다 깁니다 — 괄호 안 도보 시간은 직선거리를 분당 80m로 환산한 최소치이니, 실제로는 1.2–1.5배로 잡으시는 편이 안전합니다.</p>
   <p><b>읽는 법.</b> 호갱노노는 같은 평형·층의 매물을 하나로 묶습니다. <b>묶음 N건</b>이 그 안의 실제 매물 수이고, 링크를 열면 묶음 전체가 펼쳐집니다. 평당가는 공급면적 기준입니다. 가격은 수집 시점 호가이며 실거래가가 아닙니다.</p>
+  <p><b>네이버 링크.</b> 매물 옆 <b>네이버</b> 버튼과 단지 목록의 초록색 <b>N</b>은 네이버 부동산 모바일 <b>검색 결과</b>로 이어집니다. 단지 고유번호는 네이버에서만 확인할 수 있어 단지 상세 화면으로 바로 보내지는 못하니, 검색 결과에서 한 번 더 고르셔야 합니다. 검색어는 "법정동+단지명"이며, 법정동을 확인하지 못한 리버프라임토평은 단지명만으로 검색합니다.</p>
   <p><b>출처.</b> hogangnono.com 공개 API — <code>/api/v2/apts/closest</code>, <code>/api/v2/item-catalogs/summaries?tradeTypes=0</code>, <code>/api/v2/item-catalogs/{areaHoId}?tradeType=0</code>. 2026년 9월 17일 수집. 직방 제휴 광고 매물 기준이라 시장 전체 물량보다 적습니다 — 여기 없다고 매물이 없는 것은 아닙니다.</p>
 </footer>
 
@@ -254,6 +267,17 @@ footer.note code{font-family:var(--mono);font-size:11.5px;background:var(--surfa
 
 <script>
 const DATA = [{"aptKey": "wonil", "apt": "원일", "hash": "ajje9", "dist": 1678, "hh": 116, "age": "1988년 6월(39년차)", "price": 40000, "pub": 85.61, "priv": 56.61, "py": 26, "dong": "1동", "floor": "1", "bfloor": 5, "rooms": 3, "baths": 1, "dir": "s", "title": "1층 저렴한 매물", "aho": 12569142, "iid": 48751577, "real": true, "n": 2}, {"aptKey": "wonil", "apt": "원일", "hash": "ajje9", "dist": 1678, "hh": 116, "age": "1988년 6월(39년차)", "price": 43000, "pub": 85.61, "priv": 56.61, "py": 26, "dong": "1동", "floor": "1", "bfloor": 5, "rooms": 3, "baths": 1, "dir": "s", "title": "재건축,구리역(8호선,경의중)도보권,도보한양대병원1분", "aho": 12569142, "iid": 191108, "real": true, "n": 2}, {"aptKey": "namyang", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 69000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "고", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "e", "title": "고층 왕숙천 특급뷰 입주가능한 귀한매물 수리된집", "aho": 4332614, "iid": 50043965, "real": true, "n": 7}, {"aptKey": "namyang", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 69000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "e", "title": "귀한입주 복층테라스 조망굿 깨끗", "aho": 4332614, "iid": 50049792, "real": true, "n": 7}, {"aptKey": "namyang", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "고", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "e", "title": "ACE 왕숙천뷰 일부수리,테라스 구리역도보가능", "aho": 4332614, "iid": 50050873, "real": true, "n": 7}, {"aptKey": "namyang", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "귀한입주. 방3화2. 좋은구조. 깨끗. 복층테라스있어요", "aho": 4332614, "iid": 50044131, "real": true, "n": 7}, {"aptKey": "namyang", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "리버 마운틴뷰 TOP층 야외전용테라스 10월 전후", "aho": 4332614, "iid": 50141799, "real": true, "n": 7}, {"aptKey": "namyang", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "입주협의 깨끗 복층테라스", "aho": 4332614, "iid": 50044529, "real": true, "n": 7}, {"aptKey": "namyang", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "고", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "옥탑방 나무 사다리 시공, 샷시, 욕실, 주방 교체", "aho": 4332614, "iid": 50043922, "real": true, "n": 7}, {"aptKey": "river", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 73000, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "509동", "floor": "10", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "부분수리 확장 입주협의", "aho": 2184451, "iid": 49543995, "real": true, "n": 3}, {"aptKey": "river", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 73000, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "509동", "floor": "10", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "27년1월하순입주가능 왕숙천뷰 최근부분수리 깨끗한집", "aho": 2184451, "iid": 49544524, "real": true, "n": 3}, {"aptKey": "river", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 73000, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "509동", "floor": "10", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "왕숙천뷰.올확장.부분수리", "aho": 2184451, "iid": 248066, "real": true, "n": 3}, {"aptKey": "river", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 74500, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "502동", "floor": "고", "bfloor": 18, "rooms": 3, "baths": 2, "dir": "s", "title": "입주가능 베란다확장 로얄층 전망굿 주방올수리 주인거주", "aho": 2184114, "iid": 50221802, "real": true, "n": 1}, {"aptKey": "river", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 77000, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "509동", "floor": "19", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "집주인거주. 작은방과 뒤베란다 왕수천뷰. 앞베란다 롯데타워", "aho": 2184433, "iid": 225968, "real": true, "n": 1}];
+
+const NAVER = "https://m.land.naver.com/search/result/";
+// 단지명이 이미 동 이름으로 시작하면(다산동 다산한신휴플러스) 동을 덧붙이지 않는다.
+function naverQuery(dong, apt){
+  return dong && !apt.startsWith(dong.slice(0,-1)) ? dong + apt : apt;
+}
+// 네이버 부동산 모바일 검색: "법정동+단지명"으로 보낸다. 법정동을 모르는 단지는 단지명만 넘긴다.
+const DONG = {"원일":"교문동","남양i좋은집":"수택동"};
+function naver(d){
+  return NAVER + encodeURIComponent(naverQuery(DONG[d.apt]||"", d.apt));
+}
 const BANDS = ["4억대", "5억대", "6억대", "7억대"];
 const APTS = [{k:"river",n:"리버프라임토평",d:1554},{k:"wonil",n:"원일",d:1678},{k:"namyang",n:"남양i좋은집",d:1776}];
 const MAXD = 2000;
@@ -336,7 +360,10 @@ function row(d){
         <div class="track"><div class="fill" style="width:${pct}%"></div></div>
         <div class="lab"><span>역까지 <b>${d.dist.toLocaleString()}m</b></span><span>도보 ${d.walk}분~</span></div>
       </div>
-      <a class="go" href="${url}" target="_blank" rel="noopener">호갱노노에서 보기 <span>↗</span></a>
+      <div class="golinks">
+        <a class="go" href="${url}" target="_blank" rel="noopener">호갱노노 <span>↗</span></a>
+        <a class="go nv" href="${naver(d)}" target="_blank" rel="noopener">네이버 <span>↗</span></a>
+      </div>
     </div>
   </li>`;
 }
@@ -346,7 +373,10 @@ document.getElementById("idx").innerHTML = byApt.map(a=>{
   const rows = DATA.filter(d=>d.apt===a.apt);
   const lo = Math.min(...rows.map(r=>r.price)), hi = Math.max(...rows.map(r=>r.price));
   return `<li>
-    <a href="https://hogangnono.com/apt/${a.hash}" target="_blank" rel="noopener">${a.apt}</a>
+    <span class="nm">
+      <a href="https://hogangnono.com/apt/${a.hash}" target="_blank" rel="noopener">${a.apt}</a>
+      <a class="nv" href="${naver(a)}" target="_blank" rel="noopener" aria-label="네이버 부동산에서 ${a.apt} 검색" title="네이버 부동산에서 검색">N</a>
+    </span>
     <span class="d">${a.dist.toLocaleString()}m · ${rows.length}건 · ${won(lo)}${lo!==hi?"–"+won(hi):""}</span>
   </li>`;
 }).join("");

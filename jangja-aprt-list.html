@@ -157,6 +157,18 @@ a.go{
 }
 a.go:hover{border-color:var(--ink);background:var(--surface-2)}
 a.go span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.golinks{display:flex;flex-wrap:wrap;gap:6px}
+a.go.nv{color:var(--ink-2)}
+a.go.nv::before{content:"";width:7px;height:7px;border-radius:2px;background:#03c75a;flex:none}
+.idx li{flex-wrap:wrap}
+.idx .nm{display:flex;align-items:center;gap:7px;flex:1 1 auto}
+.idx .d{margin-left:auto}
+.idx a.nv{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:16px;height:16px;border-radius:3px;background:#03c75a;color:#fff;
+  font-size:10px;font-weight:600;line-height:1;text-decoration:none;
+}
+.idx a.nv:hover{text-decoration:none;filter:brightness(1.08)}
 
 .empty{padding:26px 0;color:var(--muted);font-size:14px;font-weight:300}
 
@@ -259,12 +271,25 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   <p><b>이 보드의 조건.</b> 매매 7억 이하 · 전용면적 55–62㎡ · 두 역 반경 2km 이내 · 아파트(오피스텔·빌라 제외). 전용 59㎡대를 겨냥한 범위이며, 실제 결과는 전용 56.61–59.99㎡ 사이에 들어옵니다.</p>
   <p><b>거리에 대하여.</b> 표기한 m는 역 좌표에서 단지 좌표까지의 <b>직선거리</b>입니다. 실제 도보 경로는 이보다 깁니다 — 괄호 안 도보 시간은 직선거리를 분당 80m로 환산한 최소치이니, 실제로는 1.2–1.5배로 잡으시는 편이 안전합니다.</p>
   <p><b>읽는 법.</b> 호갱노노는 같은 평형·층의 매물을 하나로 묶습니다. <b>묶음 N건</b>이 그 안의 실제 매물 수이고, 링크를 열면 묶음 전체가 펼쳐집니다. 평당가는 공급면적 기준입니다. 가격은 수집 시점 호가이며 실거래가가 아닙니다.</p>
+  <p><b>네이버 링크.</b> 매물 옆 <b>네이버</b> 버튼과 단지 목록의 초록색 <b>N</b>은 네이버 부동산 모바일 <b>검색 결과</b>로 이어집니다. 단지 고유번호는 네이버에서만 확인할 수 있어 단지 상세 화면으로 바로 보내지는 못하니, 검색 결과에서 한 번 더 고르셔야 합니다. 검색어는 "법정동+단지명"입니다.</p>
   <p><b>출처.</b> hogangnono.com 공개 API — <code>/api/v2/apts/closest</code>, <code>/api/v2/item-catalogs/summaries?tradeTypes=0</code>, <code>/api/v2/item-catalogs/{areaHoId}</code>. 2026년 9월 15일 수집. 직방 제휴 광고 매물 기준이라 시장 전체 물량보다 적습니다.</p>
 </footer>
 </div>
 
 <script>
 const DATA = [{"stKey": "jangja", "st": "장자호수공원역", "apt": "원일", "hash": "ajje9", "dist": 1640, "hh": 116, "age": "입주 39년차", "addr": "경기도 구리시 교문동 232", "price": 40000, "pub": 85.61, "priv": 56.61, "py": 26, "dong": "1동", "floor": "1", "bfloor": 5, "rooms": 3, "baths": 1, "dir": "s", "title": "재건축,구리역(8호선,경의중)도보권,도보한양대병원1분", "n": 2, "aho": 12569142, "iid": 191108, "real": true, "ok": true}, {"stKey": "dasan", "st": "다산역", "apt": "다산한신휴플러스", "hash": "5Xkd9", "dist": 1574, "hh": 270, "age": "입주 28년차", "addr": "경기도 남양주시 다산동 4026-6", "price": 45000, "pub": 82.14, "priv": 59.84, "py": 25, "dong": "102동", "floor": "13", "bfloor": 22, "rooms": 3, "baths": 1, "dir": "w", "title": "부분수리 에2 세안고매매", "n": 1, "aho": 11714830, "iid": 49771395, "real": true, "ok": true}, {"stKey": "dasan", "st": "다산역", "apt": "인창해모로", "hash": "5TI25", "dist": 926, "hh": 953, "age": "입주 25년차", "addr": "경기도 구리시 인창동 29", "price": 53000, "pub": 80.79, "priv": 59.93, "py": 24, "dong": "101동", "floor": "1", "bfloor": 25, "rooms": 3, "baths": 1, "dir": "s", "title": "농협 입점으로 생활편리하며, 아이 키우는분, 어르신 편리", "n": 3, "aho": 7614139, "iid": 249558, "real": true, "ok": true}, {"stKey": "dasan", "st": "다산역", "apt": "인창해모로", "hash": "5TI25", "dist": 926, "hh": 953, "age": "입주 25년차", "addr": "경기도 구리시 인창동 29", "price": 55000, "pub": 80.79, "priv": 59.93, "py": 24, "dong": "107동", "floor": "중", "bfloor": 25, "rooms": 3, "baths": 1, "dir": "s", "title": "남향 뻥뷰 세안고", "n": 1, "aho": 7614254, "iid": 49520653, "real": true, "ok": true}, {"stKey": "jangja", "st": "장자호수공원역", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1735, "hh": 319, "age": "입주 23년차", "addr": "경기도 구리시 수택동 550", "price": 69000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "옥탑방 나무 사다리 시공, 샷시, 욕실, 주방 교체", "n": 7, "aho": 4332614, "iid": 50043922, "real": true, "ok": true}, {"stKey": "dasan", "st": "다산역", "apt": "인창4단지주공", "hash": "5Txbf", "dist": 1970, "hh": 1408, "age": "입주 31년차", "addr": "경기도 구리시 인창동 666-1", "price": 70000, "pub": 78.63, "priv": 58.14, "py": 24, "dong": "403동", "floor": "1", "bfloor": 15, "rooms": 3, "baths": 1, "dir": "sw", "title": "올수리된 예쁜집이며 관리가 잘되었어요", "n": 1, "aho": 4167600, "iid": 50007749, "real": true, "ok": true}];
+
+const NAVER = "https://m.land.naver.com/search/result/";
+// 단지명이 이미 동 이름으로 시작하면(다산동 다산한신휴플러스) 동을 덧붙이지 않는다.
+function naverQuery(dong, apt){
+  return dong && !apt.startsWith(dong.slice(0,-1)) ? dong + apt : apt;
+}
+// 네이버 부동산 모바일 검색: "법정동+단지명"으로 보낸다. 단지 고유번호는 네이버에서만 알 수 있어
+// 단지 상세로 바로 못 가고 검색 결과까지만 연결된다.
+function naver(d){
+  const m = (d.addr||"").match(/\s([\uac00-\ud7a3\d]+[\ub3d9\uc74d\uba74])\s/);
+  return NAVER + encodeURIComponent(naverQuery(m ? m[1] : "", d.apt));
+}
 const BANDS = ["4억대","5억대","6억대","7억대"];
 const STS = [{k:"jangja",n:"장자호수공원역"},{k:"dasan",n:"다산역"}];
 const MAXD = 2000;
@@ -348,7 +373,10 @@ function row(d){
         <div class="track"><div class="tick" style="left:50%"></div><div class="fill" style="width:${pct}%"></div></div>
         <div class="lab"><span class="walk">도보 약 ${d.walk}분</span><span><b>${d.dist.toLocaleString()}</b>m</span></div>
       </div>
-      <a class="go" href="${url}" target="_blank" rel="noopener">매물 보기 <span>↗</span></a>
+      <div class="golinks">
+        <a class="go" href="${url}" target="_blank" rel="noopener">매물 보기 <span>↗</span></a>
+        <a class="go nv" href="${naver(d)}" target="_blank" rel="noopener">네이버 <span>↗</span></a>
+      </div>
     </div>
   </li>`;
 }
@@ -358,7 +386,10 @@ DATA.forEach(d=>{ if(!danji.some(x=>x.hash===d.hash)) danji.push(d); });
 danji.sort((a,b)=> a.dist-b.dist);
 document.getElementById("idx").innerHTML = danji.map(d=>`
   <li>
-    <a href="https://hogangnono.com/items/${d.hash}/0" target="_blank" rel="noopener">${d.apt}</a>
+    <span class="nm">
+      <a href="https://hogangnono.com/items/${d.hash}/0" target="_blank" rel="noopener">${d.apt}</a>
+      <a class="nv" href="${naver(d)}" target="_blank" rel="noopener" aria-label="네이버 부동산에서 ${d.apt} 검색" title="네이버 부동산에서 검색">N</a>
+    </span>
     <span class="d" style="color:var(--${d.stKey})">${d.dist.toLocaleString()}m</span>
   </li>`).join("");
 
