@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>임장 체크리스트</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --ink:#1A231D; --muted:#5B6A60;
+  --line:#E0E7DF; --accent:#1E6B4F; --accent-ink:#FFFFFF; --accent-soft:#E2EFE7;
+  --danger:#B23A24; --danger-soft:#F8E9E4;
+  --warn:#8A6112; --warn-soft:#F5EDD9;
+  --note:#4E5D54; --note-soft:#E9EEE8;
+  --shadow:0 1px 2px rgba(26,45,35,.05),0 4px 14px rgba(26,45,35,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121915; --surface:#1A231E; --ink:#E7EDE7; --muted:#98A99E;
+    --line:#2A362F; --accent:#57C296; --accent-ink:#0D1F17; --accent-soft:#1D3529;
+    --danger:#E8836B; --danger-soft:#3B241D;
+    --warn:#D9AB52; --warn-soft:#372D18;
+    --note:#A5B5AA; --note-soft:#232E28;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121915; --surface:#1A231E; --ink:#E7EDE7; --muted:#98A99E;
+  --line:#2A362F; --accent:#57C296; --accent-ink:#0D1F17; --accent-soft:#1D3529;
+  --danger:#E8836B; --danger-soft:#3B241D;
+  --warn:#D9AB52; --warn-soft:#372D18;
+  --note:#A5B5AA; --note-soft:#232E28;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'IBM Plex Sans KR',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  font-size:15px; line-height:1.6; letter-spacing:-0.01em;
+  padding-bottom:72px;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+
+/* ── Header ── */
+header{padding:36px 0 20px}
+header .kicker{color:var(--accent);font-weight:600;font-size:13px;margin-bottom:6px}
+header h1{font-size:26px;font-weight:700;letter-spacing:-0.03em;line-height:1.3}
+header p.lede{color:var(--muted);font-size:14px;margin-top:8px;max-width:34em}
+
+/* ── Sticky progress ── */
+.progress{
+  position:sticky;top:0;z-index:20;background:var(--bg);
+  padding:10px 0 12px;border-bottom:1px solid var(--line);
+}
+.progress .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+.progress .must{font-weight:600;font-size:14px}
+.progress .must strong{color:var(--danger)}
+.progress .total{color:var(--muted);font-size:13px}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:3px;background:var(--accent);transition:width .3s ease}
+.progress .done-msg{display:none;margin-top:8px;font-size:13px;color:var(--accent);font-weight:600}
+.progress.all-must-done .done-msg{display:block}
+.sync{margin-top:6px;font-size:12px;color:var(--muted)}
+.sync.shared{color:var(--accent)}
+
+/* ── Filter chips ── */
+.chips{display:flex;gap:8px;padding:16px 0 4px;flex-wrap:wrap}
+.chip{
+  border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;
+  font-family:inherit;cursor:pointer;
+}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:active{transform:scale(.97)}
+
+/* ── Sections ── */
+section{margin-top:28px}
+section>h2{font-size:17px;font-weight:700;letter-spacing:-0.02em;display:flex;align-items:center;gap:8px}
+section>h2 .count{font-size:12px;font-weight:500;color:var(--muted)}
+section>p.desc{color:var(--muted);font-size:13px;margin-top:4px}
+.items{margin-top:12px;display:grid;gap:10px}
+
+/* ── Item card ── */
+.item{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.item.hidden{display:none}
+.item-head{
+  display:flex;align-items:flex-start;gap:12px;padding:14px;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+.check{
+  flex:none;width:24px;height:24px;margin-top:1px;border-radius:8px;
+  border:2px solid var(--line);background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:0;
+}
+.check svg{width:14px;height:14px;stroke:var(--accent-ink);stroke-width:3;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;opacity:0;transform:scale(.6);transition:opacity .15s,transform .15s}
+.item.checked .check{background:var(--accent);border-color:var(--accent)}
+.item.checked .check svg{opacity:1;transform:scale(1)}
+.item.checked .q{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line);text-decoration-thickness:1.5px}
+.item-main{flex:1;min-width:0}
+.badge{
+  display:inline-block;font-size:11px;font-weight:700;border-radius:6px;
+  padding:2px 7px;margin-bottom:5px;letter-spacing:0;
+}
+.badge.must{color:var(--danger);background:var(--danger-soft)}
+.badge.imp{color:var(--warn);background:var(--warn-soft)}
+.badge.chk{color:var(--note);background:var(--note-soft)}
+.q{font-weight:600;font-size:15px;line-height:1.45}
+.caret{flex:none;margin-top:6px;color:var(--muted);transition:transform .2s}
+.caret svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.item.open .caret{transform:rotate(180deg)}
+.item-body{display:none;padding:0 14px 14px 50px}
+.item.open .item-body{display:block}
+.item-body h4{font-size:12px;font-weight:700;color:var(--accent);margin:10px 0 3px}
+.item-body h4:first-child{margin-top:0}
+.item-body p{font-size:13.5px;color:var(--ink)}
+.item-body p+h4{margin-top:12px}
+
+/* ── 특약 ── */
+.note{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);padding:14px;
+}
+.note h3{font-size:14px;font-weight:700;margin-bottom:6px}
+.note blockquote{
+  font-size:13.5px;color:var(--muted);border-left:3px solid var(--accent);
+  padding:2px 0 2px 10px;margin-bottom:10px;white-space:pre-line;
+}
+.copy{
+  border:1px solid var(--line);background:transparent;color:var(--accent);
+  font-family:inherit;font-size:12.5px;font-weight:600;border-radius:8px;
+  padding:6px 12px;cursor:pointer;
+}
+.copy:active{transform:scale(.97)}
+.copy.copied{background:var(--accent-soft);border-color:var(--accent)}
+
+/* ── 용어 ── */
+.terms{margin-top:12px;background:var(--surface);border:1px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.terms details{border-bottom:1px solid var(--line)}
+.terms details:last-child{border-bottom:none}
+.terms summary{
+  list-style:none;display:flex;justify-content:space-between;align-items:center;
+  padding:12px 14px;font-weight:600;font-size:14px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.terms summary::-webkit-details-marker{display:none}
+.terms summary::after{content:"+";color:var(--muted);font-weight:400;font-size:16px}
+.terms details[open] summary::after{content:"−"}
+.terms .def{padding:0 14px 12px;font-size:13.5px;color:var(--muted)}
+
+/* ── 준비물 & footer ── */
+.prep{margin-top:12px;display:grid;gap:8px}
+.prep .item .item-head{padding:12px 14px}
+footer{margin-top:40px;padding:20px 0 8px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:12.5px}
+footer p+p{margin-top:6px}
+.reset{margin-top:12px;border:1px solid var(--line);background:transparent;color:var(--muted);
+  font-family:inherit;font-size:12.5px;border-radius:8px;padding:7px 12px;cursor:pointer}
+
+button:focus-visible,.item-head:focus-visible,summary:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important}
+}
+@media (min-width:640px){
+  body{font-size:16px}
+  header h1{font-size:32px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">현장 방문</div>
+  <h1>임장 체크리스트</h1>
+  <p class="lede">입지 임장과 단지 임장에서 눈으로 확인할 것들. 항목을 누르면 왜 봐야 하는지, 현장에서 어떻게 확인하는지가 열립니다. 체크 상태는 이 기기에 저장됩니다.</p>
+</header>
+
+<div class="progress" id="progress">
+  <div class="row">
+    <span class="must">필수 <strong id="mustDone">0</strong>/<span id="mustTotal">0</span> 확인</span>
+    <span class="total">전체 <span id="allDone">0</span>/<span id="allTotal">0</span></span>
+  </div>
+  <div class="bar"><i id="barFill"></i></div>
+  <div class="sync" id="syncMsg">이 기기에만 저장 중</div>
+  <div class="done-msg">필수 항목을 다 봤어요. 기억은 하루면 흐려집니다 — 단지를 떠나기 전에 메모 템플릿을 채워두세요.</div>
+</div>
+
+<div class="chips" role="group" aria-label="중요도 필터">
+  <button class="chip" data-filter="all" aria-pressed="true">전체</button>
+  <button class="chip" data-filter="must" aria-pressed="false">필수</button>
+  <button class="chip" data-filter="imp" aria-pressed="false">중요</button>
+  <button class="chip" data-filter="chk" aria-pressed="false">확인</button>
+</div>
+
+<div id="sections"></div>
+
+<section id="notes-sec">
+  <h2>현장 메모 템플릿</h2>
+  <p class="desc">두 곳만 봐도 기억이 섞입니다. 단지를 떠나기 전에 복사해서 메모 앱에 붙여넣고 그 자리에서 채우세요. 나중에 매물끼리 나란히 비교할 때 이 기록이 전부입니다.</p>
+  <div class="items" id="notes"></div>
+</section>
+
+<section>
+  <h2>용어 사전</h2>
+  <div class="terms" id="terms"></div>
+</section>
+
+<section>
+  <h2>임장 준비물</h2>
+  <div class="prep" id="prep"></div>
+</section>
+
+<footer>
+  <p>한 번의 방문으로는 부족합니다. 같은 집을 평일 밤과 주말 낮에 한 번씩 더 보세요 — 주차, 소음, 채광은 시간대마다 다른 얼굴을 보여줍니다.</p>
+  <p>중개사가 보여주는 동선만 따라가면 단점은 보이지 않습니다. 약속 시간보다 30분 일찍 도착해 혼자 단지를 한 바퀴 도세요.</p>
+  <p>여기서 확인한 사실은 가격 협상 카드이거나 계약서 특약의 근거입니다. 계약 단계는 매매 체크리스트에서 이어서 확인하세요.</p>
+  <button class="reset" id="resetBtn">체크 상태 초기화</button>
+</footer>
+
+</div>
+
+<script>
+const DATA = [
+{
+  title:"입지 · 교통", desc:"입지 임장의 핵심은 '지도에 안 나오는 것'입니다. 거리는 지도로 알 수 있지만 경사와 신호등, 아침의 밀도는 발로만 알 수 있습니다.",
+  items:[
+    {id:"t1",lv:"must",q:"역까지 내 발로 걸어봤는가",
+     why:"매물 정보의 도보 시간은 보통 직선거리 100m를 1분으로 환산한 값입니다. 오르막, 신호등, 돌아가는 길, 횡단보도 대기가 모두 빠져 있어 실제로는 1.5배까지 벌어집니다.",
+     act:"단지 정문이 아니라 내가 살 동의 현관에서 출발해 개찰구까지 스톱워치로 재세요. 평지 기준 1분에 약 70~80m입니다. 돌아올 때는 오르막이라 더 걸린다는 점도 기록해 두세요."},
+    {id:"t2",lv:"must",q:"출근 시간대에 실제로 타봤는가",
+     why:"낮 2시의 전철과 아침 8시의 전철은 다른 교통수단입니다. 앉아서 가는지 서서 가는지, 환승 통로가 얼마나 막히는지가 매일의 삶을 결정합니다.",
+     act:"평일 아침 7:30~8:30 사이에 집에서 회사까지 한 번 가보세요. 총 소요 시간, 환승 대기, 승강장 혼잡도를 적어두면 다른 단지와 비교할 수 있습니다."},
+    {id:"t3",lv:"imp",q:"버스 정류장과 노선을 확인했는가",
+     why:"지하철이 멀어도 광역버스가 좋으면 출퇴근이 해결되고, 역세권이어도 노선이 하나뿐이면 사고 한 번에 발이 묶입니다.",
+     act:"정류장 위치와 배차 간격, 광역·직행 노선 유무를 보세요. 아침에 정류장에 서 있는 줄의 길이가 가장 정직한 지표입니다."},
+    {id:"t4",lv:"chk",q:"차로 빠져나가는 길이 막히지 않는가",
+     why:"단지에서 간선도로까지 진입로가 하나뿐이면 아침마다 단지 안에서만 10분을 씁니다.",
+     act:"평일 아침 단지 출구를 직접 보거나, 지도 앱의 실시간 교통 정보를 출근 시간대로 맞춰 확인하세요."},
+    {id:"t5",lv:"chk",q:"늦은 밤 귀가 수단이 있는가",
+     why:"막차 시각과 심야버스 유무가 생활 반경을 정합니다. 택시가 안 잡히는 동네도 많습니다.",
+     act:"막차 시각을 확인하고, 역에서 집까지 심야 도보 구간의 가로등과 인적을 직접 걸어보세요."}
+  ]
+},
+{
+  title:"입지 · 생활 인프라",
+  items:[
+    {id:"l1",lv:"imp",q:"장은 어디서 보게 되는가",
+     why:"마트까지의 거리는 매주 반복되는 시간과 비용입니다. 차가 없으면 더 결정적입니다.",
+     act:"도보권 마트와 차로 10분 내 대형마트를 지도에서 확인하고, 실제로 한 번 다녀오세요. 배달·새벽배송 권역인지도 앱으로 주소를 넣어 확인할 수 있습니다."},
+    {id:"l2",lv:"imp",q:"병원과 약국이 가까운가",
+     why:"필요해지는 순간에는 거리가 곧 불안입니다. 특히 소아과와 야간 진료는 동네마다 편차가 큽니다.",
+     act:"아이가 있다면 소아과, 부모를 모신다면 내과와 종합병원 위치를 확인하세요. 주말·야간 진료 여부까지 봐야 의미가 있습니다."},
+    {id:"l3",lv:"chk",q:"상권이 살아 있는가",
+     why:"1층 상가의 공실은 유동인구가 줄고 있다는 신호입니다. 반대로 카페와 식당이 꾸준히 차 있으면 동네에 사람이 돌고 있다는 뜻입니다.",
+     act:"단지 상가와 인근 상권을 한 바퀴 걸으며 빈 점포 수와 업종 구성을 보세요. 학원이 많으면 학군 수요가 있다는 간접 신호입니다."},
+    {id:"l4",lv:"chk",q:"은행·관공서·택배 수령이 불편하지 않은가",
+     why:"사소해 보이지만 매달 반복되면 체감이 큽니다. 무인택배함 유무는 1인 가구·맞벌이에 특히 중요합니다.",
+     act:"주민센터와 은행 위치를 확인하고, 단지에 무인택배함이 있는지 관리사무소에 물어보세요."}
+  ]
+},
+{
+  title:"입지 · 학군",
+  items:[
+    {id:"e1",lv:"imp",q:"초등학교 통학로가 안전한가",
+     why:"이른바 '초품아'가 비싼 이유는 학교가 가까워서가 아니라 큰 길을 건너지 않아서입니다. 되팔 때도 같은 이유로 수요가 받쳐줍니다.",
+     act:"아이 걸음으로 직접 걸으며 횡단보도 수, 신호등 유무, 차량 통행량, 인도 폭을 확인하세요. 학교가 단지 바로 옆이어도 큰 길을 건너야 하면 초품아가 아닙니다."},
+    {id:"e2",lv:"chk",q:"중학교 배정이 어떻게 되는가",
+     why:"초등학교는 대개 가까운 곳으로 가지만 중학교는 배정 방식에 따라 멀리 갈 수 있고, 선호 학군 여부가 집값에 그대로 반영됩니다.",
+     act:"관할 교육지원청의 배정 방식을 확인하고, 단지 상가 부동산과 학원에 '여기 애들은 어느 중학교 가나요'라고 물어보세요. 실태는 현장이 더 정확합니다."},
+    {id:"e3",lv:"chk",q:"학원가까지 어떻게 가는가",
+     why:"학원 셔틀이 들어오는 단지인지 여부가 저녁 시간을 통째로 좌우합니다.",
+     act:"주요 학원가까지의 거리와 셔틀 운행 여부를 확인하세요. 단지 게시판이나 엘리베이터의 학원 전단이 좋은 단서입니다."}
+  ]
+},
+{
+  title:"입지 · 환경과 소음", desc:"사진에 찍히지 않는 것들입니다. 소리와 냄새는 반드시 현장에서 확인해야 합니다.",
+  items:[
+    {id:"v1",lv:"must",q:"소음원을 직접 들어봤는가",
+     why:"도로·철도·학교 운동장·공장은 지도에 보이지만 소리의 크기는 현장에서만 압니다. 창을 닫았을 때와 열었을 때가 완전히 다릅니다.",
+     act:"창문을 열고 1분간 아무 말 없이 서서 들어보세요. 가능하면 밤 10시 이후에 다시 오세요. 스마트폰 소음 측정 앱으로 숫자를 남겨두면 다른 매물과 비교할 수 있습니다."},
+    {id:"v2",lv:"imp",q:"기피시설이 주변에 있는가",
+     why:"축사·소각장·변전소·유흥가는 냄새와 소음뿐 아니라 되팔 때의 가격에도 영향을 줍니다.",
+     act:"지도에서 반경 1km를 훑고, 바람이 부는 날 냄새를 확인하세요. 아직 없더라도 예정된 시설이 있는지는 토지이용계획으로 볼 수 있습니다."},
+    {id:"v3",lv:"imp",q:"공원·산책로가 실제로 쓸 만한가",
+     why:"'공세권'이라고 소개되지만 큰 길을 건너야 하거나 접근로가 없어 실제로는 안 가게 되는 경우가 많습니다.",
+     act:"단지에서 공원 입구까지 걸어보세요. 걸어서 5분을 넘기면 일상적으로 쓰기 어렵습니다."},
+    {id:"v4",lv:"chk",q:"고압선·송전탑이 시야에 있는가",
+     why:"건강 논란과 별개로, 창밖에 보이는 것만으로 선호도와 가격이 내려갑니다.",
+     act:"거실 창에서 실제로 보이는지 확인하세요. 낮은 층과 높은 층의 시야가 다릅니다."}
+  ]
+},
+{
+  title:"입지 · 호재와 리스크",
+  items:[
+    {id:"d1",lv:"imp",q:"개발 계획을 원본으로 확인했는가",
+     why:"중개사가 말하는 '호재'에는 확정 계획, 검토 단계, 소문이 섞여 있습니다. '추진 중'과 '착공'은 몇 년 차이입니다.",
+     act:"토지이음(토지이용계획)과 해당 시·군·구청 고시를 직접 확인하세요. 들은 이야기와 문서가 다르면 문서가 맞습니다."},
+    {id:"d2",lv:"imp",q:"주변에 대규모 입주 물량이 있는가",
+     why:"인근에 수천 세대가 한꺼번에 입주하면 2~3년간 전세와 매매가가 함께 눌립니다. 가장 흔하게 간과되는 리스크입니다.",
+     act:"반경 3~5km의 입주 예정 물량과 시기를 확인하고, 내 잔금·전세 만기와 겹치지 않는지 보세요."},
+    {id:"d3",lv:"chk",q:"재건축·리모델링 이야기가 있는가",
+     why:"추진 단계에 따라 기대감이 가격에 이미 들어가 있을 수도, 앞으로 분담금을 내야 할 수도 있습니다.",
+     act:"단지 내 현수막과 게시판, 추진위원회 유무를 보세요. 관리사무소에 진행 단계를 물으면 가장 정확합니다."}
+  ]
+},
+{
+  title:"단지 · 관리 상태", desc:"단지 임장은 '관리가 되고 있는가'를 보는 일입니다. 관리 수준은 앞으로 내가 낼 돈과 직결됩니다.",
+  items:[
+    {id:"c1",lv:"imp",q:"외벽과 지하주차장 상태는 어떤가",
+     why:"외벽 균열과 누수 자국, 지하주차장 천장의 하얗게 굳은 자국(백화)은 관리 수준과 앞으로 들어갈 수선비를 보여줍니다.",
+     act:"지하주차장 천장과 기둥의 물 자국, 균열을 보세요. 마지막 외벽 도색이 언제였는지 관리사무소에 물어보세요."},
+    {id:"c2",lv:"imp",q:"복도·계단·분리수거장이 깨끗한가",
+     why:"공용 공간의 청결은 관리사무소의 역량이자 주민 구성을 보여주는 가장 빠른 신호입니다.",
+     act:"엘리베이터 게시판의 공지와 민원 내용을 읽어보세요. 층간소음 경고문이나 관리비 연체 독촉이 붙어 있으면 그 자체가 정보입니다."},
+    {id:"c3",lv:"chk",q:"엘리베이터 연식과 교체 이력은",
+     why:"교체 시 세대당 수백만 원의 분담금이 나올 수 있고, 20년 넘은 승강기는 고장도 잦습니다.",
+     act:"엘리베이터 안 점검표에서 설치 연도를 확인하세요. 20년 이상이면 교체 논의가 있는지 관리사무소에 물어보세요."},
+    {id:"c4",lv:"chk",q:"조경과 놀이터가 관리되고 있는가",
+     why:"돈이 도는 단지인지 아닌지가 가장 먼저 드러나는 곳입니다.",
+     act:"잡초, 부서진 채 방치된 시설, 꺼진 가로등을 보세요. 관리가 손을 놓은 단지는 관리비를 아끼는 대신 자산가치를 깎고 있는 중입니다."}
+  ]
+},
+{
+  title:"단지 · 주차",
+  items:[
+    {id:"k1",lv:"must",q:"평일 밤에 주차장을 봤는가",
+     why:"낮의 주차장은 어디나 여유롭습니다. 진실은 차가 다 들어온 밤에 드러납니다. 매일 겪을 스트레스를 미리 보는 유일한 방법입니다.",
+     act:"평일 밤 9~10시에 다시 와서 이중주차 정도와 빈 자리를 직접 보세요. 주말 밤도 양상이 다르니 여유가 있으면 두 번 보세요."},
+    {id:"k2",lv:"imp",q:"세대당 주차 대수와 2대째 조건은",
+     why:"세대당 1대 미만이면 매일 자리 싸움이고, 2대째는 별도 요금이나 등록 제한이 걸리는 단지가 많습니다.",
+     act:"관리사무소에 세대당 대수, 2대째 등록 가능 여부와 월 요금을 물어보세요. 방문차량 정책도 함께 확인하세요."},
+    {id:"k3",lv:"chk",q:"지하주차장이 동과 연결되는가",
+     why:"구축은 지하주차장에서 동으로 바로 올라가지 못해 비 오는 날마다 밖으로 걸어야 합니다.",
+     act:"직접 지하에서 엘리베이터까지 걸어보세요. SUV를 탄다면 주차장 진입 높이 제한도 확인해야 합니다."}
+  ]
+},
+{
+  title:"단지 · 동·향·층",
+  items:[
+    {id:"b1",lv:"imp",q:"낮에 햇빛이 실제로 들어오는가",
+     why:"향은 도면으로 알 수 있지만 앞 동에 가리는지는 현장에서만 압니다. 남향이어도 앞 동이 가까우면 겨울엔 종일 그늘입니다.",
+     act:"반드시 낮에 한 번 보세요. 겨울에는 해가 낮게 떠 지금 보이는 것보다 더 가려진다는 점을 감안해야 합니다."},
+    {id:"b2",lv:"imp",q:"앞 동과의 거리와 시선은 어떤가",
+     why:"동간 거리가 짧으면 커튼을 걷지 못한 채 살게 됩니다. 사진으로는 절대 드러나지 않는 부분입니다.",
+     act:"거실과 안방 창 앞에 서서 앞 동 창문이 정면으로 보이는지 확인하세요. 마주 보는 집과 눈이 마주칠 거리면 실거주 만족도가 크게 떨어집니다."},
+    {id:"b3",lv:"chk",q:"저층·탑층의 단점을 감수할 수 있는가",
+     why:"저층은 사생활과 채광, 탑층은 여름 더위와 누수 위험이 있습니다. 싸게 사는 만큼 되팔 때도 싸다는 점이 핵심입니다.",
+     act:"가격 차이가 그 불편의 값으로 적절한지 계산하세요. 탑층이라면 옥상 방수 공사 이력을 관리사무소에 꼭 물어보세요."},
+    {id:"b4",lv:"chk",q:"동 위치가 정문·역 방향인가",
+     why:"같은 단지에서도 동에 따라 역까지 3~5분이 차이 나고, 그 차이가 가격에 반영됩니다.",
+     act:"단지 배치도를 보고 내가 볼 동이 어디인지 확인한 뒤, 그 동 현관에서 역까지 걸어보세요."}
+  ]
+},
+{
+  title:"세대 내부", desc:"집을 보는 시간은 보통 10분 남짓입니다. 무엇을 볼지 미리 정해 가지 않으면 벽지 색만 보고 나오게 됩니다.",
+  items:[
+    {id:"h1",lv:"must",q:"누수·결로 흔적을 직접 봤는가",
+     why:"도배로 가려도 흔적은 남습니다. 계약 후에 발견하면 수리비와 책임을 두고 분쟁이 됩니다.",
+     act:"천장 모서리, 베란다 벽 아래, 창틀 주변, 붙박이장 뒤쪽을 보세요. 한 곳만 벽지가 새것이면 반드시 이유를 물어보세요."},
+    {id:"h2",lv:"must",q:"수압과 배수를 확인했는가",
+     why:"고층 수압 부족과 배수 불량은 살면서 매일 겪는 불편인데, 현장에서 1분이면 확인됩니다.",
+     act:"주방과 욕실 수도를 동시에 틀어보고, 변기 물을 내려 내려가는 속도를 보세요. 양해를 구하면 대부분 허락합니다. 안 된다고 하면 그 자체가 신호입니다."},
+    {id:"h3",lv:"imp",q:"새시와 보일러 연식은",
+     why:"새시 교체 500만~1천만 원, 보일러 100만 원 이상이 바로 내 돈입니다. 협상 근거로도 가장 잘 먹힙니다.",
+     act:"보일러 명판의 제조 연도를 사진으로 찍어두세요. 새시가 홑겹이면 교체 비용을 그대로 네고 카드로 쓰세요."},
+    {id:"h4",lv:"imp",q:"냄새가 나는가",
+     why:"하수구·곰팡이·담배 냄새는 사진에 찍히지 않고 고치기도 어렵습니다. 배관 문제라면 세대 혼자 해결되지 않습니다.",
+     act:"현관에 들어선 첫 3초의 냄새를 기억하세요. 미리 환기해 둔 집일 수 있으니, 창을 닫고 잠시 있어보는 편이 정확합니다."},
+    {id:"h5",lv:"chk",q:"수납과 생활 동선이 맞는가",
+     why:"같은 평형이라도 판상형과 타워형, 확장 여부에 따라 실제로 쓰는 공간이 크게 다릅니다.",
+     act:"내 가구가 들어갈 벽면을 줄자로 재세요. 냉장고 자리, 세탁기 자리, 침대 놓을 벽의 길이는 도면으로 판단하면 안 됩니다."},
+    {id:"h6",lv:"chk",q:"콘센트·조명·문을 직접 눌러봤는가",
+     why:"작동하지 않는 것들이 모이면 입주 전 수리비가 됩니다. 확인하면 대부분 매도인 부담으로 넘길 수 있습니다.",
+     act:"방마다 스위치를 켜보고 문을 여닫아 보세요. 문제가 있으면 사진을 찍어두고 특약에 넣을 목록으로 만드세요."}
+  ]
+},
+{
+  title:"사람에게 묻기", desc:"중개사는 팔려는 사람입니다. 같은 질문을 다른 사람에게 해보면 답이 갈리는 지점이 보입니다.",
+  items:[
+    {id:"w1",lv:"imp",q:"관리사무소에 직접 물어봤는가",
+     why:"예정 공사, 하자 이력, 민원은 관리사무소가 가장 정확합니다. 파는 입장이 아니기 때문에 답이 다릅니다.",
+     act:"장기수선충당금 적립액, 예정된 공사, 최근 누수·층간소음 민원을 물어보세요. 관리비 고지서 샘플을 요청하면 여름·겨울 실제 금액을 볼 수 있습니다."},
+    {id:"w2",lv:"chk",q:"경비실·주민에게 분위기를 물었는가",
+     why:"'여기 살기 어떠세요' 한마디가 중개사의 열 마디보다 정확할 때가 많습니다. 불만이 있으면 대부분 먼저 이야기해 줍니다.",
+     act:"단지 벤치나 상가에서 자연스럽게 물어보세요. 주차, 층간소음, 관리사무소 이야기가 가장 많이 나옵니다."},
+    {id:"w3",lv:"chk",q:"단지 상가 부동산 두 곳 이상을 들렀는가",
+     why:"매물을 소개한 중개사 한 곳의 말만 들으면 시세와 단점이 한쪽으로 기웁니다.",
+     act:"같은 단지의 다른 중개사에게 같은 질문을 던지고, 답이 갈리는 지점을 기록하세요. 그 지점이 대개 진짜 쟁점입니다."}
+  ]
+}
+];
+
+const NOTES = [
+ {t:"단지 요약", c:`단지명 / 동·호수:
+방문 일시 (요일·시간대):
+전용 면적 / 구조 (판상형·타워형·확장):
+호가 / 최근 실거래가:
+역까지 실측 도보:     분 (출발 지점:        )
+첫인상 한 줄:`},
+ {t:"입지 메모", c:`교통: 역·정류장 실측 시간, 출근길 혼잡
+생활: 마트, 병원, 상가 공실
+학군: 통학로 위험 구간, 배정 중학교
+환경: 소음원과 크기, 냄새, 공원 접근
+호재·리스크: 확인한 출처까지`},
+ {t:"단지 메모", c:`관리 상태: 외벽·지하주차장·복도
+주차: 밤 몇 시 기준, 이중주차 정도
+동·향·층: 채광, 앞 동 거리, 시선
+엘리베이터 설치 연도:
+관리사무소 답변 (예정 공사·민원):`},
+ {t:"세대 내부 메모", c:`누수·결로 흔적:
+수압 / 배수:
+새시 / 보일러 연도:
+냄새:
+줄자 실측 (냉장고·세탁기·침대 벽):
+수리 필요 목록 (특약 후보):`},
+ {t:"관리사무소 질문 목록", c:`장기수선충당금 적립액은 얼마인가요
+올해나 내년에 예정된 공사가 있나요
+최근 누수나 층간소음 민원이 있었나요
+엘리베이터·배관 교체 이력이 어떻게 되나요
+세대당 주차 대수와 2대째 등록 조건은요
+관리비 고지서 샘플을 볼 수 있을까요`},
+ {t:"떠나기 전 3줄", c:`좋았던 점 (구체적으로):
+걸리는 점 (가격으로 환산하면 얼마):
+다시 와서 확인할 것 (몇 시에):`}
+];
+
+const TERMS = [
+ ["임장","현장에 직접 가서 보는 것. 서류와 사진으로 알 수 없는 것을 확인하는 단계입니다."],
+ ["입지 임장","단지 바깥을 보는 것. 교통, 생활 인프라, 학군, 소음, 개발 계획이 대상입니다."],
+ ["단지 임장","단지 안을 보는 것. 관리 상태, 주차, 동·향·층, 세대 내부가 대상입니다."],
+ ["초품아","초등학교를 품은 아파트. 핵심은 거리가 아니라 큰 길을 건너지 않는다는 점입니다."],
+ ["역세권","역이 가까운 입지. 표기된 도보 시간은 직선거리 환산값이라 실측과 다릅니다."],
+ ["동간 거리","앞뒤 동 사이의 거리. 짧으면 채광과 사생활이 함께 나빠집니다."],
+ ["판상형","일자로 배치된 구조. 맞통풍이 되고 남향 배치가 쉬워 선호됩니다."],
+ ["타워형","탑 모양 배치. 조망이 좋은 대신 맞통풍과 향이 불리한 세대가 생깁니다."],
+ ["로열동·로열층","단지 안에서 선호도가 높은 위치. 같은 평형이라도 가격이 다릅니다."],
+ ["필로티","1층을 비워 기둥만 둔 구조. 그만큼 실제 거주 층이 한 층 올라갑니다."],
+ ["확장","발코니를 터서 실내로 쓰는 것. 같은 전용 면적이라도 체감 공간이 달라집니다."],
+ ["홑겹창·이중창","창의 유리 겹 수. 단열과 소음 차단, 그리고 교체 비용에 직결됩니다."],
+ ["백화 현상","콘크리트에 하얗게 굳은 자국. 물이 스며들었다는 흔적입니다."],
+ ["장기수선충당금","대규모 공사를 위해 매달 모으는 적립금. 적립이 부족하면 나중에 분담금이 나옵니다."],
+ ["세대당 주차 대수","세대 수 대비 주차면 수. 1대 미만이면 매일 자리 싸움입니다."],
+ ["입주 물량","일정 기간에 새로 입주하는 세대 수. 많으면 그 기간 동안 시세가 눌립니다."],
+ ["토지이음","토지이용계획을 조회하는 국토부 사이트. 개발 계획과 규제를 원본으로 확인합니다."],
+ ["K-apt","공동주택관리정보시스템. 단지별 관리비를 직접 조회해 비교할 수 있습니다."]
+];
+
+const PREP = [
+ {id:"g1",q:"이 체크리스트 (휴대폰 또는 출력)"},
+ {id:"g2",q:"줄자 (5m 이상)"},
+ {id:"g3",q:"스톱워치·나침반·소음측정 앱"},
+ {id:"g4",q:"보조배터리 (사진과 지도로 배터리가 빨리 닳습니다)"},
+ {id:"g5",q:"편한 신발 (한 번에 여러 단지를 걷게 됩니다)"},
+ {id:"g6",q:"미리 뽑아둔 실거래가·시세 (스크린샷)"},
+ {id:"g7",q:"재방문 시간대 계획 (평일 밤·주말 낮)"}
+];
+
+const LV = {must:"필수",imp:"중요",chk:"확인"};
+const KEY = "imjang-checklist-v1";
+
+let state = {};
+try{ state = JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ state = {}; }
+function saveLocal(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+/* ── 공유 저장 (링크를 받은 사람과 체크 상태 동기화) ── */
+let checksRef = null, shared = false;
+const syncEl = () => document.getElementById("syncMsg");
+function setSync(msg, isShared){
+  const el = syncEl(); if(!el) return;
+  el.textContent = msg;
+  el.classList.toggle("shared", !!isShared);
+}
+function applyState(){
+  document.querySelectorAll(".item").forEach(card=>{
+    card.classList.toggle("checked", !!state[card.dataset.id]);
+  });
+  refresh();
+}
+async function writeShared(id, val){
+  try{
+    await checksRef.update({items: {[id]: !!val}});
+  }catch(err){
+    if(err && err.code === "invalid_argument"){
+      try{
+        const items = {}; Object.keys(state).forEach(k=>items[k]=true);
+        await checksRef.set({items});
+      }catch(e2){
+        shared = false;
+        setSync("공유 저장 권한이 없어 이 기기에만 저장돼요", false);
+        saveLocal();
+      }
+    }else{
+      shared = false;
+      setSync("공유 저장 권한이 없어 이 기기에만 저장돼요", false);
+      saveLocal();
+    }
+  }
+}
+function setCheck(id, val){
+  if(val) state[id] = true; else delete state[id];
+  refresh();
+  if(shared && checksRef){ writeShared(id, val); }
+  else{ saveLocal(); }
+}
+(async ()=>{
+  try{
+    if(!(window.claude && window.claude.use)) return;
+    const db = await claude.use("db");
+    if(!db) return;
+    checksRef = db.doc("shared/checks");
+    let first = true;
+    checksRef.onSnapshot(snap=>{
+      const d = (typeof snap.data === "function" ? snap.data() : null) || null;
+      if(first){
+        first = false;
+        if(!d && Object.keys(state).length){
+          // 이 기기의 기존 체크를 공유 저장소로 이전
+          const items = {}; Object.keys(state).forEach(k=>items[k]=true);
+          shared = true;
+          setSync("링크를 받은 사람과 체크가 함께 보여요", true);
+          checksRef.set({items}).catch(()=>{
+            shared = false;
+            setSync("공유 저장 권한이 없어 이 기기에만 저장돼요", false);
+          });
+          return;
+        }
+      }
+      const items = (d && d.items) || {};
+      state = {};
+      for(const k in items){ if(items[k]) state[k] = true; }
+      shared = true;
+      setSync("링크를 받은 사람과 체크가 함께 보여요", true);
+      applyState();
+    }, ()=>{
+      shared = false; checksRef = null;
+      setSync("이 기기에만 저장 중", false);
+    });
+  }catch(e){}
+})();
+
+const checkSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>';
+const caretSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+
+function itemHTML(it, withBody){
+  return `<article class="item${state[it.id]?" checked":""}" data-id="${it.id}" data-lv="${it.lv||""}">
+    <div class="item-head" tabindex="0" role="button" aria-expanded="false">
+      <button class="check" aria-label="완료 표시">${checkSvg}</button>
+      <div class="item-main">
+        ${it.lv?`<span class="badge ${it.lv}">${LV[it.lv]}</span>`:""}
+        <div class="q">${it.q}</div>
+      </div>
+      ${withBody?`<span class="caret">${caretSvg}</span>`:""}
+    </div>
+    ${withBody?`<div class="item-body">
+      <h4>왜 확인하나요</h4><p>${it.why}</p>
+      <h4>확인 후 할 일</h4><p>${it.act}</p>
+    </div>`:""}
+  </article>`;
+}
+
+const sectionsEl = document.getElementById("sections");
+sectionsEl.innerHTML = DATA.map(sec=>`
+  <section data-sec>
+    <h2>${sec.title} <span class="count">${sec.items.length}문항</span></h2>
+    ${sec.desc?`<p class="desc">${sec.desc}</p>`:""}
+    <div class="items">${sec.items.map(it=>itemHTML(it,true)).join("")}</div>
+  </section>`).join("");
+
+document.getElementById("notes").innerHTML = NOTES.map((cl,i)=>`
+  <div class="note">
+    <h3>${cl.t}</h3>
+    <blockquote>${cl.c}</blockquote>
+    <button class="copy" data-i="${i}">템플릿 복사</button>
+  </div>`).join("");
+
+document.getElementById("terms").innerHTML = TERMS.map(([t,d])=>`
+  <details><summary>${t}</summary><div class="def">${d}</div></details>`).join("");
+
+document.getElementById("prep").innerHTML = PREP.map(it=>itemHTML(it,false)).join("");
+
+const allIds = [...DATA.flatMap(s=>s.items), ...PREP];
+const mustIds = DATA.flatMap(s=>s.items).filter(i=>i.lv==="must");
+
+function refresh(){
+  const done = allIds.filter(i=>state[i.id]).length;
+  const mustDone = mustIds.filter(i=>state[i.id]).length;
+  document.getElementById("allDone").textContent = done;
+  document.getElementById("allTotal").textContent = allIds.length;
+  document.getElementById("mustDone").textContent = mustDone;
+  document.getElementById("mustTotal").textContent = mustIds.length;
+  document.getElementById("barFill").style.width = (allIds.length? done/allIds.length*100 : 0)+"%";
+  document.getElementById("progress").classList.toggle("all-must-done", mustDone===mustIds.length && mustIds.length>0);
+}
+refresh();
+
+document.body.addEventListener("click", e=>{
+  const check = e.target.closest(".check");
+  if(check){
+    const card = check.closest(".item");
+    const id = card.dataset.id;
+    const val = !state[id];
+    card.classList.toggle("checked", val);
+    setCheck(id, val);
+    return;
+  }
+  const head = e.target.closest(".item-head");
+  if(head && head.parentElement.querySelector(".item-body")){
+    const card = head.parentElement;
+    const open = card.classList.toggle("open");
+    head.setAttribute("aria-expanded", open ? "true" : "false");
+    return;
+  }
+  const copy = e.target.closest(".copy");
+  if(copy){
+    const text = NOTES[+copy.dataset.i].c;
+    const ok = ()=>{ copy.textContent="복사됨"; copy.classList.add("copied");
+      setTimeout(()=>{copy.textContent="템플릿 복사";copy.classList.remove("copied");},1600); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(ok).catch(()=>fallbackCopy(text, ok));
+    }else{ fallbackCopy(text, ok); }
+  }
+});
+document.body.addEventListener("keydown", e=>{
+  if((e.key==="Enter"||e.key===" ") && e.target.classList.contains("item-head")){
+    e.preventDefault(); e.target.click();
+  }
+});
+function fallbackCopy(text, ok){
+  const ta = document.createElement("textarea");
+  ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); ok(); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+document.querySelectorAll(".chip").forEach(chip=>{
+  chip.addEventListener("click", ()=>{
+    document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
+    chip.setAttribute("aria-pressed","true");
+    const f = chip.dataset.filter;
+    document.querySelectorAll("[data-sec] .item").forEach(card=>{
+      card.classList.toggle("hidden", f!=="all" && card.dataset.lv!==f);
+    });
+    document.querySelectorAll("[data-sec]").forEach(sec=>{
+      const visible = sec.querySelectorAll(".item:not(.hidden)").length;
+      sec.style.display = visible ? "" : "none";
+    });
+  });
+});
+
+document.getElementById("resetBtn").addEventListener("click", ()=>{
+  state = {}; saveLocal();
+  if(shared && checksRef){ checksRef.set({items:{}}).catch(()=>{}); }
+  document.querySelectorAll(".item.checked").forEach(c=>c.classList.remove("checked"));
+  refresh();
+});
+</script>
+</body>
+</html>
