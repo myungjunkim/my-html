@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>장자호수공원역 59㎡ 보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Song+Myung&display=swap">
+<style>
+:root{
+  --sans:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --serif:"Song Myung","Nanum Myeongjo",'Apple SD Gothic Neo',"Noto Serif KR",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,"IBM Plex Sans KR","Apple SD Gothic Neo",monospace;
+  --ground:#F3F6F2; --surface:#FFFFFF; --surface-2:#E9EEE8;
+  --ink:#1A231D; --ink-2:#4E5D54; --muted:#5B6A60; --faint:#8A9990;
+  --rule:#E0E7DF; --rule-soft:#EDF1EC;
+  --accent:#1E6B4F; --accent-soft:#E2EFE7;
+  --danger:#B23A24; --danger-soft:#F8E9E4;
+  --bar:#1E6B4F; --bar-soft:#D7E2D9;
+  --focus:#1E6B4F;
+  --shadow:0 1px 2px rgba(26,45,35,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#121915; --surface:#1A231E; --surface-2:#232E28;
+    --ink:#E7EDE7; --ink-2:#C2CEC5; --muted:#98A99E; --faint:#74867B;
+    --rule:#2A362F; --rule-soft:#222C26;
+    --accent:#57C296; --accent-soft:#1D3529;
+    --danger:#E8836B; --danger-soft:#3B241D;
+    --bar:#57C296; --bar-soft:#2A362F;
+    --focus:#57C296;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121915; --surface:#1A231E; --surface-2:#232E28;
+  --ink:#E7EDE7; --ink-2:#C2CEC5; --muted:#98A99E; --faint:#74867B;
+  --rule:#2A362F; --rule-soft:#222C26;
+  --accent:#57C296; --accent-soft:#1D3529;
+  --danger:#E8836B; --danger-soft:#3B241D;
+  --bar:#57C296; --bar-soft:#2A362F;
+  --focus:#57C296;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--sans); font-weight:400; font-size:15px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 88px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* ---------- masthead ---------- */
+.back{display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--accent)}
+header.top{padding:18px 0 26px;border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap
+}
+.line8{display:inline-flex;align-items:center;gap:6px}
+.line8 i{width:9px;height:9px;border-radius:50%;background:var(--accent);display:block}
+h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(34px,6.2vw,54px);line-height:1.1;letter-spacing:-.01em;
+  margin:14px 0 0;text-wrap:balance;
+}
+.dek{margin:12px 0 0;max-width:60ch;color:var(--ink-2);font-weight:300;font-size:16px}
+.facts{display:flex;flex-wrap:wrap;gap:0;margin-top:26px;border:1px solid var(--rule);border-radius:2px;background:var(--surface);box-shadow:var(--shadow)}
+.fact{flex:1 1 150px;padding:14px 18px;border-right:1px solid var(--rule-soft)}
+.fact:last-child{border-right:0}
+.fact dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 4px;font-family:var(--mono)}
+.fact dd{margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em}
+.fact dd small{font-size:12px;color:var(--muted);font-weight:400;margin-left:3px}
+.alert{
+  margin:22px 0 0;padding:14px 16px;border-radius:2px;
+  background:var(--danger-soft);border-left:3px solid var(--danger);
+  font-size:14px;font-weight:300;color:var(--ink-2);max-width:72ch;line-height:1.7;
+}
+.alert b{font-weight:600;color:var(--ink)}
+
+/* ---------- distribution ---------- */
+section.dist{padding:30px 0 34px;border-bottom:1px solid var(--rule)}
+.sec-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
+.distgrid{display:grid;grid-template-columns:62px 1fr;gap:7px 14px;align-items:center;max-width:620px}
+.distgrid .bl{font-size:13px;color:var(--ink-2);text-align:right;font-weight:500}
+.distrow{display:flex;align-items:center;gap:9px}
+.distbar{height:11px;background:var(--bar);border-radius:0 3px 3px 0;min-width:2px}
+.distbar.zero{background:var(--bar-soft);width:3px}
+.distcount{font-size:12px;color:var(--muted);white-space:nowrap}
+.distcount b{color:var(--ink);font-weight:500}
+
+/* ---------- controls ---------- */
+.controls{
+  position:sticky;top:0;z-index:20;background:var(--ground);
+  padding:14px 0;border-bottom:1px solid var(--rule);
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+}
+.grp{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.grp-t{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-right:2px}
+button.chip{
+  font:inherit;font-size:13px;line-height:1;padding:7px 12px;cursor:pointer;
+  background:var(--surface);color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;
+  display:inline-flex;align-items:center;gap:6px;transition:background .12s,border-color .12s,color .12s;
+}
+button.chip:hover{border-color:var(--faint)}
+button.chip .c{font-family:var(--mono);font-size:11px;color:var(--faint)}
+button.chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button.chip[aria-pressed="true"] .c{color:var(--ground);opacity:.6}
+button.chip.dist[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+button.chip.dist[aria-pressed="true"] .c{color:#fff;opacity:.7}
+.spacer{flex:1 1 auto}
+.shown{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+/* ---------- bands ---------- */
+.band{padding-top:40px}
+.band[hidden]{display:none}
+.band-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.band-num{font-family:var(--serif);font-size:clamp(26px,4vw,38px);line-height:1;letter-spacing:-.01em}
+.band-meta{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.02em}
+.band-note{flex-basis:100%;font-size:13px;color:var(--muted);font-weight:300;margin-top:2px}
+
+ul.rows{list-style:none;margin:0;padding:0}
+li.row{
+  display:grid;grid-template-columns:142px minmax(0,1fr) 186px;gap:20px;
+  padding:16px 0 16px 14px;border-bottom:1px solid var(--rule-soft);position:relative;
+}
+li.row[hidden]{display:none}
+li.row::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:2px;background:var(--accent)}
+
+.price{display:flex;flex-direction:column;gap:2px}
+.price .p{font-family:var(--mono);font-size:21px;font-weight:500;letter-spacing:-.02em;line-height:1.15}
+.price .pp{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.who{min-width:0}
+.who h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.who .stn{font-size:11px;font-family:var(--mono);letter-spacing:.04em;margin-right:7px;color:var(--accent)}
+.spec{margin:3px 0 0;font-size:13px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:4px 9px}
+.spec .m{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.blurb{margin:7px 0 0;font-size:13.5px;font-weight:300;color:var(--ink-2);line-height:1.55;overflow-wrap:anywhere}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;padding:2px 7px;border:1px solid var(--rule);border-radius:2px;color:var(--muted)}
+.tag.real{border-color:var(--accent);color:var(--accent)}
+
+.right{display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+.rail{width:100%}
+.rail .track{height:4px;background:var(--bar-soft);border-radius:2px;position:relative}
+.rail .fill{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:var(--accent)}
+.rail .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:4px}
+.rail .lab b{font-weight:500;color:var(--ink-2)}
+a.go{
+  font-size:12.5px;font-weight:500;text-decoration:none;color:var(--ink);
+  border:1px solid var(--rule);border-radius:2px;padding:6px 11px;background:var(--surface);
+  display:inline-flex;align-items:center;gap:6px;transition:border-color .12s,background .12s;
+}
+a.go:hover{border-color:var(--accent);background:var(--accent-soft)}
+a.go span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.empty{padding:26px 0;color:var(--muted);font-size:14px;font-weight:300}
+
+/* ---------- danji index ---------- */
+section.index{margin-top:56px;padding-top:30px;border-top:1px solid var(--rule)}
+.idx{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0 22px;list-style:none;padding:0;margin:14px 0 0}
+.idx li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--rule-soft);font-size:13.5px;align-items:baseline}
+.idx a{text-decoration:none;font-weight:500}
+.idx a:hover{text-decoration:underline;text-underline-offset:3px}
+.idx .d{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+
+footer.note{margin-top:46px;padding-top:22px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);font-weight:300;line-height:1.75;max-width:70ch}
+footer.note b{color:var(--ink-2);font-weight:500}
+footer.note code{font-family:var(--mono);font-size:11.5px;background:var(--surface-2);padding:1px 5px;border-radius:2px;overflow-wrap:anywhere}
+
+@media (max-width:760px){
+  .wrap{padding:0 16px 64px}
+  li.row{grid-template-columns:1fr;gap:10px;padding-left:12px}
+  .price{flex-direction:row;align-items:baseline;gap:9px}
+  .right{flex-direction:row;align-items:flex-end;justify-content:space-between;width:100%;gap:14px}
+  .rail{max-width:190px}
+  .controls{position:static}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (pointer:coarse){
+  button.chip{padding:11px 14px;font-size:14px}
+  a.go{padding:11px 14px;font-size:13.5px}
+  .idx li{padding:11px 0}
+  .idx a{display:inline-block;padding:2px 0}
+}
+@media (max-width:430px){
+  .fact{flex-basis:120px;padding:12px 14px}
+  .fact dd{font-size:17px}
+  .right{flex-wrap:wrap;gap:10px 14px}
+  .rail{flex:1 1 160px;max-width:100%}
+  .who h3{font-size:15.5px}
+  .blurb{font-size:13px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="index.html">← 목록으로</a>
+
+<header class="top">
+  <p class="eyebrow">
+    <span class="line8"><i></i>수도권 전철 8호선 별내선</span><span>·</span><span>장자호수공원역 반경 2km</span><span>·</span><span>전용 55–62㎡</span><span>·</span><span>2026.09.17 수집</span>
+  </p>
+  <h1>장자호수공원역 59㎡ 보드</h1>
+  <p class="dek">다산역을 빼고 장자호수공원역만 기준으로, 반경 2km 안의 아파트 <b>129개 단지</b>를 전수 조회해 전용 59㎡대 <b>매매</b>를 모았습니다. 가격 상한은 두지 않았습니다 — 어느 거리에서 얼마부터 시작하는지가 이 보드의 핵심이기 때문입니다.</p>
+  <dl class="facts">
+    <div class="fact"><dt>매물</dt><dd>34<small>건</small></dd></div>
+    <div class="fact"><dt>단지</dt><dd>10<small>곳</small></dd></div>
+    <div class="fact"><dt>가격 범위</dt><dd class="mono">4–13<small>억</small></dd></div>
+    <div class="fact"><dt>역까지</dt><dd class="mono">141–1,909<small>m</small></dd></div>
+    <div class="fact"><dt>7억 이하</dt><dd class="mono">4<small>건</small></dd></div>
+  </dl>
+  <p class="alert"><b>거리가 가격을 지배합니다.</b> 7억 이하는 <b>4건 있습니다</b> — 원일 2건(4–4.3억)과 남양i좋은집 2건(6.9억). 다만 <b>넷 다 1.6km 밖</b>입니다. 반대로 도보권인 <b>1km 이내 11건은 최저가가 8.5억</b>이고, 1.5km 밖으로 나가야 비로소 4억대가 나옵니다. 7억이라는 예산과 도보 거리는 이 지역에서 여전히 양립하지 않습니다 — 다만 그 경계선이 <b>약 1.5km</b>라는 것이 이번에 확인된 사실입니다.</p>
+</header>
+
+<section class="dist">
+  <p class="sec-label">가격대 분포 · 34건</p>
+  <div class="distgrid" id="dist"></div>
+</section>
+
+<div class="controls">
+  <div class="grp"><span class="grp-t">가격대</span><div class="grp" id="bandChips"></div></div>
+  <div class="grp"><span class="grp-t">역까지</span><div class="grp" id="distChips"></div></div>
+  <span class="spacer"></span>
+  <span class="shown" id="shown"></span>
+</div>
+
+<main id="bands"></main>
+
+<section class="index">
+  <p class="sec-label">단지별 전체 매물 목록</p>
+  <ul class="idx" id="idx"></ul>
+</section>
+
+<footer class="note">
+  <p><b>이 보드의 조건.</b> 매매 · 전용면적 55–62㎡ · 장자호수공원역 반경 2km 이내 · 아파트(오피스텔·빌라 제외). 가격 상한 없음. 다산역은 제외했습니다.</p>
+  <p><b>범위에 대하여.</b> 역 좌표(위도 37.58722, 경도 127.13778) 기준 직선 2km 안의 아파트 <b>129개 단지</b>를 전수 조회했습니다. 매매 매물이 조회된 단지는 72곳, 전체 매매 묶음 45건이고, 전용 55–62㎡에 해당하는 것이 19묶음입니다.</p>
+  <p><b>제외한 매물.</b> 19묶음 중 2묶음(구리역롯데캐슬시그니처 1억, e편한세상수택센트럴파크 2.5억)은 상세 조회에서 <code>not found item in catalog</code>가 떠 <b>생존 확인에 실패해 제외</b>했습니다. 목록에만 남아 있고 실제로는 내려간 매물로 보입니다 — 같은 단지의 다른 전용 59㎡대가 10억 전후인 점에 비추어도 정상 매매가로 보기 어렵습니다.</p>
+  <p><b>거리에 대하여.</b> 표기한 m는 역 좌표에서 단지 좌표까지의 <b>직선거리</b>입니다. 실제 도보 경로는 이보다 깁니다 — 괄호 안 도보 시간은 직선거리를 분당 80m로 환산한 최소치이니, 실제로는 1.2–1.5배로 잡으시는 편이 안전합니다.</p>
+  <p><b>읽는 법.</b> 호갱노노는 같은 평형·층의 매물을 하나로 묶습니다. <b>묶음 N건</b>이 그 안의 실제 매물 수이고, 링크를 열면 묶음 전체가 펼쳐집니다. 평당가는 공급면적 기준입니다. 가격은 수집 시점 호가이며 실거래가가 아닙니다.</p>
+  <p><b>출처.</b> hogangnono.com 공개 API — <code>/api/v2/apts/closest</code>, <code>/api/v2/item-catalogs/summaries?tradeTypes=0</code>, <code>/api/v2/item-catalogs/{areaHoId}?tradeType=0</code>. 2026년 9월 17일 수집. 직방 제휴 광고 매물 기준이라 시장 전체 물량보다 적습니다 — 여기 없다고 매물이 없는 것은 아닙니다.</p>
+</footer>
+
+</div>
+
+<script>
+const DATA = [{"distKey": "w2000", "apt": "원일", "hash": "ajje9", "dist": 1678, "hh": 116, "age": "1988년 6월(39년차)", "price": 40000, "pub": 85.61, "priv": 56.61, "py": 26, "dong": "1동", "floor": "1", "bfloor": 5, "rooms": 3, "baths": 1, "dir": "s", "title": "1층 저렴한 매물", "aho": 12569142, "iid": 48751577, "real": true, "n": 2}, {"distKey": "w2000", "apt": "원일", "hash": "ajje9", "dist": 1678, "hh": 116, "age": "1988년 6월(39년차)", "price": 43000, "pub": 85.61, "priv": 56.61, "py": 26, "dong": "1동", "floor": "1", "bfloor": 5, "rooms": 3, "baths": 1, "dir": "s", "title": "재건축,구리역(8호선,경의중)도보권,도보한양대병원1분", "aho": 12569142, "iid": 191108, "real": true, "n": 2}, {"distKey": "w2000", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 69000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "고", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "e", "title": "고층 왕숙천 특급뷰 입주가능한 귀한매물 수리된집", "aho": 4332614, "iid": 50043965, "real": true, "n": 7}, {"distKey": "w2000", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 69000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "e", "title": "귀한입주 복층테라스 조망굿 깨끗", "aho": 4332614, "iid": 50049792, "real": true, "n": 7}, {"distKey": "w2000", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "고", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "e", "title": "ACE 왕숙천뷰 일부수리,테라스 구리역도보가능", "aho": 4332614, "iid": 50050873, "real": true, "n": 7}, {"distKey": "w2000", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "귀한입주. 방3화2. 좋은구조. 깨끗. 복층테라스있어요", "aho": 4332614, "iid": 50044131, "real": true, "n": 7}, {"distKey": "w2000", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "리버 마운틴뷰 TOP층 야외전용테라스 10월 전후", "aho": 4332614, "iid": 50141799, "real": true, "n": 7}, {"distKey": "w2000", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "입주협의 깨끗 복층테라스", "aho": 4332614, "iid": 50044529, "real": true, "n": 7}, {"distKey": "w2000", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1776, "hh": 319, "age": "2004년 11월(23년차)", "price": 72000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "고", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "옥탑방 나무 사다리 시공, 샷시, 욕실, 주방 교체", "aho": 4332614, "iid": 50043922, "real": true, "n": 7}, {"distKey": "w2000", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 73000, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "509동", "floor": "10", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "부분수리 확장 입주협의", "aho": 2184451, "iid": 49543995, "real": true, "n": 3}, {"distKey": "w2000", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 73000, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "509동", "floor": "10", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "27년1월하순입주가능 왕숙천뷰 최근부분수리 깨끗한집", "aho": 2184451, "iid": 49544524, "real": true, "n": 3}, {"distKey": "w2000", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 73000, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "509동", "floor": "10", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "왕숙천뷰.올확장.부분수리", "aho": 2184451, "iid": 248066, "real": true, "n": 3}, {"distKey": "w2000", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 74500, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "502동", "floor": "고", "bfloor": 18, "rooms": 3, "baths": 2, "dir": "s", "title": "입주가능 베란다확장 로얄층 전망굿 주방올수리 주인거주", "aho": 2184114, "iid": 50221802, "real": true, "n": 1}, {"distKey": "w2000", "apt": "리버프라임토평", "hash": "5Vh23", "dist": 1554, "hh": 693, "age": "2002년 5월(25년차)", "price": 77000, "pub": 81.32, "priv": 59.92, "py": 25, "dong": "509동", "floor": "19", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "집주인거주. 작은방과 뒤베란다 왕수천뷰. 앞베란다 롯데타워", "aho": 2184433, "iid": 225968, "real": true, "n": 1}, {"distKey": "w1500", "apt": "구리한양립스", "hash": "gGn86", "dist": 1063, "hh": 268, "age": "2027년 11월(입주예정)", "price": 84800, "pub": 81.73, "priv": 59.92, "py": 25, "dong": "103동", "floor": "11", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "e", "title": "분양권이고요 조합 아파트라 조합원 자격 있는분만 매매가능", "aho": 18840652, "iid": 223550, "real": true, "n": 1}, {"distKey": "w1000", "apt": "구리우성한양", "hash": "5U1c0", "dist": 199, "hh": 682, "age": "1994년 7월(33년차)", "price": 85000, "pub": 80.82, "priv": 60.56, "py": 24, "dong": "101동", "floor": "1", "bfloor": 15, "rooms": 3, "baths": 1, "dir": "s", "title": "추천. 귀한입주. 방3화1. 내부올수리. 8호선초역세권", "aho": 832619, "iid": 49586886, "real": true, "n": 1}, {"distKey": "w1000", "apt": "한성", "hash": "5Vk20", "dist": 141, "hh": 240, "age": "1994년 10월(33년차)", "price": 86000, "pub": 81.69, "priv": 59.72, "py": 25, "dong": "301동", "floor": "저", "bfloor": 20, "rooms": 3, "baths": 1, "dir": "s", "title": "입주또는세안고.방3화1.계단식.샷시포함올수리.엄청깨끗.남향", "aho": 108514, "iid": 49408686, "real": true, "n": 1}, {"distKey": "w1000", "apt": "한일", "hash": "5VVe7", "dist": 423, "hh": 526, "age": "2001년 8월(26년차)", "price": 95000, "pub": 85.73, "priv": 59.78, "py": 26, "dong": "205동", "floor": "9", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "세안고 매수, 부분수리된 집,", "aho": 7792980, "iid": 49725585, "real": true, "n": 7}, {"distKey": "w1000", "apt": "한일", "hash": "5VVe7", "dist": 423, "hh": 526, "age": "2001년 8월(26년차)", "price": 95000, "pub": 85.73, "priv": 59.78, "py": 26, "dong": "205동", "floor": "9", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "전세4.5억안고. 27년6월중순만기. 전실있는 방3화2입주", "aho": 7792980, "iid": 49743441, "real": true, "n": 7}, {"distKey": "w1000", "apt": "한일", "hash": "5VVe7", "dist": 423, "hh": 526, "age": "2001년 8월(26년차)", "price": 95000, "pub": 85.73, "priv": 59.78, "py": 26, "dong": "205동", "floor": "9", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "27.6월입주협의 부분수리", "aho": 7792980, "iid": 49707609, "real": true, "n": 7}, {"distKey": "w1000", "apt": "한일", "hash": "5VVe7", "dist": 423, "hh": 526, "age": "2001년 8월(26년차)", "price": 95000, "pub": 85.73, "priv": 59.78, "py": 26, "dong": "205동", "floor": "9", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "27.6월입주가능 부분수리 깨끗한집 장자호수공원도보5분", "aho": 7792980, "iid": 49687824, "real": true, "n": 7}, {"distKey": "w1000", "apt": "한일", "hash": "5VVe7", "dist": 423, "hh": 526, "age": "2001년 8월(26년차)", "price": 95000, "pub": 85.73, "priv": 59.78, "py": 26, "dong": "205동", "floor": "9", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "27년 6월 입주 세안고 부분수리 초역세권", "aho": 7792980, "iid": 49692857, "real": true, "n": 7}, {"distKey": "w1000", "apt": "한일", "hash": "5VVe7", "dist": 423, "hh": 526, "age": "2001년 8월(26년차)", "price": 95000, "pub": 85.73, "priv": 59.78, "py": 26, "dong": "205동", "floor": "9", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "8호선 역세권 부분수리 세안고매매", "aho": 7792980, "iid": 49701707, "real": true, "n": 7}, {"distKey": "w1000", "apt": "한일", "hash": "5VVe7", "dist": 423, "hh": 526, "age": "2001년 8월(26년차)", "price": 95000, "pub": 85.73, "priv": 59.78, "py": 26, "dong": "205동", "floor": "9", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "8호선 토평 장자호수공원역 도보 6분거리", "aho": 7792980, "iid": 250396, "real": true, "n": 7}, {"distKey": "w1500", "apt": "e편한세상수택센트럴파크", "hash": "ct7e9", "dist": 1008, "hh": 733, "age": "2020년 1월(7년차)", "price": 100000, "pub": 81.74, "priv": 59.95, "py": 25, "dong": "102동", "floor": "중", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "sw", "title": "입주협의 펜트리 및 드레스룸있는4베이구조", "aho": 12588695, "iid": 50090196, "real": true, "n": 1}, {"distKey": "w1500", "apt": "e편한세상수택센트럴파크", "hash": "ct7e9", "dist": 1008, "hh": 733, "age": "2020년 1월(7년차)", "price": 102000, "pub": 81.89, "priv": 59.97, "py": 25, "dong": "108동", "floor": "고", "bfloor": 29, "rooms": 3, "baths": 2, "dir": "sw", "title": "전망이 좋아요 관리굿 시스템에어컨 중문 옵션", "aho": 12589239, "iid": 50127633, "real": true, "n": 1}, {"distKey": "w1000", "apt": "한일", "hash": "5VVe7", "dist": 423, "hh": 526, "age": "2001년 8월(26년차)", "price": 110000, "pub": 85.73, "priv": 59.78, "py": 26, "dong": "201동", "floor": "15", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "긴정상 전망굿 귀한앞동", "aho": 7793104, "iid": 50083576, "real": true, "n": 1}, {"distKey": "w1000", "apt": "한일", "hash": "5VVe7", "dist": 423, "hh": 526, "age": "2001년 8월(26년차)", "price": 115000, "pub": 85.73, "priv": 59.78, "py": 26, "dong": "201동", "floor": "고", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "s", "title": "샷시포함올수리. 방3화2. 3베이. 입주협의", "aho": 7793130, "iid": 50264865, "real": false, "n": 1}, {"distKey": "w2000", "apt": "e편한세상인창어반포레", "hash": "dwm3e", "dist": 1784, "hh": 632, "age": "2021년 9월(6년차)", "price": 120000, "pub": 85.49, "priv": 59.99, "py": 26, "dong": "106동", "floor": "2", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "se", "title": "ACE. 8호선초역세권 시스템에어컨2대,깨끗", "aho": 12592618, "iid": 50175718, "real": true, "n": 1}, {"distKey": "w2000", "apt": "구리역한양수자인리버시티", "hash": "b7d99", "dist": 1909, "hh": 410, "age": "2021년 6월(6년차)", "price": 125000, "pub": 83.1, "priv": 59.99, "py": 25, "dong": "107동", "floor": "6", "bfloor": 20, "rooms": 3, "baths": 2, "dir": "sw", "title": "ACE 역세권 초세권,입주", "aho": 5723343, "iid": 49814876, "real": true, "n": 1}, {"distKey": "w2000", "apt": "e편한세상인창어반포레", "hash": "dwm3e", "dist": 1784, "hh": 632, "age": "2021년 9월(6년차)", "price": 125500, "pub": 85.49, "priv": 59.99, "py": 26, "dong": "106동", "floor": "23", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "sw", "title": "ACE 롯데타워뷰 시에2,중문,안방붙박이장,깨끗해요", "aho": 12592704, "iid": 49885468, "real": true, "n": 1}, {"distKey": "w2000", "apt": "e편한세상인창어반포레", "hash": "dwm3e", "dist": 1784, "hh": 632, "age": "2021년 9월(6년차)", "price": 130000, "pub": 85.49, "priv": 59.99, "py": 26, "dong": "106동", "floor": "저", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "sw", "title": "최초분양자매물 주인거주 확장형 풍부한옵션", "aho": 12592624, "iid": 50141868, "real": true, "n": 3}, {"distKey": "w2000", "apt": "e편한세상인창어반포레", "hash": "dwm3e", "dist": 1784, "hh": 632, "age": "2021년 9월(6년차)", "price": 130000, "pub": 85.49, "priv": 59.99, "py": 26, "dong": "106동", "floor": "저", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "sw", "title": "ACE. 8호선초역세권 시에2,트인뷰", "aho": 12592624, "iid": 50129445, "real": true, "n": 3}, {"distKey": "w2000", "apt": "e편한세상인창어반포레", "hash": "dwm3e", "dist": 1784, "hh": 632, "age": "2021년 9월(6년차)", "price": 130000, "pub": 85.49, "priv": 59.99, "py": 26, "dong": "106동", "floor": "3", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "sw", "title": "입주협의 역세권 에어컨유", "aho": 12592624, "iid": 50134662, "real": true, "n": 3}];
+const BANDS = ["4억대", "5억대", "6억대", "7억대", "8억대", "9억대", "10억대", "11억대", "12억대", "13억대"];
+const DISTS = [{k:"w1000",n:"1km 이내"},{k:"w1500",n:"1–1.5km"},{k:"w2000",n:"1.5–2km"}];
+const MAXD = 2000;
+const NOTE = {
+  "4억대":"원일 1동 1층 두 건. 39년차 116세대 구축이고 재건축 추진을 내걸고 있습니다. 4.3억 물건은 전세 1억3천이 2027년 12월까지 걸려 있습니다 — 실입주하려면 퇴거 기간을 따로 협의해야 합니다.",
+  "6억대":"남양i좋은집 105동 두 건, 둘 다 25층 탑층입니다. 7억 이하에서 실입주가 가능한 사실상 유일한 선택지이고, 역까지 1,776m입니다.",
+  "7억대":"이 구간은 남양i좋은집 7.2억대 다섯 건과 리버프라임토평 7.3–7.7억이 채웁니다. 7억을 조금만 넘기면 선택지가 한 번에 늘어납니다.",
+  "8억대":"여기서 처음으로 도보권이 등장합니다 — 한성 141m, 구리우성한양 199m. 다만 둘 다 33년차 구축입니다. 구리한양립스 1,063m는 2027년 11월 입주예정 물건입니다.",
+  "9억대":"한일 205동 9층 한 묶음에 7건이 몰려 있습니다. 같은 평형·같은 층이라 가격이 같고, 대부분 세안고(전세 낀) 조건입니다.",
+  "10억대":"e편한세상수택센트럴파크 1,008m, 7년차. 도보권에 가까우면서 신축인 조합의 가격대입니다.",
+  "11억대":"둘 다 한일 201동입니다. 같은 단지 같은 평형인데 205동 9층보다 1.5–2억 비쌉니다 — 동·층·전망 차이입니다.",
+  "12억대":"e편한세상인창어반포레(1,784m, 6년차)와 구리역한양수자인리버시티(1,909m, 6년차). 거리는 멀지만 신축입니다.",
+  "13억대":"e편한세상인창어반포레 106동 3층. 이 조건에서 가장 비싼 물건입니다."
+};
+const DIR = {s:"남향",n:"북향",e:"동향",w:"서향",ne:"북동향",nw:"북서향",se:"남동향",sw:"남서향"};
+const DLAB = {w1000:"1km 이내",w1500:"1–1.5km",w2000:"1.5–2km"};
+
+const band = p => Math.floor(p/10000) + "억대";
+const won = v => { const e=Math.floor(v/10000), m=v%10000;
+  if(!m) return `${e}억`;
+  return m%1000===0 ? `${e}억 ${m/1000}천` : `${e}억 ${m.toLocaleString()}`; };
+
+DATA.forEach(d => { d.band = band(d.price); d.pyung = Math.round(d.price/d.py); d.walk = Math.round(d.dist/80); });
+
+const counts = BANDS.map(b => ({b, n: DATA.filter(d=>d.band===b).length}));
+const max = Math.max(...counts.map(c=>c.n));
+document.getElementById("dist").innerHTML = counts.map(c => `
+  <div class="bl">${c.b}</div>
+  <div class="distrow">
+    <div class="distbar ${c.n?"":"zero"}" style="width:${c.n?(c.n/max*100):0}%"></div>
+    <div class="distcount"><b>${c.n}</b>건</div>
+  </div>`).join("");
+
+const state = {bands:new Set(BANDS), dists:new Set(DISTS.map(d=>d.k))};
+document.getElementById("bandChips").innerHTML = BANDS.map(b=>{
+  const n = counts.find(c=>c.b===b).n;
+  return `<button class="chip" type="button" data-band="${b}" aria-pressed="true">${b}<span class="c">${n}</span></button>`;
+}).join("");
+document.getElementById("distChips").innerHTML = DISTS.map(s=>{
+  const n = DATA.filter(d=>d.distKey===s.k).length;
+  return `<button class="chip dist" type="button" data-dist="${s.k}" aria-pressed="true">${s.n}<span class="c">${n}</span></button>`;
+}).join("");
+
+document.getElementById("bands").innerHTML = BANDS.map(b=>{
+  const rows = DATA.filter(d=>d.band===b);
+  if(!rows.length) return "";
+  const lo = Math.min(...rows.map(r=>r.price)), hi = Math.max(...rows.map(r=>r.price));
+  return `<section class="band" data-band="${b}">
+    <div class="band-head">
+      <span class="band-num">${b}</span>
+      <span class="band-meta">${rows.length}건 · ${won(lo)}${lo!==hi?" – "+won(hi):""}</span>
+      ${NOTE[b]?`<span class="band-note">${NOTE[b]}</span>`:""}
+    </div>
+    <ul class="rows">${rows.map(row).join("")}</ul>
+    <p class="empty" hidden>선택한 거리대에 이 가격대 매물이 없습니다.</p>
+  </section>`;
+}).join("");
+
+function row(d){
+  const url = `https://hogangnono.com/apt/${d.hash}/item-catalog/${d.aho}/0?itemId=${d.iid}`;
+  const pct = Math.max(3, Math.min(100, d.dist/MAXD*100));
+  const fl = `${d.floor}층${d.bfloor?` / ${d.bfloor}층`:""}`;
+  return `<li class="row" data-dist="${d.distKey}" data-band="${d.band}">
+    <div class="price">
+      <span class="p">${won(d.price)}</span>
+      <span class="pp">평당 ${d.pyung.toLocaleString()}만</span>
+    </div>
+    <div class="who">
+      <h3><span class="stn">${DLAB[d.distKey]}</span>${d.apt}</h3>
+      <p class="spec">
+        <span>${d.dong} · ${fl}</span>
+        <span class="m">${d.py}평</span>
+        <span class="m">전용 ${d.priv}㎡</span>
+        ${d.rooms?`<span class="m">방${d.rooms}·욕${d.baths}</span>`:""}
+        ${DIR[d.dir]?`<span class="dirn">${DIR[d.dir]}</span>`:""}
+      </p>
+      <p class="blurb">${d.title.replace(/</g,"&lt;")}</p>
+      <div class="tags">
+        ${d.n>1?`<span class="tag">묶음 ${d.n}건</span>`:""}
+        ${d.real?`<span class="tag real">확인매물</span>`:""}
+        <span class="tag">${d.hh.toLocaleString()}세대</span>
+        <span class="tag">${d.age}</span>
+      </div>
+    </div>
+    <div class="right">
+      <div class="rail">
+        <div class="track"><div class="fill" style="width:${pct}%"></div></div>
+        <div class="lab"><span>역까지 <b>${d.dist.toLocaleString()}m</b></span><span>도보 ${d.walk}분~</span></div>
+      </div>
+      <a class="go" href="${url}" target="_blank" rel="noopener">호갱노노에서 보기 <span>↗</span></a>
+    </div>
+  </li>`;
+}
+
+const byApt = [...new Map(DATA.map(d=>[d.apt,d])).values()].sort((a,b)=>a.dist-b.dist);
+document.getElementById("idx").innerHTML = byApt.map(a=>{
+  const rows = DATA.filter(d=>d.apt===a.apt);
+  const lo = Math.min(...rows.map(r=>r.price)), hi = Math.max(...rows.map(r=>r.price));
+  return `<li>
+    <a href="https://hogangnono.com/apt/${a.hash}" target="_blank" rel="noopener">${a.apt}</a>
+    <span class="d">${a.dist.toLocaleString()}m · ${rows.length}건 · ${won(lo)}${lo!==hi?"–"+won(hi):""}</span>
+  </li>`;
+}).join("");
+
+function apply(){
+  let shown = 0;
+  document.querySelectorAll("li.row").forEach(li=>{
+    const ok = state.bands.has(li.dataset.band) && state.dists.has(li.dataset.dist);
+    li.hidden = !ok; if(ok) shown++;
+  });
+  document.querySelectorAll("section.band").forEach(sec=>{
+    const vis = [...sec.querySelectorAll("li.row")].filter(li=>!li.hidden).length;
+    sec.hidden = !state.bands.has(sec.dataset.band);
+    const empty = sec.querySelector(".empty");
+    if(empty) empty.hidden = vis > 0;
+  });
+  document.getElementById("shown").textContent = `${shown} / ${DATA.length}건 표시`;
+}
+
+document.getElementById("bandChips").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  const on = b.getAttribute("aria-pressed") === "true";
+  b.setAttribute("aria-pressed", String(!on));
+  on ? state.bands.delete(b.dataset.band) : state.bands.add(b.dataset.band);
+  apply();
+});
+document.getElementById("distChips").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  const on = b.getAttribute("aria-pressed") === "true";
+  b.setAttribute("aria-pressed", String(!on));
+  on ? state.dists.delete(b.dataset.dist) : state.dists.add(b.dataset.dist);
+  apply();
+});
+
+apply();
+</script>
+</body>
+</html>
