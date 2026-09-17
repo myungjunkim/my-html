@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>장자·다산 59㎡ 보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=Song+Myung&display=swap">
+<style>
+:root{
+  --sans:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --serif:"Song Myung","Nanum Myeongjo",'Apple SD Gothic Neo',"Noto Serif KR",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,"IBM Plex Sans KR","Apple SD Gothic Neo","Noto Sans KR",monospace;
+  --ground:#faf8f9; --surface:#ffffff; --surface-2:#f3eff1;
+  --ink:#1c1a1c; --ink-2:#4b444c; --muted:#7c737f; --faint:#a89fab;
+  --rule:#e6dfe6; --rule-soft:#efeaef;
+  --dasan:#d6246e; --jangja:#0e8fa8;
+  --bar:#5c5360; --bar-soft:#d9d2da;
+  --focus:#d6246e;
+  --shadow:0 1px 2px rgba(28,26,28,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#151316; --surface:#1d1a1e; --surface-2:#262229;
+    --ink:#f0ecf0; --ink-2:#c7bfc9; --muted:#968d99; --faint:#6e6572;
+    --rule:#332e36; --rule-soft:#282430;
+    --dasan:#e8468a; --jangja:#22a0be;
+    --bar:#b9aebd; --bar-soft:#3a343d;
+    --focus:#e8468a;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#151316; --surface:#1d1a1e; --surface-2:#262229;
+  --ink:#f0ecf0; --ink-2:#c7bfc9; --muted:#968d99; --faint:#6e6572;
+  --rule:#332e36; --rule-soft:#282430;
+  --dasan:#e8468a; --jangja:#22a0be;
+  --bar:#b9aebd; --bar-soft:#3a343d;
+  --focus:#e8468a;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400; font-size:15px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 88px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---------- masthead ---------- */
+header.top{padding:48px 0 26px;border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap
+}
+.line8{display:inline-flex;align-items:center;gap:6px}
+.line8 i{width:9px;height:9px;border-radius:50%;background:var(--dasan);display:block}
+h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(34px,6.2vw,54px);line-height:1.1;letter-spacing:-.01em;
+  margin:14px 0 0;text-wrap:balance;
+}
+.dek{margin:12px 0 0;max-width:60ch;color:var(--ink-2);font-weight:300;font-size:16px}
+.facts{display:flex;flex-wrap:wrap;gap:0;margin-top:26px;border:1px solid var(--rule);border-radius:2px;background:var(--surface)}
+.fact{flex:1 1 150px;padding:14px 18px;border-right:1px solid var(--rule-soft)}
+.fact:last-child{border-right:0}
+.fact dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 4px;font-family:var(--mono)}
+.fact dd{margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em}
+.fact dd small{font-size:12px;color:var(--muted);font-weight:400;margin-left:3px}
+
+/* ---------- distribution ---------- */
+section.dist{padding:30px 0 34px;border-bottom:1px solid var(--rule)}
+.sec-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
+.distgrid{display:grid;grid-template-columns:62px 1fr;gap:7px 14px;align-items:center;max-width:620px}
+.distgrid .bl{font-size:13px;color:var(--ink-2);text-align:right;font-weight:500}
+.distrow{display:flex;align-items:center;gap:9px}
+.distbar{height:11px;background:var(--bar);border-radius:0 3px 3px 0;min-width:2px}
+.distbar.zero{background:var(--bar-soft);width:3px}
+.distcount{font-size:12px;color:var(--muted)}
+.distcount b{color:var(--ink);font-weight:500}
+
+/* ---------- controls ---------- */
+.controls{
+  position:sticky;top:0;z-index:20;background:var(--ground);
+  padding:14px 0;border-bottom:1px solid var(--rule);
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+}
+.grp{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.grp-t{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-right:2px}
+button.chip{
+  font:inherit;font-size:13px;line-height:1;padding:7px 12px;cursor:pointer;
+  background:var(--surface);color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;
+  display:inline-flex;align-items:center;gap:6px;transition:background .12s,border-color .12s,color .12s;
+}
+button.chip:hover{border-color:var(--faint)}
+button.chip .c{font-family:var(--mono);font-size:11px;color:var(--faint)}
+button.chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button.chip[aria-pressed="true"] .c{color:var(--ground);opacity:.6}
+button.chip.st-dasan[aria-pressed="true"]{background:var(--dasan);border-color:var(--dasan);color:#fff}
+button.chip.st-jangja[aria-pressed="true"]{background:var(--jangja);border-color:var(--jangja);color:#fff}
+button.chip.st-dasan[aria-pressed="true"] .c,button.chip.st-jangja[aria-pressed="true"] .c{color:#fff}
+.spacer{flex:1 1 auto}
+.shown{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+/* ---------- bands ---------- */
+.band{padding-top:40px}
+.band[hidden]{display:none}
+.band-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.band-num{font-family:var(--serif);font-size:clamp(26px,4vw,38px);line-height:1;letter-spacing:-.01em}
+.band-meta{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.02em}
+.band-note{flex-basis:100%;font-size:13px;color:var(--muted);font-weight:300;margin-top:2px}
+
+ul.rows{list-style:none;margin:0;padding:0}
+li.row{
+  display:grid;grid-template-columns:142px minmax(0,1fr) 186px;gap:20px;
+  padding:16px 0 16px 14px;border-bottom:1px solid var(--rule-soft);position:relative;
+}
+li.row[hidden]{display:none}
+li.row::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:2px}
+li.row[data-st="dasan"]::before{background:var(--dasan)}
+li.row[data-st="jangja"]::before{background:var(--jangja)}
+
+.price{display:flex;flex-direction:column;gap:2px}
+.price .p{font-family:var(--mono);font-size:21px;font-weight:500;letter-spacing:-.02em;line-height:1.15}
+.price .pp{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.who{min-width:0}
+.who h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
+.who .stn{font-size:11px;font-family:var(--mono);letter-spacing:.04em;margin-right:7px}
+li.row[data-st="dasan"] .stn{color:var(--dasan)}
+li.row[data-st="jangja"] .stn{color:var(--jangja)}
+.spec{margin:3px 0 0;font-size:13px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:4px 9px}
+.spec .m{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.blurb{margin:7px 0 0;font-size:13.5px;font-weight:300;color:var(--ink-2);line-height:1.55;overflow-wrap:anywhere}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;padding:2px 7px;border:1px solid var(--rule);border-radius:2px;color:var(--muted)}
+.tag.real{border-color:var(--jangja);color:var(--jangja)}
+
+.right{display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+.rail{width:100%}
+.rail .track{height:4px;background:var(--bar-soft);border-radius:2px;position:relative}
+.rail .fill{position:absolute;left:0;top:0;bottom:0;border-radius:2px}
+li.row[data-st="dasan"] .rail .fill{background:var(--dasan)}
+li.row[data-st="jangja"] .rail .fill{background:var(--jangja)}
+.rail .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:4px}
+.rail .lab b{font-weight:500;color:var(--ink-2)}
+a.go{
+  font-size:12.5px;font-weight:500;text-decoration:none;color:var(--ink);
+  border:1px solid var(--rule);border-radius:2px;padding:6px 11px;background:var(--surface);
+  display:inline-flex;align-items:center;gap:6px;transition:border-color .12s,background .12s;
+}
+a.go:hover{border-color:var(--ink);background:var(--surface-2)}
+a.go span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.empty{padding:26px 0;color:var(--muted);font-size:14px;font-weight:300}
+
+/* ---------- danji index ---------- */
+section.index{margin-top:56px;padding-top:30px;border-top:1px solid var(--rule)}
+.idx{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0 22px;list-style:none;padding:0;margin:14px 0 0}
+.idx li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--rule-soft);font-size:13.5px;align-items:baseline}
+.idx a{text-decoration:none;font-weight:500}
+.idx a:hover{text-decoration:underline;text-underline-offset:3px}
+.idx .d{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+
+footer.note{margin-top:46px;padding-top:22px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);font-weight:300;line-height:1.75;max-width:70ch}
+footer.note b{color:var(--ink-2);font-weight:500}
+footer.note code{font-family:var(--mono);font-size:11.5px;background:var(--surface-2);padding:1px 5px;border-radius:2px;overflow-wrap:anywhere}
+
+@media (max-width:760px){
+  .wrap{padding:0 16px 64px}
+  li.row{grid-template-columns:1fr;gap:10px;padding-left:12px}
+  .price{flex-direction:row;align-items:baseline;gap:9px}
+  .right{flex-direction:row;align-items:flex-end;justify-content:space-between;width:100%;gap:14px}
+  .rail{max-width:190px}
+  .controls{position:static}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* --- 모바일 보강 --- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (pointer:coarse){
+  button.chip{padding:11px 14px;font-size:14px}
+  a.go{padding:11px 14px;font-size:13.5px}
+  .idx li{padding:11px 0}
+  .idx a{display:inline-block;padding:2px 0}
+}
+@media (max-width:430px){
+  .fact{flex-basis:120px;padding:12px 14px}
+  .fact dd{font-size:17px}
+  .right{flex-wrap:wrap;gap:10px 14px}
+  .rail{flex:1 1 160px;max-width:100%}
+  .who h3{font-size:15.5px}
+  .blurb{font-size:13px}
+}
+@media (max-width:360px){
+  .wrap{padding:0 13px 56px}
+  .distgrid{grid-template-columns:54px 1fr}
+  .price .p{font-size:19px}
+}
+</style><style>
+/* --- 이 보드 전용 추가 --- */
+.alert{
+  margin-top:26px;padding:16px 18px;border:1px solid var(--rule);border-left:3px solid var(--dasan);
+  background:var(--surface);border-radius:2px;font-size:14px;color:var(--ink-2);font-weight:300;line-height:1.7;max-width:74ch;
+}
+.alert b{color:var(--ink);font-weight:600}
+.alert .mono{font-size:13px}
+.scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em;margin-bottom:3px}
+.rail .track{position:relative}
+.rail .tick{position:absolute;top:-2px;bottom:-2px;width:1px;background:var(--rule);}
+.walk{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.dirn{font-family:var(--mono);font-size:12px;color:var(--muted)}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">
+    <span class="line8"><i></i>수도권 전철 8호선</span><span>·</span><span>매매 7억 이하</span><span>·</span><span>전용 55–62㎡</span><span>·</span><span>2026.09.15 수집</span>
+  </p>
+  <h1>장자·다산 59㎡ 보드</h1>
+  <p class="dek">전용 59㎡대, 7억 이하 <b>매매</b>만 추렸습니다. 탐색 범위는 8억 보드와 같은 <b>반경 2km</b>, 세대수 하한 없음. 상한을 1억 낮추자 8억 보드의 15건 중 9건(7.1–7.95억)이 빠지고 <b>6건</b>이 남았습니다. 전부 매물 API로 생존 확인했습니다.</p>
+  <dl class="facts">
+    <div class="fact"><dt>매물</dt><dd>6<small>건</small></dd></div>
+    <div class="fact"><dt>단지</dt><dd>5<small>곳</small></dd></div>
+    <div class="fact"><dt>가격 범위</dt><dd class="mono">4–7<small>억</small></dd></div>
+    <div class="fact"><dt>역까지</dt><dd class="mono">926–1,970<small>m</small></dd></div>
+  </dl>
+  <p class="alert"><b>먼저 알아두실 점.</b> 이 조건에 맞는 매물은 <b>역세권에 없습니다.</b> 가장 가까운 것이 인창해모로 2건 <span class="mono">926m</span>이고, 나머지 4건은 전부 <span class="mono">1.5km</span> 밖입니다. 앞서 본 역세권 단지들(다산자이·수자인·유승한내들 등)은 전용 59㎡대 최저가가 8.5억부터 시작합니다. 7억이라는 상한과 도보 거리는 이 지역에서 동시에 만족되지 않습니다 — 둘 중 하나를 고르셔야 합니다.</p>
+</header>
+
+<section class="dist">
+  <p class="sec-label">가격대 분포 · 6건</p>
+  <div class="distgrid" id="dist"></div>
+</section>
+
+<div class="controls">
+  <div class="grp"><span class="grp-t">가격대</span><div class="grp" id="bandChips"></div></div>
+  <div class="grp"><span class="grp-t">역</span><div class="grp" id="stChips"></div></div>
+  <span class="spacer"></span>
+  <span class="shown" id="shown"></span>
+</div>
+
+<main id="bands"></main>
+
+<section class="index">
+  <p class="sec-label">단지별 전체 매물 목록</p>
+  <ul class="idx" id="idx"></ul>
+</section>
+
+<footer class="note">
+  <p><b>이 보드의 조건.</b> 매매 7억 이하 · 전용면적 55–62㎡ · 두 역 반경 2km 이내 · 아파트(오피스텔·빌라 제외). 전용 59㎡대를 겨냥한 범위이며, 실제 결과는 전용 56.61–59.99㎡ 사이에 들어옵니다.</p>
+  <p><b>거리에 대하여.</b> 표기한 m는 역 좌표에서 단지 좌표까지의 <b>직선거리</b>입니다. 실제 도보 경로는 이보다 깁니다 — 괄호 안 도보 시간은 직선거리를 분당 80m로 환산한 최소치이니, 실제로는 1.2–1.5배로 잡으시는 편이 안전합니다.</p>
+  <p><b>읽는 법.</b> 호갱노노는 같은 평형·층의 매물을 하나로 묶습니다. <b>묶음 N건</b>이 그 안의 실제 매물 수이고, 링크를 열면 묶음 전체가 펼쳐집니다. 평당가는 공급면적 기준입니다. 가격은 수집 시점 호가이며 실거래가가 아닙니다.</p>
+  <p><b>출처.</b> hogangnono.com 공개 API — <code>/api/v2/apts/closest</code>, <code>/api/v2/item-catalogs/summaries?tradeTypes=0</code>, <code>/api/v2/item-catalogs/{areaHoId}</code>. 2026년 9월 15일 수집. 직방 제휴 광고 매물 기준이라 시장 전체 물량보다 적습니다.</p>
+</footer>
+</div>
+
+<script>
+const DATA = [{"stKey": "jangja", "st": "장자호수공원역", "apt": "원일", "hash": "ajje9", "dist": 1640, "hh": 116, "age": "입주 39년차", "addr": "경기도 구리시 교문동 232", "price": 40000, "pub": 85.61, "priv": 56.61, "py": 26, "dong": "1동", "floor": "1", "bfloor": 5, "rooms": 3, "baths": 1, "dir": "s", "title": "재건축,구리역(8호선,경의중)도보권,도보한양대병원1분", "n": 2, "aho": 12569142, "iid": 191108, "real": true, "ok": true}, {"stKey": "dasan", "st": "다산역", "apt": "다산한신휴플러스", "hash": "5Xkd9", "dist": 1574, "hh": 270, "age": "입주 28년차", "addr": "경기도 남양주시 다산동 4026-6", "price": 45000, "pub": 82.14, "priv": 59.84, "py": 25, "dong": "102동", "floor": "13", "bfloor": 22, "rooms": 3, "baths": 1, "dir": "w", "title": "부분수리 에2 세안고매매", "n": 1, "aho": 11714830, "iid": 49771395, "real": true, "ok": true}, {"stKey": "dasan", "st": "다산역", "apt": "인창해모로", "hash": "5TI25", "dist": 926, "hh": 953, "age": "입주 25년차", "addr": "경기도 구리시 인창동 29", "price": 53000, "pub": 80.79, "priv": 59.93, "py": 24, "dong": "101동", "floor": "1", "bfloor": 25, "rooms": 3, "baths": 1, "dir": "s", "title": "농협 입점으로 생활편리하며, 아이 키우는분, 어르신 편리", "n": 3, "aho": 7614139, "iid": 249558, "real": true, "ok": true}, {"stKey": "dasan", "st": "다산역", "apt": "인창해모로", "hash": "5TI25", "dist": 926, "hh": 953, "age": "입주 25년차", "addr": "경기도 구리시 인창동 29", "price": 55000, "pub": 80.79, "priv": 59.93, "py": 24, "dong": "107동", "floor": "중", "bfloor": 25, "rooms": 3, "baths": 1, "dir": "s", "title": "남향 뻥뷰 세안고", "n": 1, "aho": 7614254, "iid": 49520653, "real": true, "ok": true}, {"stKey": "jangja", "st": "장자호수공원역", "apt": "남양i좋은집", "hash": "5Uu03", "dist": 1735, "hh": 319, "age": "입주 23년차", "addr": "경기도 구리시 수택동 550", "price": 69000, "pub": 79.42, "priv": 59.99, "py": 24, "dong": "105동", "floor": "25", "bfloor": 25, "rooms": 3, "baths": 2, "dir": "ne", "title": "옥탑방 나무 사다리 시공, 샷시, 욕실, 주방 교체", "n": 7, "aho": 4332614, "iid": 50043922, "real": true, "ok": true}, {"stKey": "dasan", "st": "다산역", "apt": "인창4단지주공", "hash": "5Txbf", "dist": 1970, "hh": 1408, "age": "입주 31년차", "addr": "경기도 구리시 인창동 666-1", "price": 70000, "pub": 78.63, "priv": 58.14, "py": 24, "dong": "403동", "floor": "1", "bfloor": 15, "rooms": 3, "baths": 1, "dir": "sw", "title": "올수리된 예쁜집이며 관리가 잘되었어요", "n": 1, "aho": 4167600, "iid": 50007749, "real": true, "ok": true}];
+const BANDS = ["4억대","5억대","6억대","7억대"];
+const STS = [{k:"jangja",n:"장자호수공원역"},{k:"dasan",n:"다산역"}];
+const MAXD = 2000;
+const NOTE = {
+  "4억대":"둘 다 1.5km 밖 구축입니다. 원일은 39년차 116세대로 재건축을 내건 물건이고, 다산한신휴플러스는 28년차 270세대입니다.",
+  "5억대":"이 조건에서 역에 가장 가까운 두 건입니다. 인창해모로 926m — 여기가 한계선입니다.",
+  "6억대":"단 한 건, 남양i좋은집 25층 탑층입니다. 이 가격대가 비어 있는 이유는 6억대 구축이 이미 7억대로 올라섰기 때문입니다.",
+  "7억대":"상한선 7억 정각의 한 건, 인창4단지주공 403동 1층 올수리입니다. 7억을 조금만 넘기면(7.1–7.95억) 9건이 더 있었으니, 예산에 여유가 생기면 8억 보드를 보세요."
+};
+const DIR = {s:"남향",n:"북향",e:"동향",w:"서향",ne:"북동향",nw:"북서향",se:"남동향",sw:"남서향"};
+
+const band = p => Math.floor(p/10000) + "억대";
+const won = v => { const e=Math.floor(v/10000), m=v%10000;
+  return e && m ? `${e}억 ${m/1000}천` : `${e}억`; };
+
+DATA.forEach(d => { d.band = band(d.price); d.pyung = Math.round(d.price/d.py); d.walk = Math.round(d.dist/80); });
+
+const counts = BANDS.map(b => ({b, n: DATA.filter(d=>d.band===b).length}));
+const max = Math.max(...counts.map(c=>c.n));
+document.getElementById("dist").innerHTML = counts.map(c => `
+  <div class="bl">${c.b}</div>
+  <div class="distrow">
+    <div class="distbar ${c.n?"":"zero"}" style="width:${c.n?(c.n/max*100):0}%"></div>
+    <div class="distcount"><b>${c.n}</b>건</div>
+  </div>`).join("");
+
+const state = {bands:new Set(BANDS), sts:new Set(STS.map(s=>s.k))};
+document.getElementById("bandChips").innerHTML = BANDS.map(b=>{
+  const n = counts.find(c=>c.b===b).n;
+  return `<button class="chip" type="button" data-band="${b}" aria-pressed="true">${b}<span class="c">${n}</span></button>`;
+}).join("");
+document.getElementById("stChips").innerHTML = STS.map(s=>{
+  const n = DATA.filter(d=>d.stKey===s.k).length;
+  return `<button class="chip st-${s.k}" type="button" data-st="${s.k}" aria-pressed="true">${s.n}<span class="c">${n}</span></button>`;
+}).join("");
+
+document.getElementById("bands").innerHTML = BANDS.map(b=>{
+  const rows = DATA.filter(d=>d.band===b);
+  if(!rows.length) return "";
+  const lo = Math.min(...rows.map(r=>r.price)), hi = Math.max(...rows.map(r=>r.price));
+  return `<section class="band" data-band="${b}">
+    <div class="band-head">
+      <span class="band-num">${b}</span>
+      <span class="band-meta">${rows.length}건 · ${won(lo)}${lo!==hi?" – "+won(hi):""}</span>
+      ${NOTE[b]?`<span class="band-note">${NOTE[b]}</span>`:""}
+    </div>
+    <ul class="rows">${rows.map(row).join("")}</ul>
+    <p class="empty" hidden>선택한 역에 이 가격대 매물이 없습니다.</p>
+  </section>`;
+}).join("");
+
+function row(d){
+  const url = `https://hogangnono.com/apt/${d.hash}/item-catalog/${d.aho}/0?itemId=${d.iid}`;
+  const pct = Math.max(3, Math.min(100, d.dist/MAXD*100));
+  const fl = /^\d+$/.test(d.floor) ? `${d.floor}층${d.bfloor?` / ${d.bfloor}층`:""}` : `${d.floor}층${d.bfloor?` / ${d.bfloor}층`:""}`;
+  return `<li class="row" data-st="${d.stKey}" data-band="${d.band}">
+    <div class="price">
+      <span class="p">${won(d.price)}</span>
+      <span class="pp">평당 ${d.pyung.toLocaleString()}만</span>
+    </div>
+    <div class="who">
+      <h3><span class="stn">${d.stKey==="dasan"?"다산":"장자호수"}</span>${d.apt}</h3>
+      <p class="spec">
+        <span>${d.dong} · ${fl}</span>
+        <span class="m">${d.py}평</span>
+        <span class="m">전용 ${d.priv}㎡</span>
+        ${d.rooms?`<span class="m">방${d.rooms}·욕${d.baths}</span>`:""}
+        ${DIR[d.dir]?`<span class="dirn">${DIR[d.dir]}</span>`:""}
+      </p>
+      <p class="blurb">${d.title.replace(/</g,"&lt;")}</p>
+      <div class="tags">
+        ${d.n>1?`<span class="tag">묶음 ${d.n}건</span>`:""}
+        ${d.real?`<span class="tag real">확인매물</span>`:""}
+        <span class="tag">${d.hh.toLocaleString()}세대</span>
+        <span class="tag">${d.age.replace("입주 ","")}</span>
+      </div>
+    </div>
+    <div class="right">
+      <div class="rail">
+        <div class="scale"><span>역</span><span>1km</span><span>2km</span></div>
+        <div class="track"><div class="tick" style="left:50%"></div><div class="fill" style="width:${pct}%"></div></div>
+        <div class="lab"><span class="walk">도보 약 ${d.walk}분</span><span><b>${d.dist.toLocaleString()}</b>m</span></div>
+      </div>
+      <a class="go" href="${url}" target="_blank" rel="noopener">매물 보기 <span>↗</span></a>
+    </div>
+  </li>`;
+}
+
+const danji = [];
+DATA.forEach(d=>{ if(!danji.some(x=>x.hash===d.hash)) danji.push(d); });
+danji.sort((a,b)=> a.dist-b.dist);
+document.getElementById("idx").innerHTML = danji.map(d=>`
+  <li>
+    <a href="https://hogangnono.com/items/${d.hash}/0" target="_blank" rel="noopener">${d.apt}</a>
+    <span class="d" style="color:var(--${d.stKey})">${d.dist.toLocaleString()}m</span>
+  </li>`).join("");
+
+function apply(){
+  let vis = 0;
+  document.querySelectorAll("section.band").forEach(sec=>{
+    const on = state.bands.has(sec.dataset.band);
+    sec.hidden = !on;
+    let n = 0;
+    sec.querySelectorAll("li.row").forEach(li=>{
+      const show = on && state.sts.has(li.dataset.st);
+      li.hidden = !show; if(show) n++;
+    });
+    sec.querySelector(".empty").hidden = !(on && n===0);
+    vis += n;
+  });
+  document.getElementById("shown").textContent = `${vis}건 표시 중`;
+}
+document.querySelectorAll("button.chip").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const set = btn.dataset.band ? state.bands : state.sts;
+    const key = btn.dataset.band || btn.dataset.st;
+    if(set.has(key)){ if(set.size>1){ set.delete(key); btn.setAttribute("aria-pressed","false"); } }
+    else { set.add(key); btn.setAttribute("aria-pressed","true"); }
+    apply();
+  });
+});
+apply();
+</script>
+
+</body>
+</html>
