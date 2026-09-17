@@ -67,6 +67,9 @@ header p.lede{color:var(--muted);font-size:14px;margin-top:8px;max-width:34em}
 /* ── Filter chips ── */
 .chips{display:flex;gap:8px;padding:16px 0 4px;flex-wrap:wrap}
 .chips.lv{padding-top:8px}
+.conds{display:flex;align-items:center;gap:8px;padding:16px 0 0;flex-wrap:wrap}
+.conds-label{font-size:12.5px;color:var(--muted);font-weight:600}
+.conds-hint{flex:1 1 100%;font-size:12px;color:var(--muted);margin-top:2px}
 .chip{
   border:1px solid var(--line);background:var(--surface);color:var(--muted);
   border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;
@@ -99,7 +102,7 @@ section>p.desc{color:var(--muted);font-size:13px;margin-top:4px}
   background:var(--surface);border:1px solid var(--line);border-radius:14px;
   box-shadow:var(--shadow);overflow:hidden;
 }
-.item.hidden{display:none}
+.item.hidden,.item.excluded{display:none}
 .item-head{
   display:flex;align-items:flex-start;gap:12px;padding:14px;
   cursor:pointer;-webkit-tap-highlight-color:transparent;
@@ -206,6 +209,13 @@ button:focus-visible,.item-head:focus-visible,summary:focus-visible{
   <div class="done-msg">필수 항목을 다 봤어요. 기억은 하루면 흐려집니다 — 단지를 떠나기 전에 메모 템플릿을 채워두세요.</div>
 </div>
 
+<div class="conds" role="group" aria-label="내 조건">
+  <span class="conds-label">내 조건</span>
+  <button class="chip cond" data-cond="kid" aria-pressed="false">아이 있음</button>
+  <button class="chip cond" data-cond="car" aria-pressed="true">차 있음</button>
+  <p class="conds-hint">해당 없는 항목은 목록과 문항 수에서 빠집니다.</p>
+</div>
+
 <div class="chips" role="group" aria-label="임장 구분 필터">
   <button class="chip cat" data-cat="all" aria-pressed="true">전체</button>
   <button class="chip cat" data-cat="loc" aria-pressed="false">입지 임장</button>
@@ -249,22 +259,33 @@ button:focus-visible,.item-head:focus-visible,summary:focus-visible{
 <script>
 const DATA = [
 {
+  cat:"loc", title:"가기 전에 조회", desc:"현장이 아니라 책상에서 하는 일입니다. 출발하기 전에 확인하고 가야 현장에서 볼 것이 달라집니다.",
+  items:[
+    {id:"d1",lv:"imp",q:"개발 계획을 원본으로 확인했는가",
+     why:"중개사가 말하는 '호재'에는 확정 계획, 검토 단계, 소문이 섞여 있습니다. '추진 중'과 '착공'은 몇 년 차이입니다.",
+     act:"토지이음(토지이용계획)과 해당 시·군·구청 고시를 직접 확인하세요. 들은 이야기와 문서가 다르면 문서가 맞습니다."},
+    {id:"d2",lv:"imp",q:"주변에 대규모 입주 물량이 있는가",
+     why:"인근에 수천 세대가 한꺼번에 입주하면 2~3년간 전세와 매매가가 함께 눌립니다. 가장 흔하게 간과되는 리스크입니다.",
+     act:"반경 3~5km의 입주 예정 물량과 시기를 확인하고, 내 잔금·전세 만기와 겹치지 않는지 보세요."}
+  ]
+},
+{
   cat:"loc", title:"교통", desc:"입지 임장의 핵심은 '지도에 안 나오는 것'입니다. 거리는 지도로 알 수 있지만 경사와 신호등, 아침의 밀도는 발로만 알 수 있습니다.",
   items:[
     {id:"t1",lv:"must",q:"역까지 내 발로 걸어봤는가",
      why:"매물 정보의 도보 시간은 보통 직선거리 100m를 1분으로 환산한 값입니다. 오르막, 신호등, 돌아가는 길, 횡단보도 대기가 모두 빠져 있어 실제로는 1.5배까지 벌어집니다.",
-     act:"단지 정문이 아니라 내가 살 동의 현관에서 출발해 개찰구까지 스톱워치로 재세요. 평지 기준 1분에 약 70~80m입니다. 돌아올 때는 오르막이라 더 걸린다는 점도 기록해 두세요."},
+     act:"단지 정문이 아니라 내가 살 동의 현관에서 출발해 개찰구까지 스톱워치로 재세요. 평지 기준 1분에 약 70~80m입니다. 같은 단지에서도 동에 따라 3~5분이 차이 나고 그 차이가 가격에 반영됩니다."},
     {id:"t2",lv:"must",q:"출근 시간대에 실제로 타봤는가",
      why:"낮 2시의 전철과 아침 8시의 전철은 다른 교통수단입니다. 앉아서 가는지 서서 가는지, 환승 통로가 얼마나 막히는지가 매일의 삶을 결정합니다.",
      act:"평일 아침 7:30~8:30 사이에 집에서 회사까지 한 번 가보세요. 총 소요 시간, 환승 대기, 승강장 혼잡도를 적어두면 다른 단지와 비교할 수 있습니다."},
     {id:"t3",lv:"imp",q:"버스 정류장과 노선을 확인했는가",
      why:"지하철이 멀어도 광역버스가 좋으면 출퇴근이 해결되고, 역세권이어도 노선이 하나뿐이면 사고 한 번에 발이 묶입니다.",
      act:"정류장 위치와 배차 간격, 광역·직행 노선 유무를 보세요. 아침에 정류장에 서 있는 줄의 길이가 가장 정직한 지표입니다."},
-    {id:"t4",lv:"chk",q:"차로 빠져나가는 길이 막히지 않는가",
+    {id:"t4",lv:"chk",cond:"car",q:"차로 빠져나가는 길이 막히지 않는가",
      why:"단지에서 간선도로까지 진입로가 하나뿐이면 아침마다 단지 안에서만 10분을 씁니다.",
      act:"평일 아침 단지 출구를 직접 보거나, 지도 앱의 실시간 교통 정보를 출근 시간대로 맞춰 확인하세요."},
     {id:"t5",lv:"chk",q:"늦은 밤 귀가 수단이 있는가",
-     why:"막차 시각과 심야버스 유무가 생활 반경을 정합니다. 택시가 안 잡히는 동네도 많습니다.",
+     why:"차가 있어도 술자리나 차를 두고 나선 날에는 막차 시각과 심야버스가 생활 반경을 정합니다. 택시가 안 잡히는 동네도 많습니다.",
      act:"막차 시각을 확인하고, 역에서 집까지 심야 도보 구간의 가로등과 인적을 직접 걸어보세요."}
   ]
 },
@@ -272,29 +293,26 @@ const DATA = [
   cat:"loc", title:"생활 인프라",
   items:[
     {id:"l1",lv:"imp",q:"장은 어디서 보게 되는가",
-     why:"마트까지의 거리는 매주 반복되는 시간과 비용입니다. 차가 없으면 더 결정적입니다.",
-     act:"도보권 마트와 차로 10분 내 대형마트를 지도에서 확인하고, 실제로 한 번 다녀오세요. 배달·새벽배송 권역인지도 앱으로 주소를 넣어 확인할 수 있습니다."},
+     why:"마트까지의 거리는 매주 반복되는 시간과 비용입니다.",
+     act:"도보권 마트와 차로 10분 내 대형마트를 지도에서 확인하고, 실제로 한 번 다녀오세요. 주차장 진입과 대기 줄까지 봐야 실제 장보기 시간이 나옵니다."},
     {id:"l2",lv:"imp",q:"병원과 약국이 가까운가",
-     why:"필요해지는 순간에는 거리가 곧 불안입니다. 특히 소아과와 야간 진료는 동네마다 편차가 큽니다.",
-     act:"아이가 있다면 소아과, 부모를 모신다면 내과와 종합병원 위치를 확인하세요. 주말·야간 진료 여부까지 봐야 의미가 있습니다."},
+     why:"필요해지는 순간에는 거리가 곧 불안입니다. 야간·주말 진료는 동네마다 편차가 큽니다.",
+     act:"내과와 종합병원 위치를 확인하세요. 주말·야간 진료를 하는 곳이 있는지까지 봐야 의미가 있습니다."},
     {id:"l3",lv:"chk",q:"상권이 살아 있는가",
      why:"1층 상가의 공실은 유동인구가 줄고 있다는 신호입니다. 반대로 카페와 식당이 꾸준히 차 있으면 동네에 사람이 돌고 있다는 뜻입니다.",
-     act:"단지 상가와 인근 상권을 한 바퀴 걸으며 빈 점포 수와 업종 구성을 보세요. 학원이 많으면 학군 수요가 있다는 간접 신호입니다."},
-    {id:"l4",lv:"chk",q:"은행·관공서·택배 수령이 불편하지 않은가",
-     why:"사소해 보이지만 매달 반복되면 체감이 큽니다. 무인택배함 유무는 1인 가구·맞벌이에 특히 중요합니다.",
-     act:"주민센터와 은행 위치를 확인하고, 단지에 무인택배함이 있는지 관리사무소에 물어보세요."}
+     act:"단지 상가와 인근 상권을 한 바퀴 걸으며 빈 점포 수와 업종 구성을 보세요. 무인택배함이 있는지는 관리사무소에 함께 물어보면 됩니다."}
   ]
 },
 {
-  cat:"loc", title:"학군",
+  cat:"loc", title:"학군", desc:"아이가 없어도 첫 항목은 봐야 합니다. 되팔 때의 수요를 좌우하기 때문입니다.",
   items:[
-    {id:"e1",lv:"imp",q:"초등학교 통학로가 안전한가",
-     why:"이른바 '초품아'가 비싼 이유는 학교가 가까워서가 아니라 큰 길을 건너지 않아서입니다. 되팔 때도 같은 이유로 수요가 받쳐줍니다.",
-     act:"아이 걸음으로 직접 걸으며 횡단보도 수, 신호등 유무, 차량 통행량, 인도 폭을 확인하세요. 학교가 단지 바로 옆이어도 큰 길을 건너야 하면 초품아가 아닙니다."},
-    {id:"e2",lv:"chk",q:"중학교 배정이 어떻게 되는가",
+    {id:"e1",lv:"imp",q:"초등학교를 큰 길 없이 갈 수 있는가",
+     why:"내가 아이를 키우지 않아도, 이 집을 살 다음 사람은 대개 키웁니다. 이른바 '초품아'가 비싼 이유는 학교가 가까워서가 아니라 큰 길을 건너지 않아서이고, 그 조건이 되팔 때 수요를 받쳐줍니다.",
+     act:"단지에서 학교 정문까지 걸으며 건너야 하는 큰 길이 있는지만 보세요. 학교가 바로 옆이어도 왕복 4차선을 건너야 하면 초품아가 아니고, 값도 그만큼 안 쳐줍니다."},
+    {id:"e2",lv:"chk",cond:"kid",q:"중학교 배정이 어떻게 되는가",
      why:"초등학교는 대개 가까운 곳으로 가지만 중학교는 배정 방식에 따라 멀리 갈 수 있고, 선호 학군 여부가 집값에 그대로 반영됩니다.",
      act:"관할 교육지원청의 배정 방식을 확인하고, 단지 상가 부동산과 학원에 '여기 애들은 어느 중학교 가나요'라고 물어보세요. 실태는 현장이 더 정확합니다."},
-    {id:"e3",lv:"chk",q:"학원가까지 어떻게 가는가",
+    {id:"e3",lv:"chk",cond:"kid",q:"학원가까지 어떻게 가는가",
      why:"학원 셔틀이 들어오는 단지인지 여부가 저녁 시간을 통째로 좌우합니다.",
      act:"주요 학원가까지의 거리와 셔틀 운행 여부를 확인하세요. 단지 게시판이나 엘리베이터의 학원 전단이 좋은 단서입니다."}
   ]
@@ -306,28 +324,11 @@ const DATA = [
      why:"도로·철도·학교 운동장·공장은 지도에 보이지만 소리의 크기는 현장에서만 압니다. 창을 닫았을 때와 열었을 때가 완전히 다릅니다.",
      act:"창문을 열고 1분간 아무 말 없이 서서 들어보세요. 가능하면 밤 10시 이후에 다시 오세요. 스마트폰 소음 측정 앱으로 숫자를 남겨두면 다른 매물과 비교할 수 있습니다."},
     {id:"v2",lv:"imp",q:"기피시설이 주변에 있는가",
-     why:"축사·소각장·변전소·유흥가는 냄새와 소음뿐 아니라 되팔 때의 가격에도 영향을 줍니다.",
-     act:"지도에서 반경 1km를 훑고, 바람이 부는 날 냄새를 확인하세요. 아직 없더라도 예정된 시설이 있는지는 토지이용계획으로 볼 수 있습니다."},
+     why:"축사·소각장·변전소·유흥가는 냄새와 소음뿐 아니라 되팔 때의 가격에도 영향을 줍니다. 고압선과 송전탑은 건강 논란과 별개로, 창밖에 보이는 것만으로 선호도가 내려갑니다.",
+     act:"지도에서 반경 1km를 훑고, 바람이 부는 날 냄새를 확인하세요. 송전탑은 층에 따라 보이는 정도가 다르니 반드시 해당 층에서 창밖을 보세요. 예정된 시설은 토지이용계획으로 확인할 수 있습니다."},
     {id:"v3",lv:"imp",q:"공원·산책로가 실제로 쓸 만한가",
      why:"'공세권'이라고 소개되지만 큰 길을 건너야 하거나 접근로가 없어 실제로는 안 가게 되는 경우가 많습니다.",
-     act:"단지에서 공원 입구까지 걸어보세요. 걸어서 5분을 넘기면 일상적으로 쓰기 어렵습니다."},
-    {id:"v4",lv:"chk",q:"고압선·송전탑이 시야에 있는가",
-     why:"건강 논란과 별개로, 창밖에 보이는 것만으로 선호도와 가격이 내려갑니다.",
-     act:"거실 창에서 실제로 보이는지 확인하세요. 낮은 층과 높은 층의 시야가 다릅니다."}
-  ]
-},
-{
-  cat:"loc", title:"호재와 리스크",
-  items:[
-    {id:"d1",lv:"imp",q:"개발 계획을 원본으로 확인했는가",
-     why:"중개사가 말하는 '호재'에는 확정 계획, 검토 단계, 소문이 섞여 있습니다. '추진 중'과 '착공'은 몇 년 차이입니다.",
-     act:"토지이음(토지이용계획)과 해당 시·군·구청 고시를 직접 확인하세요. 들은 이야기와 문서가 다르면 문서가 맞습니다."},
-    {id:"d2",lv:"imp",q:"주변에 대규모 입주 물량이 있는가",
-     why:"인근에 수천 세대가 한꺼번에 입주하면 2~3년간 전세와 매매가가 함께 눌립니다. 가장 흔하게 간과되는 리스크입니다.",
-     act:"반경 3~5km의 입주 예정 물량과 시기를 확인하고, 내 잔금·전세 만기와 겹치지 않는지 보세요."},
-    {id:"d3",lv:"chk",q:"재건축·리모델링 이야기가 있는가",
-     why:"추진 단계에 따라 기대감이 가격에 이미 들어가 있을 수도, 앞으로 분담금을 내야 할 수도 있습니다.",
-     act:"단지 내 현수막과 게시판, 추진위원회 유무를 보세요. 관리사무소에 진행 단계를 물으면 가장 정확합니다."}
+     act:"단지에서 공원 입구까지 걸어보세요. 걸어서 5분을 넘기면 일상적으로 쓰기 어렵습니다."}
   ]
 },
 {
@@ -336,29 +337,29 @@ const DATA = [
     {id:"c1",lv:"imp",q:"외벽과 지하주차장 상태는 어떤가",
      why:"외벽 균열과 누수 자국, 지하주차장 천장의 하얗게 굳은 자국(백화)은 관리 수준과 앞으로 들어갈 수선비를 보여줍니다.",
      act:"지하주차장 천장과 기둥의 물 자국, 균열을 보세요. 마지막 외벽 도색이 언제였는지 관리사무소에 물어보세요."},
-    {id:"c2",lv:"imp",q:"복도·계단·분리수거장이 깨끗한가",
-     why:"공용 공간의 청결은 관리사무소의 역량이자 주민 구성을 보여주는 가장 빠른 신호입니다.",
+    {id:"c2",lv:"imp",q:"공용 공간이 관리되고 있는가",
+     why:"복도·계단·분리수거장·조경·놀이터의 상태는 관리사무소의 역량이자 주민 구성을 보여주는 가장 빠른 신호입니다. 잡초와 꺼진 가로등, 부서진 채 방치된 시설은 관리비를 아끼는 대신 자산가치를 깎고 있다는 뜻입니다.",
      act:"엘리베이터 게시판의 공지와 민원 내용을 읽어보세요. 층간소음 경고문이나 관리비 연체 독촉이 붙어 있으면 그 자체가 정보입니다."},
     {id:"c3",lv:"chk",q:"엘리베이터 연식과 교체 이력은",
      why:"교체 시 세대당 수백만 원의 분담금이 나올 수 있고, 20년 넘은 승강기는 고장도 잦습니다.",
      act:"엘리베이터 안 점검표에서 설치 연도를 확인하세요. 20년 이상이면 교체 논의가 있는지 관리사무소에 물어보세요."},
-    {id:"c4",lv:"chk",q:"조경과 놀이터가 관리되고 있는가",
-     why:"돈이 도는 단지인지 아닌지가 가장 먼저 드러나는 곳입니다.",
-     act:"잡초, 부서진 채 방치된 시설, 꺼진 가로등을 보세요. 관리가 손을 놓은 단지는 관리비를 아끼는 대신 자산가치를 깎고 있는 중입니다."}
+    {id:"d3",lv:"chk",q:"재건축·리모델링 이야기가 있는가",
+     why:"추진 단계에 따라 기대감이 가격에 이미 들어가 있을 수도, 앞으로 분담금을 내야 할 수도 있습니다.",
+     act:"단지 내 현수막과 게시판, 추진위원회 유무를 보세요. 관리사무소에 진행 단계를 물으면 가장 정확합니다."}
   ]
 },
 {
   cat:"apt", title:"주차",
   items:[
-    {id:"k1",lv:"must",q:"평일 밤에 주차장을 봤는가",
+    {id:"k1",lv:"must",cond:"car",q:"평일 밤에 주차장을 봤는가",
      why:"낮의 주차장은 어디나 여유롭습니다. 진실은 차가 다 들어온 밤에 드러납니다. 매일 겪을 스트레스를 미리 보는 유일한 방법입니다.",
      act:"평일 밤 9~10시에 다시 와서 이중주차 정도와 빈 자리를 직접 보세요. 주말 밤도 양상이 다르니 여유가 있으면 두 번 보세요."},
-    {id:"k2",lv:"imp",q:"세대당 주차 대수와 2대째 조건은",
+    {id:"k2",lv:"imp",cond:"car",q:"세대당 주차 대수와 2대째 조건은",
      why:"세대당 1대 미만이면 매일 자리 싸움이고, 2대째는 별도 요금이나 등록 제한이 걸리는 단지가 많습니다.",
      act:"관리사무소에 세대당 대수, 2대째 등록 가능 여부와 월 요금을 물어보세요. 방문차량 정책도 함께 확인하세요."},
-    {id:"k3",lv:"chk",q:"지하주차장이 동과 연결되는가",
+    {id:"k3",lv:"chk",cond:"car",q:"지하주차장이 동과 연결되는가",
      why:"구축은 지하주차장에서 동으로 바로 올라가지 못해 비 오는 날마다 밖으로 걸어야 합니다.",
-     act:"직접 지하에서 엘리베이터까지 걸어보세요. SUV를 탄다면 주차장 진입 높이 제한도 확인해야 합니다."}
+     act:"직접 지하에서 엘리베이터까지 걸어보세요. 차종에 따라 주차장 진입 높이 제한도 확인해야 합니다."}
   ]
 },
 {
@@ -372,10 +373,7 @@ const DATA = [
      act:"거실과 안방 창 앞에 서서 앞 동 창문이 정면으로 보이는지 확인하세요. 마주 보는 집과 눈이 마주칠 거리면 실거주 만족도가 크게 떨어집니다."},
     {id:"b3",lv:"chk",q:"저층·탑층의 단점을 감수할 수 있는가",
      why:"저층은 사생활과 채광, 탑층은 여름 더위와 누수 위험이 있습니다. 싸게 사는 만큼 되팔 때도 싸다는 점이 핵심입니다.",
-     act:"가격 차이가 그 불편의 값으로 적절한지 계산하세요. 탑층이라면 옥상 방수 공사 이력을 관리사무소에 꼭 물어보세요."},
-    {id:"b4",lv:"chk",q:"동 위치가 정문·역 방향인가",
-     why:"같은 단지에서도 동에 따라 역까지 3~5분이 차이 나고, 그 차이가 가격에 반영됩니다.",
-     act:"단지 배치도를 보고 내가 볼 동이 어디인지 확인한 뒤, 그 동 현관에서 역까지 걸어보세요."}
+     act:"가격 차이가 그 불편의 값으로 적절한지 계산하세요. 탑층이라면 옥상 방수 공사 이력을 관리사무소에 꼭 물어보세요."}
   ]
 },
 {
@@ -489,6 +487,18 @@ const CATS = [
 
 const LV = {must:"필수",imp:"중요",chk:"확인"};
 const KEY = "imjang-checklist-v1";
+const CONDKEY = "imjang-cond-v1";
+
+/* ── 내 조건 (아이·차 유무에 따라 해당 없는 항목을 뺀다) ── */
+let conds = {kid:false, car:true};
+try{ const c = JSON.parse(localStorage.getItem(CONDKEY)); if(c) conds = {...conds, ...c}; }catch(e){}
+function saveConds(){ try{ localStorage.setItem(CONDKEY, JSON.stringify(conds)); }catch(e){} }
+function relevant(it){
+  if(it.cond==="kid") return conds.kid;
+  if(it.cond==="car") return conds.car;
+  if(it.cond==="nocar") return !conds.car;
+  return true;
+}
 
 let state = {};
 try{ state = JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ state = {}; }
@@ -597,7 +607,7 @@ sectionsEl.innerHTML = CATS.map(cat=>{
   return `<div class="group" data-cat="${cat.id}">
     <div class="group-head">
       <span class="group-tag">${cat.name}</span>
-      <span class="group-prog"><strong data-gdone="${cat.id}">0</strong>/${total}</span>
+      <span class="group-prog"><strong data-gdone="${cat.id}">0</strong>/<span data-gtotal="${cat.id}">${total}</span></span>
       <p class="group-desc">${cat.desc}</p>
     </div>
     ${secs.map(sec=>`
@@ -621,10 +631,30 @@ document.getElementById("terms").innerHTML = TERMS.map(([t,d])=>`
 
 document.getElementById("prep").innerHTML = PREP.map(it=>itemHTML(it,false)).join("");
 
-const allIds = [...DATA.flatMap(s=>s.items), ...PREP];
-const mustIds = DATA.flatMap(s=>s.items).filter(i=>i.lv==="must");
+const BYID = {}; DATA.forEach(s=>s.items.forEach(it=>BYID[it.id]=it));
+let curCat = "all", curLv = "all";
 
 function refresh(){
+  // 조건에 맞지 않는 항목을 빼고, 그 위에 중요도·구분 필터를 겹친다
+  document.querySelectorAll("[data-sec] .item").forEach(card=>{
+    const it = BYID[card.dataset.id];
+    card.classList.toggle("excluded", !!it && !relevant(it));
+    card.classList.toggle("hidden", curLv!=="all" && card.dataset.lv!==curLv);
+  });
+  document.querySelectorAll("[data-sec]").forEach(sec=>{
+    const cnt = sec.querySelector(".count");
+    if(cnt) cnt.textContent = sec.querySelectorAll(".item:not(.excluded)").length+"문항";
+    sec.style.display = sec.querySelectorAll(".item:not(.excluded):not(.hidden)").length ? "" : "none";
+  });
+  document.querySelectorAll(".group").forEach(g=>{
+    const catOk = curCat==="all" || g.dataset.cat===curCat;
+    const visible = g.querySelectorAll(".item:not(.excluded):not(.hidden)").length;
+    g.style.display = (catOk && visible) ? "" : "none";
+  });
+
+  const live = DATA.flatMap(s=>s.items).filter(relevant);
+  const allIds = [...live, ...PREP];
+  const mustIds = live.filter(i=>i.lv==="must");
   const done = allIds.filter(i=>state[i.id]).length;
   const mustDone = mustIds.filter(i=>state[i.id]).length;
   document.getElementById("allDone").textContent = done;
@@ -634,10 +664,11 @@ function refresh(){
   document.getElementById("barFill").style.width = (allIds.length? done/allIds.length*100 : 0)+"%";
   document.getElementById("progress").classList.toggle("all-must-done", mustDone===mustIds.length && mustIds.length>0);
   CATS.forEach(cat=>{
-    const el = document.querySelector(`[data-gdone="${cat.id}"]`);
-    if(!el) return;
-    el.textContent = DATA.filter(s=>s.cat===cat.id)
-      .flatMap(s=>s.items).filter(i=>state[i.id]).length;
+    const items = DATA.filter(s=>s.cat===cat.id).flatMap(s=>s.items).filter(relevant);
+    const doneEl = document.querySelector(`[data-gdone="${cat.id}"]`);
+    const totEl = document.querySelector(`[data-gtotal="${cat.id}"]`);
+    if(doneEl) doneEl.textContent = items.filter(i=>state[i.id]).length;
+    if(totEl) totEl.textContent = items.length;
   });
 }
 refresh();
@@ -682,28 +713,23 @@ function fallbackCopy(text, ok){
   document.body.removeChild(ta);
 }
 
-let curCat = "all", curLv = "all";
-function applyFilters(){
-  document.querySelectorAll("[data-sec] .item").forEach(card=>{
-    card.classList.toggle("hidden", curLv!=="all" && card.dataset.lv!==curLv);
-  });
-  document.querySelectorAll("[data-sec]").forEach(sec=>{
-    const visible = sec.querySelectorAll(".item:not(.hidden)").length;
-    sec.style.display = visible ? "" : "none";
-  });
-  document.querySelectorAll(".group").forEach(g=>{
-    const catOk = curCat==="all" || g.dataset.cat===curCat;
-    const visible = g.querySelectorAll(".item:not(.hidden)").length;
-    g.style.display = (catOk && visible) ? "" : "none";
-  });
-}
+document.querySelectorAll(".chip.cond").forEach(chip=>{
+  chip.setAttribute("aria-pressed", conds[chip.dataset.cond] ? "true" : "false");
+});
 document.querySelectorAll(".chip").forEach(chip=>{
   chip.addEventListener("click", ()=>{
-    const row = chip.parentElement;
-    row.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
-    chip.setAttribute("aria-pressed","true");
-    if(chip.dataset.cat) curCat = chip.dataset.cat; else curLv = chip.dataset.filter;
-    applyFilters();
+    if(chip.dataset.cond){
+      const on = chip.getAttribute("aria-pressed") !== "true";
+      chip.setAttribute("aria-pressed", on ? "true" : "false");
+      conds[chip.dataset.cond] = on;
+      saveConds();
+    }else{
+      const row = chip.parentElement;
+      row.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
+      chip.setAttribute("aria-pressed","true");
+      if(chip.dataset.cat) curCat = chip.dataset.cat; else curLv = chip.dataset.filter;
+    }
+    refresh();
   });
 });
 
