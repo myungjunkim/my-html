@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>서울 북동부 6.5억 이하 아파트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Song+Myung&display=swap">
+<style>
+:root{
+  --sans:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --serif:"Song Myung","Nanum Myeongjo","Apple SD Gothic Neo","Noto Serif KR",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,"IBM Plex Sans KR","Apple SD Gothic Neo",monospace;
+  --ground:#F3F6F2; --surface:#FFFFFF; --surface-2:#E9EEE8;
+  --ink:#1A231D; --ink-2:#4E5D54; --muted:#5B6A60; --faint:#8A9990;
+  --rule:#E0E7DF; --rule-soft:#EDF1EC;
+  --accent:#1E6B4F; --accent-soft:#E2EFE7;
+  --mark:#8A6A1F; --mark-soft:#F3EAD3;
+  --bar:#1E6B4F; --bar-soft:#D7E2D9;
+  --focus:#1E6B4F;
+  --shadow:0 1px 2px rgba(26,45,35,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#121915; --surface:#1A231E; --surface-2:#232E28;
+    --ink:#E7EDE7; --ink-2:#C2CEC5; --muted:#98A99E; --faint:#74867B;
+    --rule:#2A362F; --rule-soft:#222C26;
+    --accent:#57C296; --accent-soft:#1D3529;
+    --mark:#D9B65C; --mark-soft:#332A12;
+    --bar:#57C296; --bar-soft:#2A362F;
+    --focus:#57C296;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121915; --surface:#1A231E; --surface-2:#232E28;
+  --ink:#E7EDE7; --ink-2:#C2CEC5; --muted:#98A99E; --faint:#74867B;
+  --rule:#2A362F; --rule-soft:#222C26;
+  --accent:#57C296; --accent-soft:#1D3529;
+  --mark:#D9B65C; --mark-soft:#332A12;
+  --bar:#57C296; --bar-soft:#2A362F;
+  --focus:#57C296;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 88px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+.back{display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--accent)}
+header.top{padding:18px 0 26px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:0}
+.eyebrow i{width:9px;height:9px;border-radius:50%;background:var(--accent);display:block}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(32px,5.8vw,52px);line-height:1.12;letter-spacing:-.01em;margin:14px 0 0;text-wrap:balance}
+.dek{margin:12px 0 0;max-width:62ch;color:var(--ink-2);font-weight:300;font-size:16px}
+.dek b{font-weight:600;color:var(--ink)}
+.facts{display:flex;flex-wrap:wrap;gap:0;margin-top:26px;border:1px solid var(--rule);border-radius:2px;background:var(--surface);box-shadow:var(--shadow)}
+.fact{flex:1 1 140px;padding:14px 18px;border-right:1px solid var(--rule-soft)}
+.fact:last-child{border-right:0}
+.fact dt{font-size:11px;letter-spacing:.09em;color:var(--muted);margin:0 0 4px;font-family:var(--mono)}
+.fact dd{margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em}
+.fact dd small{font-size:12px;color:var(--muted);font-weight:400;margin-left:3px}
+
+section.dist{padding:30px 0 34px;border-bottom:1px solid var(--rule)}
+.sec-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted);margin:0 0 4px}
+.sec-note{margin:0 0 18px;font-size:13.5px;font-weight:300;color:var(--ink-2);max-width:66ch}
+.distgrid{display:grid;grid-template-columns:64px 1fr;gap:7px 14px;align-items:center;max-width:700px}
+.distgrid .bl{font-size:13px;color:var(--ink-2);text-align:right;font-weight:500}
+.distrow{display:flex;align-items:center;gap:9px}
+.stack{display:flex;height:11px;min-width:3px;border-radius:0 3px 3px 0;overflow:hidden}
+.stack .s1{background:var(--bar)}
+.stack .s2{background:var(--mark)}
+.stack.zero{background:var(--bar-soft);width:3px}
+.distcount{font-size:12px;color:var(--muted);white-space:nowrap}
+.distcount b{color:var(--ink);font-weight:500}
+.distcount em{font-style:normal;color:var(--mark)}
+
+.controls{
+  position:sticky;top:0;z-index:20;background:var(--ground);
+  padding:14px 0;border-bottom:1px solid var(--rule);
+  display:flex;gap:10px 14px;flex-wrap:wrap;align-items:center;
+}
+.grp{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.grp-t{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--faint);margin-right:2px}
+button.chip{
+  font:inherit;font-size:13px;line-height:1;padding:7px 12px;cursor:pointer;
+  background:var(--surface);color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;
+  display:inline-flex;align-items:center;gap:6px;transition:background .12s,border-color .12s,color .12s;
+}
+button.chip:hover{border-color:var(--faint)}
+button.chip .c{font-family:var(--mono);font-size:11px;color:var(--faint)}
+button.chip[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+button.chip[aria-pressed="true"] .c{color:#fff;opacity:.72}
+button.chip.mk[aria-pressed="true"]{background:var(--mark);border-color:var(--mark)}
+.spacer{flex:1 1 auto}
+.shown{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.band{padding-top:40px}
+.band[hidden]{display:none}
+.band-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.band-num{font-family:var(--serif);font-size:clamp(26px,4vw,36px);line-height:1;letter-spacing:-.01em}
+.band-meta{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+ul.rows{list-style:none;margin:0;padding:0}
+li.row{
+  display:grid;grid-template-columns:148px minmax(0,1fr) 190px;gap:20px;
+  padding:15px 0 15px 14px;border-bottom:1px solid var(--rule-soft);position:relative;
+}
+li.row[hidden]{display:none}
+li.row::before{content:"";position:absolute;left:0;top:15px;bottom:15px;width:3px;border-radius:2px;background:var(--accent)}
+li.row.reb::before{background:var(--mark)}
+
+.price{display:flex;flex-direction:column;gap:2px}
+.price .p{font-family:var(--mono);font-size:20px;font-weight:500;letter-spacing:-.02em;line-height:1.15}
+.price .pp{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.who{min-width:0}
+.who h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.35;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;padding:2px 7px;border-radius:2px;background:var(--mark-soft);color:var(--mark);font-weight:500}
+.badge.t{background:var(--surface-2);color:var(--muted)}
+.spec{margin:4px 0 0;font-size:13px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:3px 9px}
+.spec .m{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.deal{margin:5px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:3px 12px}
+.deal b{font-weight:500;color:var(--accent)}
+li.row.reb .deal b{color:var(--mark)}
+
+.right{display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+.rail{width:100%}
+.rail .track{height:4px;background:var(--bar-soft);border-radius:2px;position:relative}
+.rail .fill{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:var(--accent)}
+li.row.reb .rail .fill{background:var(--mark)}
+.rail .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:4px}
+.rail .lab b{font-weight:500;color:var(--ink-2)}
+a.go{
+  font-size:12.5px;font-weight:500;text-decoration:none;color:var(--ink);
+  border:1px solid var(--rule);border-radius:2px;padding:6px 11px;background:var(--surface);
+  display:inline-flex;align-items:center;gap:6px;transition:border-color .12s,background .12s;
+}
+a.go:hover{border-color:var(--accent);background:var(--accent-soft)}
+a.go span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.empty{padding:40px 0;color:var(--muted);font-size:14px;font-weight:300}
+.empty[hidden]{display:none}
+
+footer.note{margin-top:46px;padding-top:22px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);font-weight:300;line-height:1.75;max-width:72ch}
+footer.note b{color:var(--ink-2);font-weight:500}
+footer.note p{margin:0 0 10px}
+
+@media (max-width:760px){
+  .wrap{padding:0 16px 64px}
+  li.row{grid-template-columns:1fr;gap:10px;padding-left:12px}
+  .price{flex-direction:row;align-items:baseline;gap:9px}
+  .right{flex-direction:row;align-items:flex-end;justify-content:space-between;width:100%;gap:14px}
+  .rail{max-width:200px}
+  .controls{position:static}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (pointer:coarse){
+  button.chip{padding:11px 14px;font-size:14px}
+  a.go{padding:11px 14px;font-size:13.5px}
+}
+@media (max-width:430px){
+  .fact{flex-basis:118px;padding:12px 14px}
+  .fact dd{font-size:17px}
+  .right{flex-wrap:wrap;gap:10px 14px}
+  .rail{flex:1 1 170px;max-width:100%}
+  .who h3{font-size:15.5px}
+  .distgrid{grid-template-columns:54px 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="index.html">← 목록으로</a>
+
+<header class="top">
+  <p class="eyebrow"><i></i><span>서울 북부·동부 9개구</span><span>·</span><span>매매(전세·월세 제외)</span><span>·</span><span>6.5억 이하</span><span>·</span><span>100세대 이상</span><span>·</span><span>전용 40㎡ 이상</span><span>·</span><span>2026.09.18 수집</span></p>
+  <h1>서울 북동부 6.5억 이하 아파트</h1>
+  <p class="dek">강북·도봉·노원·성북·중랑·동대문·성동·광진·강동 <b>9개 구 전역</b>을 네이버 부동산으로 훑어, 6.5억 이하 <b>매매</b> 매물이 있는 <b>254개 단지</b>를 모았습니다. 이 중 <b>30곳</b>이 재건축 추진 단지입니다.</p>
+  <dl class="facts">
+    <div class="fact"><dt>단지</dt><dd class="mono">254<small>곳</small></dd></div>
+    <div class="fact"><dt>6.5억 이하 매매 매물</dt><dd class="mono">3,843<small>건</small></dd></div>
+    <div class="fact"><dt>재건축</dt><dd class="mono">30<small>곳</small></dd></div>
+    <div class="fact"><dt>1,000세대 이상</dt><dd class="mono">43<small>곳</small></dd></div>
+    <div class="fact"><dt>최저 매매 호가</dt><dd class="mono">1억 6,000</dd></div>
+  </dl>
+</header>
+
+<section class="dist">
+  <p class="sec-label">구별 단지 수</p>
+  <p class="sec-note">노원·도봉 두 구가 전체의 3분의 2를 차지합니다. 짙은 색이 재건축 추진 단지입니다.</p>
+  <div class="distgrid" id="dist"></div>
+</section>
+
+<div class="controls">
+  <div class="grp"><span class="grp-t">지역</span><div class="grp" id="guChips"></div></div>
+  <div class="grp"><span class="grp-t">유형</span><div class="grp" id="typeChips"></div></div>
+  <div class="grp"><span class="grp-t">정렬</span><div class="grp" id="sortChips"></div></div>
+  <span class="spacer"></span>
+  <span class="shown" id="shown"></span>
+</div>
+
+<main id="bands"></main>
+<p class="empty" id="empty" hidden>조건에 맞는 단지가 없습니다. 위에서 지역이나 유형을 다시 켜보세요.</p>
+
+<footer class="note">
+  <p><b>조건.</b> 매매 <b>6.5억 이하</b> 매물 보유 · 총 <b>100세대 이상</b> · 전용 <b>40㎡ 이상</b> · 서울 북부·동부 9개 구. 가격 제한을 걸지 않았으므로 3억 미만 단지도 모두 들어 있습니다.</p>
+  <p><b>전부 매매가입니다.</b> 네이버 부동산에서 거래유형을 매매로 지정해 받은 매매 호가만 실었습니다. 전세·월세 보증금은 수집 대상에서 제외했고, 254개 단지 전부 전세 매물 수 0으로 확인했습니다. 단지명 옆 버튼도 매매 탭으로 열립니다.</p>
+  <p><b>가격 읽는 법.</b> 왼쪽 큰 숫자는 <b>전용 40㎡ 이상 중 가장 싼 매매 호가</b>입니다. 그 옆 <b>매매 O억–O억</b>은 평형을 가리지 않은 단지 전체 매매 호가 범위라, 큰 숫자보다 낮게 시작하는 단지는 40㎡ 미만 소형이 더 싸게 나와 있다는 뜻입니다. 모두 수집 시점의 호가이며 실거래가가 아닙니다.</p>
+  <p><b>매물 수.</b> <b>단지 전체 O건</b>은 그 단지에 나온 매매 매물 전부, <b>6.5억 이하 O건</b>은 그중 이 목록의 조건(전용 40㎡ 이상·6.5억 이하)에 맞는 매물 수입니다.</p>
+  <p><b>재건축 표시.</b> 네이버 부동산이 재건축 추진 단지로 분류한 곳입니다. 사업이 진행 중이라는 표시일 뿐 <b>단계(안전진단·조합설립·사업시행·관리처분)는 알려주지 않습니다.</b> 재건축 표시가 없는 단지 중에도 예비안전진단 수준의 초기 추진 단지가 있을 수 있으니, 관심 단지는 해당 구청 정비사업 현황으로 단계를 확인하세요.</p>
+  <p><b>도시형·주상복합.</b> 네이버에서 아파트로 분류되지만 성격이 다른 도시형생활주택·주상복합에는 따로 표시를 달았습니다. 위 유형 필터로 걸러볼 수 있습니다.</p>
+  <p><b>수집 방법.</b> 네이버 부동산 지도 API를 9개 구 전역 격자로 조회한 뒤, 단지 좌표를 행정구역 경계와 대조해 구·동을 판정했습니다. 단지명을 누르면 네이버 부동산 단지 페이지가 열립니다.</p>
+  <p>개인 참고용 자료입니다. 계약 전에는 등기부등본 등 원본 서류를 직접 확인하세요.</p>
+</footer>
+
+</div>
+
+<script>
+const DATA = [{"gu":"노원구","dong":"중계동","n":"동진","hh":210,"lo":24000,"hi":30000,"a1":53.01,"a2":53.01,"c":1,"y":1988,"id":"8783","r":1,"dlo":23000,"dhi":30000,"ca":9,"t":0},{"gu":"노원구","dong":"공릉동","n":"67디벨리움(도시형)","hh":106,"lo":25500,"hi":25500,"a1":40.24,"a2":40.24,"c":1,"y":2016,"id":"111186","r":0,"dlo":14500,"dhi":25500,"ca":17,"t":1},{"gu":"노원구","dong":"월계동","n":"초안2단지","hh":571,"lo":29000,"hi":45000,"a1":55.75,"a2":69.83,"c":11,"y":1997,"id":"3255","r":0,"dlo":29000,"dhi":45000,"ca":11,"t":0},{"gu":"노원구","dong":"월계동","n":"초안1단지","hh":410,"lo":29500,"hi":47000,"a1":55.37,"a2":83.7,"c":17,"y":1998,"id":"3254","r":0,"dlo":29500,"dhi":47000,"ca":15,"t":0},{"gu":"노원구","dong":"월계동","n":"청백3단지","hh":458,"lo":31000,"hi":57000,"a1":54.83,"a2":81.74,"c":54,"y":1998,"id":"923","r":0,"dlo":31000,"dhi":57000,"ca":55,"t":0},{"gu":"노원구","dong":"월계동","n":"청백4단지","hh":520,"lo":31000,"hi":60000,"a1":54.93,"a2":81.9,"c":7,"y":1998,"id":"225","r":0,"dlo":31000,"dhi":85000,"ca":16,"t":0},{"gu":"노원구","dong":"공릉동","n":"공릉풍림아이원","hh":1601,"lo":32000,"hi":34000,"a1":46.73,"a2":46.73,"c":2,"y":2001,"id":"3363","r":0,"dlo":32000,"dhi":125000,"ca":41,"t":0},{"gu":"노원구","dong":"상계동","n":"은빛1단지","hh":1391,"lo":35000,"hi":63000,"a1":54.56,"a2":82.4,"c":33,"y":1998,"id":"3249","r":0,"dlo":35000,"dhi":63000,"ca":33,"t":0},{"gu":"노원구","dong":"공릉동","n":"공릉3단지라이프","hh":840,"lo":38000,"hi":70000,"a1":44.84,"a2":64.44,"c":13,"y":1994,"id":"3241","r":0,"dlo":38000,"dhi":70000,"ca":15,"t":0},{"gu":"노원구","dong":"상계동","n":"벽산","hh":1590,"lo":38000,"hi":60000,"a1":52.75,"a2":85.16,"c":35,"y":1989,"id":"184","r":0,"dlo":38000,"dhi":70000,"ca":50,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공1단지","hh":2064,"lo":38000,"hi":82000,"a1":46.69,"a2":80.26,"c":132,"y":1988,"id":"202","r":1,"dlo":38000,"dhi":120000,"ca":313,"t":0},{"gu":"노원구","dong":"중계동","n":"중계주공2단지","hh":1800,"lo":38000,"hi":55000,"a1":59.2,"a2":59.2,"c":35,"y":1992,"id":"1109","r":0,"dlo":38000,"dhi":55000,"ca":35,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공4단지","hh":2136,"lo":39000,"hi":75000,"a1":45.95,"a2":69.05,"c":140,"y":1988,"id":"918","r":1,"dlo":39000,"dhi":98000,"ca":279,"t":0},{"gu":"노원구","dong":"월계동","n":"월계주공2단지","hh":2002,"lo":39500,"hi":47000,"a1":50.4,"a2":59.2,"c":9,"y":1992,"id":"227","r":0,"dlo":39500,"dhi":85000,"ca":16,"t":0},{"gu":"노원구","dong":"공릉동","n":"공릉2단지라이프","hh":660,"lo":40000,"hi":67000,"a1":46.57,"a2":66.93,"c":17,"y":1994,"id":"174","r":0,"dlo":40000,"dhi":67000,"ca":23,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공2단지","hh":2029,"lo":40000,"hi":70000,"a1":45.95,"a2":59.08,"c":121,"y":1987,"id":"203","r":1,"dlo":40000,"dhi":95000,"ca":346,"t":0},{"gu":"노원구","dong":"상계동","n":"은빛2단지","hh":1313,"lo":41000,"hi":56000,"a1":53.73,"a2":67.35,"c":11,"y":1998,"id":"3250","r":0,"dlo":41000,"dhi":56000,"ca":11,"t":0},{"gu":"노원구","dong":"상계동","n":"한신1차","hh":420,"lo":42000,"hi":55000,"a1":63.73,"a2":75.19,"c":19,"y":1987,"id":"207","r":0,"dlo":42000,"dhi":55000,"ca":19,"t":0},{"gu":"노원구","dong":"상계동","n":"두산","hh":763,"lo":43000,"hi":55000,"a1":59.95,"a2":71.15,"c":8,"y":1994,"id":"194","r":0,"dlo":43000,"dhi":90000,"ca":28,"t":0},{"gu":"노원구","dong":"중계동","n":"중계주공7단지","hh":630,"lo":43000,"hi":65000,"a1":60.39,"a2":60.39,"c":30,"y":1993,"id":"1111","r":0,"dlo":43000,"dhi":65000,"ca":30,"t":0},{"gu":"노원구","dong":"상계동","n":"한신2차","hh":471,"lo":43000,"hi":46000,"a1":64.92,"a2":64.92,"c":6,"y":1988,"id":"208","r":0,"dlo":43000,"dhi":73000,"ca":15,"t":0},{"gu":"노원구","dong":"월계동","n":"사슴3단지","hh":884,"lo":44000,"hi":65000,"a1":44.56,"a2":63.48,"c":10,"y":1995,"id":"221","r":0,"dlo":44000,"dhi":65000,"ca":10,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공13단지","hh":939,"lo":44000,"hi":70000,"a1":58.76,"a2":80.17,"c":66,"y":1989,"id":"198","r":0,"dlo":44000,"dhi":70000,"ca":66,"t":0},{"gu":"노원구","dong":"상계동","n":"북부현대","hh":105,"lo":45000,"hi":60000,"a1":74.01,"a2":97.8,"c":4,"y":1996,"id":"215","r":0,"dlo":45000,"dhi":60000,"ca":4,"t":0},{"gu":"노원구","dong":"상계동","n":"불암산센트럴","hh":240,"lo":45000,"hi":45000,"a1":85.82,"a2":85.82,"c":3,"y":2006,"id":"917","r":0,"dlo":45000,"dhi":45000,"ca":3,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공12단지","hh":1739,"lo":45000,"hi":72000,"a1":58.41,"a2":74.4,"c":35,"y":1988,"id":"197","r":0,"dlo":45000,"dhi":100000,"ca":104,"t":0},{"gu":"노원구","dong":"상계동","n":"상계중앙하이츠5차","hh":142,"lo":45000,"hi":50000,"a1":79.99,"a2":79.99,"c":5,"y":1996,"id":"187","r":0,"dlo":45000,"dhi":50000,"ca":5,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공14단지","hh":2265,"lo":46000,"hi":70000,"a1":58.76,"a2":71.05,"c":179,"y":1989,"id":"199","r":0,"dlo":46000,"dhi":95000,"ca":224,"t":0},{"gu":"노원구","dong":"공릉동","n":"삼익4단지","hh":525,"lo":48000,"hi":64000,"a1":51.43,"a2":64.28,"c":7,"y":1994,"id":"3242","r":0,"dlo":48000,"dhi":70000,"ca":10,"t":0},{"gu":"노원구","dong":"월계동","n":"유원","hh":154,"lo":48000,"hi":58000,"a1":83.87,"a2":108.37,"c":7,"y":1998,"id":"1107","r":0,"dlo":48000,"dhi":58000,"ca":7,"t":0},{"gu":"노원구","dong":"하계동","n":"청솔","hh":1192,"lo":48000,"hi":70000,"a1":55.88,"a2":70.04,"c":16,"y":1989,"id":"126","r":1,"dlo":48000,"dhi":75000,"ca":36,"t":0},{"gu":"노원구","dong":"하계동","n":"한신","hh":1200,"lo":48000,"hi":75000,"a1":46.23,"a2":58.34,"c":34,"y":1988,"id":"263","r":0,"dlo":33500,"dhi":75000,"ca":93,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공6단지","hh":2646,"lo":49000,"hi":71000,"a1":45.95,"a2":59.08,"c":62,"y":1988,"id":"920","r":1,"dlo":49000,"dhi":88000,"ca":461,"t":0},{"gu":"노원구","dong":"공릉동","n":"삼익포레스트","hh":845,"lo":50000,"hi":58000,"a1":72.23,"a2":72.23,"c":8,"y":1995,"id":"173","r":0,"dlo":50000,"dhi":96000,"ca":28,"t":0},{"gu":"노원구","dong":"중계동","n":"삼창타워프라자(주상복합)","hh":203,"lo":50000,"hi":50000,"a1":87.9,"a2":87.9,"c":2,"y":1997,"id":"14299","r":0,"dlo":50000,"dhi":100000,"ca":9,"t":1},{"gu":"노원구","dong":"상계동","n":"상계주공11단지","hh":1944,"lo":50000,"hi":73000,"a1":58.18,"a2":73.22,"c":24,"y":1988,"id":"196","r":1,"dlo":50000,"dhi":108000,"ca":106,"t":0},{"gu":"노원구","dong":"중계동","n":"중계무지개","hh":2433,"lo":50000,"hi":60000,"a1":56.98,"a2":57.07,"c":28,"y":1991,"id":"925","r":0,"dlo":50000,"dhi":85000,"ca":100,"t":0},{"gu":"노원구","dong":"중계동","n":"중계주공5단지","hh":2328,"lo":50000,"hi":70000,"a1":50.4,"a2":59.2,"c":32,"y":1992,"id":"245","r":0,"dlo":50000,"dhi":130000,"ca":66,"t":0},{"gu":"노원구","dong":"중계동","n":"중계주공6단지","hh":600,"lo":50000,"hi":65000,"a1":60.41,"a2":60.41,"c":22,"y":1993,"id":"1110","r":0,"dlo":50000,"dhi":65000,"ca":22,"t":0},{"gu":"노원구","dong":"상계동","n":"청암2단지","hh":602,"lo":50000,"hi":63000,"a1":70.41,"a2":84.83,"c":8,"y":2001,"id":"3366","r":0,"dlo":50000,"dhi":63000,"ca":8,"t":0},{"gu":"노원구","dong":"상계동","n":"한신(1277)","hh":290,"lo":50000,"hi":68000,"a1":84.47,"a2":110.07,"c":8,"y":1997,"id":"188","r":0,"dlo":50000,"dhi":78000,"ca":31,"t":0},{"gu":"노원구","dong":"월계동","n":"성원4단지","hh":713,"lo":51000,"hi":71500,"a1":52.08,"a2":65.65,"c":17,"y":1995,"id":"11694","r":0,"dlo":51000,"dhi":81000,"ca":40,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공16단지","hh":2392,"lo":52500,"hi":75000,"a1":63.68,"a2":82.63,"c":31,"y":1988,"id":"201","r":0,"dlo":52500,"dhi":85000,"ca":92,"t":0},{"gu":"노원구","dong":"상계동","n":"동아불암","hh":673,"lo":53000,"hi":80000,"a1":83.45,"a2":109.91,"c":11,"y":1999,"id":"1101","r":0,"dlo":53000,"dhi":105000,"ca":48,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공10단지","hh":2654,"lo":53000,"hi":66000,"a1":52.68,"a2":64.82,"c":47,"y":1988,"id":"72","r":1,"dlo":53000,"dhi":110000,"ca":151,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공3단지","hh":2213,"lo":53000,"hi":70000,"a1":45.95,"a2":59.08,"c":15,"y":1987,"id":"192","r":1,"dlo":53000,"dhi":130000,"ca":275,"t":0},{"gu":"노원구","dong":"중계동","n":"진로대림","hh":192,"lo":53000,"hi":65000,"a1":79.21,"a2":79.21,"c":10,"y":1992,"id":"247","r":0,"dlo":53000,"dhi":78000,"ca":20,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공9단지","hh":2830,"lo":54000,"hi":70000,"a1":58.41,"a2":73.22,"c":68,"y":1988,"id":"206","r":0,"dlo":54000,"dhi":95000,"ca":163,"t":0},{"gu":"노원구","dong":"중계동","n":"성원2차","hh":167,"lo":54000,"hi":65000,"a1":79.58,"a2":101.71,"c":5,"y":1995,"id":"8411","r":0,"dlo":54000,"dhi":75000,"ca":12,"t":0},{"gu":"노원구","dong":"중계동","n":"청암3단지","hh":180,"lo":54000,"hi":60000,"a1":106.12,"a2":106.65,"c":4,"y":2003,"id":"14198","r":0,"dlo":54000,"dhi":75000,"ca":8,"t":0},{"gu":"노원구","dong":"상계동","n":"불암현대","hh":826,"lo":55000,"hi":65000,"a1":81.03,"a2":81.03,"c":14,"y":1999,"id":"1103","r":0,"dlo":55000,"dhi":115000,"ca":99,"t":0},{"gu":"노원구","dong":"상계동","n":"상계신동아","hh":385,"lo":55000,"hi":68000,"a1":84.54,"a2":102.58,"c":6,"y":1995,"id":"190","r":0,"dlo":55000,"dhi":68000,"ca":9,"t":0},{"gu":"노원구","dong":"중계동","n":"중계건영","hh":120,"lo":55000,"hi":71000,"a1":79.69,"a2":112.3,"c":2,"y":1998,"id":"3256","r":0,"dlo":55000,"dhi":95000,"ca":9,"t":0},{"gu":"노원구","dong":"상계동","n":"보람","hh":3315,"lo":56000,"hi":70000,"a1":62.53,"a2":77.01,"c":27,"y":1988,"id":"186","r":1,"dlo":56000,"dhi":90000,"ca":219,"t":0},{"gu":"노원구","dong":"중계동","n":"중계그린","hh":3481,"lo":56000,"hi":77000,"a1":54.99,"a2":69.83,"c":59,"y":1990,"id":"240","r":1,"dlo":56000,"dhi":99000,"ca":184,"t":0},{"gu":"노원구","dong":"월계동","n":"초안산쌍용스윗닷홈","hh":225,"lo":56000,"hi":56000,"a1":77.95,"a2":77.95,"c":2,"y":2006,"id":"18546","r":0,"dlo":56000,"dhi":75000,"ca":12,"t":0},{"gu":"노원구","dong":"상계동","n":"대망드림힐","hh":165,"lo":57000,"hi":65000,"a1":91.46,"a2":91.46,"c":15,"y":2003,"id":"8367","r":0,"dlo":57000,"dhi":90000,"ca":26,"t":0},{"gu":"노원구","dong":"상계동","n":"상계대림(172)","hh":675,"lo":57000,"hi":65000,"a1":81.35,"a2":81.35,"c":14,"y":1989,"id":"64","r":0,"dlo":57000,"dhi":80000,"ca":23,"t":0},{"gu":"노원구","dong":"공릉동","n":"신원","hh":153,"lo":57000,"hi":67000,"a1":80.38,"a2":80.38,"c":5,"y":2000,"id":"3243","r":0,"dlo":57000,"dhi":67000,"ca":8,"t":0},{"gu":"노원구","dong":"공릉동","n":"현대성우","hh":181,"lo":57000,"hi":67000,"a1":82.15,"a2":82.15,"c":11,"y":2000,"id":"24706","r":0,"dlo":57000,"dhi":67000,"ca":12,"t":0},{"gu":"노원구","dong":"상계동","n":"금호어울림","hh":230,"lo":58000,"hi":65000,"a1":102.13,"a2":102.46,"c":10,"y":1995,"id":"180","r":0,"dlo":58000,"dhi":70000,"ca":11,"t":0},{"gu":"노원구","dong":"공릉동","n":"대아(740)","hh":130,"lo":58000,"hi":58000,"a1":78.5,"a2":78.5,"c":1,"y":1997,"id":"175","r":0,"dlo":58000,"dhi":72000,"ca":8,"t":0},{"gu":"노원구","dong":"상계동","n":"한신(조흥한신4차)","hh":397,"lo":58000,"hi":71000,"a1":102.96,"a2":102.96,"c":17,"y":1995,"id":"10538","r":0,"dlo":58000,"dhi":71000,"ca":33,"t":0},{"gu":"노원구","dong":"상계동","n":"수락리버시티4단지","hh":548,"lo":59000,"hi":65000,"a1":79.55,"a2":79.55,"c":2,"y":2009,"id":"27810","r":0,"dlo":59000,"dhi":80000,"ca":30,"t":0},{"gu":"노원구","dong":"중계동","n":"중계주공4단지","hh":690,"lo":59000,"hi":62000,"a1":63.6,"a2":63.6,"c":3,"y":1991,"id":"924","r":1,"dlo":59000,"dhi":120000,"ca":22,"t":0},{"gu":"노원구","dong":"공릉동","n":"현대","hh":145,"lo":59000,"hi":59000,"a1":77.15,"a2":77.15,"c":1,"y":1999,"id":"8198","r":0,"dlo":59000,"dhi":72500,"ca":7,"t":0},{"gu":"노원구","dong":"중계동","n":"현대6차","hh":453,"lo":59000,"hi":70000,"a1":85.56,"a2":85.56,"c":15,"y":2018,"id":"1114","r":0,"dlo":59000,"dhi":130000,"ca":68,"t":0},{"gu":"노원구","dong":"공릉동","n":"건영장미","hh":215,"lo":60000,"hi":60000,"a1":84.48,"a2":84.48,"c":1,"y":1999,"id":"54","r":0,"dlo":60000,"dhi":75000,"ca":6,"t":0},{"gu":"노원구","dong":"상계동","n":"극동늘푸른","hh":299,"lo":60000,"hi":60000,"a1":84.44,"a2":84.44,"c":1,"y":2000,"id":"1097","r":0,"dlo":60000,"dhi":76000,"ca":7,"t":0},{"gu":"노원구","dong":"공릉동","n":"동부","hh":295,"lo":60000,"hi":65000,"a1":81.67,"a2":81.67,"c":3,"y":1996,"id":"172","r":0,"dlo":60000,"dhi":95000,"ca":5,"t":0},{"gu":"노원구","dong":"상계동","n":"상계우방","hh":274,"lo":60000,"hi":62000,"a1":76.09,"a2":76.09,"c":14,"y":2000,"id":"3248","r":0,"dlo":60000,"dhi":100000,"ca":34,"t":0},{"gu":"노원구","dong":"상계동","n":"상계주공7단지","hh":2634,"lo":60000,"hi":70000,"a1":58.73,"a2":63.65,"c":48,"y":1988,"id":"921","r":1,"dlo":60000,"dhi":120000,"ca":184,"t":0},{"gu":"노원구","dong":"상계동","n":"상계현대2차","hh":465,"lo":60000,"hi":70000,"a1":99.61,"a2":100.9,"c":2,"y":1993,"id":"212","r":0,"dlo":60000,"dhi":70000,"ca":11,"t":0},{"gu":"노원구","dong":"월계동","n":"성북맨션","hh":120,"lo":60000,"hi":65000,"a1":72.58,"a2":72.58,"c":6,"y":1976,"id":"3252","r":0,"dlo":60000,"dhi":65000,"ca":6,"t":0},{"gu":"노원구","dong":"상계동","n":"수락현대","hh":216,"lo":60000,"hi":78000,"a1":102.07,"a2":102.91,"c":13,"y":1995,"id":"189","r":0,"dlo":60000,"dhi":78000,"ca":23,"t":0},{"gu":"노원구","dong":"하계동","n":"장미","hh":1880,"lo":60000,"hi":70000,"a1":56.56,"a2":56.75,"c":10,"y":1989,"id":"262","r":1,"dlo":60000,"dhi":100000,"ca":66,"t":0},{"gu":"노원구","dong":"상계동","n":"한신3차","hh":348,"lo":60000,"hi":67000,"a1":83.46,"a2":83.46,"c":18,"y":1990,"id":"13619","r":1,"dlo":60000,"dhi":74000,"ca":42,"t":0},{"gu":"노원구","dong":"중계동","n":"현대1차","hh":211,"lo":60000,"hi":70000,"a1":90.21,"a2":90.21,"c":6,"y":1993,"id":"253","r":0,"dlo":60000,"dhi":75000,"ca":28,"t":0},{"gu":"노원구","dong":"공릉동","n":"비선","hh":700,"lo":61000,"hi":66000,"a1":69.23,"a2":69.7,"c":8,"y":1999,"id":"1093","r":0,"dlo":61000,"dhi":69000,"ca":14,"t":0},{"gu":"노원구","dong":"상계동","n":"상계현대1차","hh":331,"lo":62000,"hi":67000,"a1":102.14,"a2":102.14,"c":11,"y":1993,"id":"211","r":0,"dlo":62000,"dhi":67000,"ca":13,"t":0},{"gu":"노원구","dong":"하계동","n":"극동.건영.벽산","hh":1980,"lo":63000,"hi":65000,"a1":55.32,"a2":55.32,"c":3,"y":1988,"id":"255","r":1,"dlo":63000,"dhi":112000,"ca":57,"t":0},{"gu":"노원구","dong":"상계동","n":"상계불암대림","hh":634,"lo":63000,"hi":70000,"a1":84.14,"a2":84.14,"c":1,"y":2000,"id":"3247","r":0,"dlo":63000,"dhi":105000,"ca":53,"t":0},{"gu":"노원구","dong":"중계동","n":"중계주공8단지","hh":696,"lo":63000,"hi":70000,"a1":70.59,"a2":70.59,"c":8,"y":1993,"id":"246","r":1,"dlo":63000,"dhi":70000,"ca":19,"t":0},{"gu":"노원구","dong":"중계동","n":"중앙하이츠","hh":499,"lo":63000,"hi":63000,"a1":75.86,"a2":75.86,"c":4,"y":1998,"id":"927","r":0,"dlo":63000,"dhi":88000,"ca":31,"t":0},{"gu":"노원구","dong":"공릉동","n":"태강","hh":1676,"lo":63000,"hi":69000,"a1":69.32,"a2":69.32,"c":11,"y":1999,"id":"1094","r":0,"dlo":63000,"dhi":75000,"ca":35,"t":0},{"gu":"노원구","dong":"중계동","n":"삼성","hh":478,"lo":64000,"hi":65000,"a1":84.85,"a2":84.85,"c":3,"y":1999,"id":"1113","r":0,"dlo":64000,"dhi":120000,"ca":24,"t":0},{"gu":"노원구","dong":"중계동","n":"경남,롯데,상아","hh":1890,"lo":65000,"hi":77000,"a1":61.52,"a2":63.36,"c":2,"y":1989,"id":"230","r":0,"dlo":65000,"dhi":135000,"ca":45,"t":0},{"gu":"노원구","dong":"상계동","n":"대창센시티","hh":117,"lo":65000,"hi":70000,"a1":105.35,"a2":105.35,"c":9,"y":2002,"id":"8364","r":0,"dlo":65000,"dhi":70000,"ca":12,"t":0},{"gu":"노원구","dong":"월계동","n":"삼창","hh":296,"lo":65000,"hi":75000,"a1":77.87,"a2":77.87,"c":2,"y":1984,"id":"222","r":0,"dlo":65000,"dhi":80000,"ca":20,"t":0},{"gu":"노원구","dong":"상계동","n":"상계대림(1301)","hh":230,"lo":65000,"hi":70000,"a1":111.27,"a2":111.27,"c":2,"y":2002,"id":"8365","r":0,"dlo":65000,"dhi":80000,"ca":10,"t":0},{"gu":"노원구","dong":"중계동","n":"중계금호타운","hh":424,"lo":65000,"hi":72000,"a1":76.44,"a2":76.44,"c":1,"y":1997,"id":"231","r":0,"dlo":65000,"dhi":88000,"ca":17,"t":0},{"gu":"노원구","dong":"상계동","n":"현대4차","hh":106,"lo":65000,"hi":65000,"a1":102.88,"a2":102.88,"c":1,"y":1995,"id":"214","r":0,"dlo":65000,"dhi":65000,"ca":1,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"한양2,3,4차","hh":1635,"lo":25000,"hi":55000,"a1":46.57,"a2":93.56,"c":43,"y":1988,"id":"301","r":0,"dlo":21000,"dhi":55000,"ca":66,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"경남","hh":264,"lo":26900,"hi":53000,"a1":62.54,"a2":107.12,"c":37,"y":1988,"id":"283","r":0,"dlo":26900,"dhi":53000,"ca":37,"t":0},{"gu":"도봉구","dong":"방학동","n":"신동아1단지","hh":3169,"lo":27000,"hi":70000,"a1":58.14,"a2":112.32,"c":62,"y":1986,"id":"274","r":1,"dlo":27000,"dhi":100000,"ca":91,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"금호1차","hh":690,"lo":27500,"hi":60500,"a1":48.02,"a2":101.28,"c":19,"y":1990,"id":"286","r":0,"dlo":27500,"dhi":60500,"ca":19,"t":0},{"gu":"도봉구","dong":"방학동","n":"대원그린","hh":220,"lo":27800,"hi":35000,"a1":64.47,"a2":64.47,"c":13,"y":1987,"id":"269","r":0,"dlo":27800,"dhi":35000,"ca":13,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"대웅","hh":160,"lo":28000,"hi":35000,"a1":68.6,"a2":72.78,"c":3,"y":1989,"id":"288","r":0,"dlo":28000,"dhi":35000,"ca":3,"t":0},{"gu":"도봉구","dong":"창동","n":"신창","hh":609,"lo":28500,"hi":46000,"a1":55.38,"a2":83.09,"c":24,"y":1998,"id":"930","r":0,"dlo":28500,"dhi":46000,"ca":25,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"삼익세라믹","hh":1541,"lo":29500,"hi":65000,"a1":55.23,"a2":95.9,"c":50,"y":1988,"id":"292","r":0,"dlo":29500,"dhi":65000,"ca":50,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"현대1차","hh":783,"lo":30000,"hi":63000,"a1":56.34,"a2":101.99,"c":38,"y":1990,"id":"307","r":0,"dlo":30000,"dhi":63000,"ca":38,"t":0},{"gu":"도봉구","dong":"방학동","n":"벽산1차","hh":489,"lo":31000,"hi":55000,"a1":63.89,"a2":102.54,"c":21,"y":1991,"id":"270","r":0,"dlo":31000,"dhi":55000,"ca":21,"t":0},{"gu":"도봉구","dong":"방학동","n":"삼익세라믹","hh":476,"lo":32000,"hi":60000,"a1":62.97,"a2":104.78,"c":31,"y":1988,"id":"272","r":0,"dlo":32000,"dhi":60000,"ca":31,"t":0},{"gu":"도봉구","dong":"방학동","n":"송학휴스테이","hh":134,"lo":32000,"hi":40000,"a1":49.84,"a2":67.35,"c":8,"y":2016,"id":"113161","r":0,"dlo":32000,"dhi":40000,"ca":8,"t":0},{"gu":"도봉구","dong":"창동","n":"미소애(주상복합)","hh":123,"lo":33000,"hi":56500,"a1":64.8,"a2":64.8,"c":22,"y":2005,"id":"17602","r":0,"dlo":33000,"dhi":56500,"ca":22,"t":1},{"gu":"도봉구","dong":"쌍문동","n":"동익파크(동익미라벨)","hh":495,"lo":35000,"hi":55000,"a1":88.94,"a2":99.79,"c":23,"y":1987,"id":"289","r":0,"dlo":35000,"dhi":55000,"ca":23,"t":0},{"gu":"도봉구","dong":"방학동","n":"우성1차","hh":658,"lo":35000,"hi":62000,"a1":73.15,"a2":103.27,"c":12,"y":1992,"id":"279","r":0,"dlo":35000,"dhi":62000,"ca":12,"t":0},{"gu":"도봉구","dong":"창동","n":"주공17단지","hh":1980,"lo":35000,"hi":70000,"a1":52.55,"a2":69.28,"c":88,"y":1989,"id":"314","r":1,"dlo":35000,"dhi":70000,"ca":90,"t":0},{"gu":"도봉구","dong":"방학동","n":"신동아5단지","hh":153,"lo":36000,"hi":36000,"a1":83.46,"a2":83.46,"c":1,"y":1998,"id":"929","r":0,"dlo":36000,"dhi":73000,"ca":5,"t":0},{"gu":"도봉구","dong":"방학동","n":"신동아4단지","hh":361,"lo":37000,"hi":55000,"a1":79.43,"a2":103.93,"c":19,"y":1995,"id":"278","r":0,"dlo":37000,"dhi":55000,"ca":19,"t":0},{"gu":"도봉구","dong":"창동","n":"창동현대타운(주상복합)","hh":158,"lo":37000,"hi":55000,"a1":67.18,"a2":93.37,"c":4,"y":1999,"id":"3268","r":0,"dlo":37000,"dhi":55000,"ca":4,"t":1},{"gu":"도봉구","dong":"쌍문동","n":"도봉금강아미움파크타운(주상복합)","hh":126,"lo":38000,"hi":51000,"a1":78.83,"a2":95.39,"c":7,"y":2018,"id":"120641","r":0,"dlo":38000,"dhi":51000,"ca":7,"t":1},{"gu":"도봉구","dong":"방학동","n":"성원","hh":258,"lo":38000,"hi":44000,"a1":76.44,"a2":76.44,"c":3,"y":1996,"id":"273","r":0,"dlo":38000,"dhi":44000,"ca":3,"t":0},{"gu":"도봉구","dong":"방학동","n":"신동아타워(주상복합)","hh":104,"lo":38000,"hi":38000,"a1":83.24,"a2":83.24,"c":1,"y":1997,"id":"1121","r":0,"dlo":38000,"dhi":38000,"ca":1,"t":1},{"gu":"도봉구","dong":"쌍문동","n":"쌍문미라보","hh":142,"lo":39000,"hi":39000,"a1":77.75,"a2":77.75,"c":1,"y":1995,"id":"291","r":0,"dlo":39000,"dhi":39000,"ca":1,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"쌍문염광","hh":103,"lo":39500,"hi":50000,"a1":83.91,"a2":118.97,"c":6,"y":1997,"id":"295","r":0,"dlo":39500,"dhi":50000,"ca":6,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"백조","hh":104,"lo":40000,"hi":45000,"a1":72.66,"a2":82.32,"c":9,"y":1981,"id":"9274","r":1,"dlo":40000,"dhi":45000,"ca":9,"t":0},{"gu":"도봉구","dong":"도봉동","n":"서울가든","hh":348,"lo":40000,"hi":49000,"a1":99.46,"a2":99.46,"c":19,"y":1987,"id":"266","r":0,"dlo":40000,"dhi":49000,"ca":19,"t":0},{"gu":"도봉구","dong":"도봉동","n":"서원","hh":2450,"lo":40000,"hi":57000,"a1":67.84,"a2":81.47,"c":30,"y":1996,"id":"1120","r":0,"dlo":40000,"dhi":57000,"ca":30,"t":0},{"gu":"도봉구","dong":"방학동","n":"한화,성원","hh":336,"lo":40000,"hi":50000,"a1":84.58,"a2":102.99,"c":11,"y":1996,"id":"282","r":0,"dlo":40000,"dhi":50000,"ca":11,"t":0},{"gu":"도봉구","dong":"방학동","n":"벽산2차","hh":318,"lo":42000,"hi":56000,"a1":79.01,"a2":107.64,"c":9,"y":1998,"id":"3261","r":0,"dlo":42000,"dhi":56000,"ca":9,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"한양5차","hh":414,"lo":42000,"hi":55000,"a1":87.91,"a2":106.5,"c":17,"y":1991,"id":"302","r":0,"dlo":42000,"dhi":55000,"ca":17,"t":0},{"gu":"도봉구","dong":"방학동","n":"극동","hh":167,"lo":43000,"hi":51000,"a1":106.71,"a2":106.71,"c":12,"y":1993,"id":"3260","r":0,"dlo":43000,"dhi":51000,"ca":12,"t":0},{"gu":"도봉구","dong":"창동","n":"창동주공2단지","hh":750,"lo":43000,"hi":74000,"a1":52.55,"a2":71.0,"c":50,"y":1990,"id":"325","r":0,"dlo":43000,"dhi":74000,"ca":65,"t":0},{"gu":"도봉구","dong":"도봉동","n":"서광","hh":159,"lo":45000,"hi":45000,"a1":85.2,"a2":85.2,"c":4,"y":1999,"id":"8568","r":0,"dlo":45000,"dhi":45000,"ca":4,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"신원2차(주상복합)","hh":136,"lo":45000,"hi":65000,"a1":86.05,"a2":121.88,"c":11,"y":1998,"id":"296","r":0,"dlo":45000,"dhi":65000,"ca":11,"t":1},{"gu":"도봉구","dong":"쌍문동","n":"쌍문극동","hh":315,"lo":45000,"hi":55000,"a1":75.77,"a2":107.34,"c":5,"y":1996,"id":"284","r":0,"dlo":45000,"dhi":55000,"ca":5,"t":0},{"gu":"도봉구","dong":"창동","n":"창동금용","hh":183,"lo":45000,"hi":47000,"a1":85.19,"a2":85.19,"c":6,"y":1997,"id":"9368","r":0,"dlo":45000,"dhi":78000,"ca":8,"t":0},{"gu":"도봉구","dong":"창동","n":"창동주공4단지","hh":1710,"lo":45000,"hi":72000,"a1":52.55,"a2":69.1,"c":25,"y":1991,"id":"328","r":1,"dlo":45000,"dhi":72000,"ca":32,"t":0},{"gu":"도봉구","dong":"방학동","n":"거성학마을","hh":347,"lo":46000,"hi":66000,"a1":76.26,"a2":107.95,"c":13,"y":1994,"id":"268","r":0,"dlo":46000,"dhi":92000,"ca":24,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"금호2차","hh":386,"lo":47000,"hi":57000,"a1":85.01,"a2":101.43,"c":23,"y":1991,"id":"287","r":0,"dlo":47000,"dhi":57000,"ca":23,"t":0},{"gu":"도봉구","dong":"방학동","n":"신동아3단지","hh":210,"lo":47000,"hi":55000,"a1":96.43,"a2":96.43,"c":17,"y":1992,"id":"277","r":0,"dlo":47000,"dhi":55000,"ca":17,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"현대3차","hh":287,"lo":47500,"hi":65000,"a1":103.54,"a2":104.64,"c":34,"y":1995,"id":"1122","r":0,"dlo":47500,"dhi":65000,"ca":34,"t":0},{"gu":"도봉구","dong":"방학동","n":"동양크레오","hh":212,"lo":50000,"hi":60000,"a1":77.35,"a2":109.25,"c":5,"y":2004,"id":"17411","r":0,"dlo":50000,"dhi":60000,"ca":5,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"성원","hh":498,"lo":50000,"hi":65000,"a1":86.47,"a2":100.7,"c":21,"y":1989,"id":"293","r":0,"dlo":50000,"dhi":65000,"ca":21,"t":0},{"gu":"도봉구","dong":"창동","n":"창동한신(451)","hh":121,"lo":50000,"hi":50000,"a1":82.79,"a2":82.79,"c":2,"y":1999,"id":"3267","r":0,"dlo":50000,"dhi":50000,"ca":2,"t":0},{"gu":"도봉구","dong":"도봉동","n":"극동","hh":205,"lo":51000,"hi":60000,"a1":101.85,"a2":102.6,"c":7,"y":1991,"id":"1119","r":0,"dlo":51000,"dhi":60000,"ca":7,"t":0},{"gu":"도봉구","dong":"창동","n":"대동","hh":188,"lo":52000,"hi":69000,"a1":79.26,"a2":105.68,"c":11,"y":1999,"id":"3264","r":0,"dlo":52000,"dhi":100000,"ca":31,"t":0},{"gu":"도봉구","dong":"창동","n":"수산트리플","hh":111,"lo":53000,"hi":60000,"a1":79.49,"a2":79.49,"c":2,"y":2004,"id":"14249","r":0,"dlo":53000,"dhi":68000,"ca":5,"t":0},{"gu":"도봉구","dong":"창동","n":"초안산신도브래뉴","hh":213,"lo":53000,"hi":72500,"a1":80.99,"a2":114.57,"c":11,"y":2005,"id":"17249","r":0,"dlo":53000,"dhi":72500,"ca":21,"t":0},{"gu":"도봉구","dong":"방학동","n":"청구","hh":978,"lo":53500,"hi":68000,"a1":102.58,"a2":102.58,"c":20,"y":1994,"id":"281","r":0,"dlo":53500,"dhi":70000,"ca":23,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"쌍문청구","hh":236,"lo":54000,"hi":56000,"a1":105.67,"a2":105.67,"c":13,"y":1996,"id":"298","r":0,"dlo":54000,"dhi":56000,"ca":13,"t":0},{"gu":"도봉구","dong":"창동","n":"주공18단지","hh":910,"lo":54000,"hi":70000,"a1":45.2,"a2":63.64,"c":31,"y":1988,"id":"102830","r":1,"dlo":54000,"dhi":97000,"ca":49,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"한양6차","hh":582,"lo":54000,"hi":79000,"a1":95.92,"a2":95.92,"c":20,"y":2002,"id":"305","r":0,"dlo":54000,"dhi":79000,"ca":23,"t":0},{"gu":"도봉구","dong":"방학동","n":"금광포란재","hh":105,"lo":54500,"hi":62000,"a1":76.69,"a2":76.69,"c":6,"y":2005,"id":"13850","r":0,"dlo":54500,"dhi":68000,"ca":8,"t":0},{"gu":"도봉구","dong":"방학동","n":"신동아2단지","hh":660,"lo":55000,"hi":65000,"a1":101.22,"a2":101.32,"c":10,"y":1992,"id":"275","r":0,"dlo":54000,"dhi":80000,"ca":28,"t":0},{"gu":"도봉구","dong":"창동","n":"창동주공1단지","hh":808,"lo":55000,"hi":75000,"a1":57.15,"a2":71.0,"c":30,"y":1990,"id":"323","r":0,"dlo":55000,"dhi":80000,"ca":75,"t":0},{"gu":"도봉구","dong":"창동","n":"창동한승미메이드","hh":135,"lo":55000,"hi":75000,"a1":75.16,"a2":105.31,"c":8,"y":2004,"id":"10304","r":0,"dlo":55000,"dhi":75000,"ca":9,"t":0},{"gu":"도봉구","dong":"도봉동","n":"현대성우","hh":190,"lo":55000,"hi":75000,"a1":113.01,"a2":146.74,"c":18,"y":1998,"id":"3258","r":0,"dlo":55000,"dhi":75000,"ca":25,"t":0},{"gu":"도봉구","dong":"방학동","n":"효성하이타운","hh":122,"lo":55000,"hi":59500,"a1":107.54,"a2":107.83,"c":2,"y":2002,"id":"9263","r":0,"dlo":55000,"dhi":59500,"ca":2,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"쌍문현대2차","hh":192,"lo":56000,"hi":65000,"a1":101.53,"a2":101.53,"c":3,"y":1993,"id":"297","r":0,"dlo":56000,"dhi":65000,"ca":3,"t":0},{"gu":"도봉구","dong":"도봉동","n":"도봉유원","hh":286,"lo":57000,"hi":62000,"a1":104.79,"a2":104.79,"c":15,"y":1990,"id":"856","r":0,"dlo":57000,"dhi":62000,"ca":15,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"한양1차","hh":824,"lo":58000,"hi":85000,"a1":71.12,"a2":97.97,"c":2,"y":1986,"id":"299","r":1,"dlo":58000,"dhi":100000,"ca":16,"t":0},{"gu":"도봉구","dong":"도봉동","n":"도봉한신","hh":2678,"lo":60000,"hi":81000,"a1":102.02,"a2":104.62,"c":9,"y":1995,"id":"267","r":0,"dlo":60000,"dhi":81000,"ca":63,"t":0},{"gu":"도봉구","dong":"도봉동","n":"삼환도봉","hh":660,"lo":60000,"hi":75000,"a1":97.81,"a2":111.71,"c":11,"y":1987,"id":"265","r":1,"dlo":60000,"dhi":75000,"ca":17,"t":0},{"gu":"도봉구","dong":"창동","n":"상아1차","hh":694,"lo":60000,"hi":60000,"a1":60.1,"a2":60.1,"c":6,"y":1987,"id":"318","r":1,"dlo":60000,"dhi":105000,"ca":44,"t":0},{"gu":"도봉구","dong":"창동","n":"상아2차","hh":427,"lo":60000,"hi":72000,"a1":64.54,"a2":64.54,"c":4,"y":1988,"id":"8564","r":0,"dlo":60000,"dhi":95000,"ca":42,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"시티프라디움","hh":112,"lo":60000,"hi":75000,"a1":86.02,"a2":90.73,"c":17,"y":2021,"id":"141183","r":0,"dlo":60000,"dhi":75000,"ca":23,"t":0},{"gu":"도봉구","dong":"도봉동","n":"양우내안애","hh":147,"lo":60000,"hi":60000,"a1":106.85,"a2":106.85,"c":1,"y":2005,"id":"13340","r":0,"dlo":60000,"dhi":60000,"ca":1,"t":0},{"gu":"도봉구","dong":"방학동","n":"우성2차","hh":558,"lo":60000,"hi":61500,"a1":104.31,"a2":104.31,"c":8,"y":1993,"id":"280","r":0,"dlo":60000,"dhi":61500,"ca":8,"t":0},{"gu":"도봉구","dong":"도봉동","n":"중흥S-클래스","hh":141,"lo":60000,"hi":68000,"a1":100.74,"a2":100.74,"c":1,"y":2004,"id":"11425","r":0,"dlo":60000,"dhi":78000,"ca":9,"t":0},{"gu":"도봉구","dong":"도봉동","n":"럭키","hh":630,"lo":61000,"hi":70000,"a1":100.71,"a2":100.71,"c":1,"y":1992,"id":"3259","r":0,"dlo":61000,"dhi":70000,"ca":4,"t":0},{"gu":"도봉구","dong":"창동","n":"건영캐스빌","hh":300,"lo":65000,"hi":82000,"a1":107.46,"a2":107.46,"c":3,"y":2002,"id":"3369","r":0,"dlo":65000,"dhi":90000,"ca":24,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"쌍문삼성래미안","hh":407,"lo":65000,"hi":71000,"a1":78.44,"a2":78.44,"c":3,"y":2002,"id":"8086","r":0,"dlo":65000,"dhi":92000,"ca":23,"t":0},{"gu":"도봉구","dong":"창동","n":"창동대우","hh":952,"lo":65000,"hi":70000,"a1":76.26,"a2":76.26,"c":7,"y":1995,"id":"309","r":0,"dlo":65000,"dhi":82500,"ca":18,"t":0},{"gu":"도봉구","dong":"창동","n":"창동주공3단지","hh":2856,"lo":65000,"hi":68000,"a1":58.72,"a2":58.72,"c":1,"y":1990,"id":"326","r":0,"dlo":65000,"dhi":125000,"ca":78,"t":0},{"gu":"도봉구","dong":"쌍문동","n":"한양7차","hh":408,"lo":65000,"hi":70000,"a1":98.2,"a2":98.26,"c":3,"y":1993,"id":"306","r":0,"dlo":65000,"dhi":70000,"ca":5,"t":0},{"gu":"중랑구","dong":"면목동","n":"현대휴온(도시형)","hh":149,"lo":24000,"hi":25000,"a1":46.16,"a2":47.15,"c":7,"y":2013,"id":"106322","r":0,"dlo":11500,"dhi":25000,"ca":17,"t":1},{"gu":"중랑구","dong":"묵동","n":"우성","hh":190,"lo":29000,"hi":40000,"a1":51.3,"a2":52.52,"c":10,"y":1975,"id":"3846","r":0,"dlo":29000,"dhi":40000,"ca":10,"t":0},{"gu":"중랑구","dong":"상봉동","n":"상봉베스트원(주상복합)","hh":114,"lo":30000,"hi":30000,"a1":41.3,"a2":41.3,"c":1,"y":2019,"id":"125007","r":0,"dlo":13300,"dhi":34000,"ca":12,"t":1},{"gu":"중랑구","dong":"신내동","n":"신내9단지진흥","hh":1650,"lo":31000,"hi":65000,"a1":47.2,"a2":71.0,"c":48,"y":1996,"id":"817","r":0,"dlo":31000,"dhi":65000,"ca":48,"t":0},{"gu":"중랑구","dong":"면목동","n":"면목한신","hh":1362,"lo":37000,"hi":55000,"a1":48.34,"a2":63.52,"c":22,"y":1987,"id":"802","r":0,"dlo":25000,"dhi":75000,"ca":73,"t":0},{"gu":"중랑구","dong":"망우동","n":"경남","hh":250,"lo":40000,"hi":63000,"a1":64.04,"a2":96.02,"c":18,"y":1989,"id":"1241","r":0,"dlo":40000,"dhi":63000,"ca":18,"t":0},{"gu":"중랑구","dong":"면목동","n":"용마한신","hh":565,"lo":41000,"hi":66000,"a1":48.04,"a2":78.14,"c":22,"y":1990,"id":"835","r":0,"dlo":41000,"dhi":77000,"ca":29,"t":0},{"gu":"중랑구","dong":"묵동","n":"신내4단지","hh":1070,"lo":42000,"hi":75000,"a1":54.07,"a2":81.09,"c":28,"y":1996,"id":"10528","r":0,"dlo":42000,"dhi":75000,"ca":43,"t":0},{"gu":"중랑구","dong":"망우동","n":"염광","hh":233,"lo":42000,"hi":55000,"a1":52.96,"a2":79.96,"c":9,"y":1983,"id":"8370","r":1,"dlo":42000,"dhi":55000,"ca":9,"t":0},{"gu":"중랑구","dong":"망우동","n":"신원","hh":198,"lo":47000,"hi":48000,"a1":82.26,"a2":82.26,"c":4,"y":1999,"id":"1243","r":0,"dlo":47000,"dhi":48000,"ca":4,"t":0},{"gu":"중랑구","dong":"중화동","n":"극동","hh":156,"lo":48000,"hi":64000,"a1":82.79,"a2":111.18,"c":3,"y":1991,"id":"3853","r":0,"dlo":48000,"dhi":68000,"ca":14,"t":0},{"gu":"중랑구","dong":"신내동","n":"동성4차","hh":478,"lo":48000,"hi":65000,"a1":64.86,"a2":82.97,"c":4,"y":1997,"id":"1249","r":0,"dlo":48000,"dhi":80000,"ca":10,"t":0},{"gu":"중랑구","dong":"묵동","n":"묵동신도(주상복합)","hh":100,"lo":51000,"hi":51000,"a1":71.26,"a2":71.26,"c":2,"y":2004,"id":"19000","r":0,"dlo":51000,"dhi":51000,"ca":2,"t":1},{"gu":"중랑구","dong":"신내동","n":"라이프미성","hh":277,"lo":52000,"hi":65000,"a1":79.7,"a2":114.07,"c":12,"y":1992,"id":"808","r":0,"dlo":52000,"dhi":65000,"ca":12,"t":0},{"gu":"중랑구","dong":"신내동","n":"신내6단지시영","hh":1609,"lo":55000,"hi":70000,"a1":54.53,"a2":68.12,"c":10,"y":1996,"id":"820","r":0,"dlo":55000,"dhi":90000,"ca":34,"t":0},{"gu":"중랑구","dong":"신내동","n":"벽산","hh":284,"lo":57000,"hi":60000,"a1":88.73,"a2":88.73,"c":4,"y":2000,"id":"3848","r":0,"dlo":57000,"dhi":100000,"ca":25,"t":0},{"gu":"중랑구","dong":"신내동","n":"다우훼밀리","hh":152,"lo":58000,"hi":58000,"a1":77.43,"a2":77.43,"c":3,"y":1999,"id":"3851","r":0,"dlo":58000,"dhi":78000,"ca":9,"t":0},{"gu":"중랑구","dong":"신내동","n":"석탑","hh":242,"lo":58000,"hi":70000,"a1":85.14,"a2":108.15,"c":4,"y":1997,"id":"823","r":0,"dlo":58000,"dhi":70000,"ca":27,"t":0},{"gu":"중랑구","dong":"망우동","n":"청광","hh":105,"lo":58000,"hi":58000,"a1":85.76,"a2":85.76,"c":1,"y":2001,"id":"3464","r":0,"dlo":58000,"dhi":58000,"ca":1,"t":0},{"gu":"중랑구","dong":"면목동","n":"신우","hh":111,"lo":59000,"hi":70000,"a1":77.8,"a2":109.94,"c":24,"y":1998,"id":"3012","r":0,"dlo":59000,"dhi":70000,"ca":30,"t":0},{"gu":"중랑구","dong":"묵동","n":"극동늘푸른","hh":188,"lo":60000,"hi":65000,"a1":80.92,"a2":80.92,"c":8,"y":1999,"id":"8934","r":0,"dlo":60000,"dhi":83000,"ca":16,"t":0},{"gu":"중랑구","dong":"묵동","n":"묵동신안2차","hh":171,"lo":62000,"hi":62000,"a1":92.32,"a2":92.32,"c":2,"y":2000,"id":"3843","r":0,"dlo":62000,"dhi":79000,"ca":10,"t":0},{"gu":"중랑구","dong":"신내동","n":"동성1,2차","hh":1047,"lo":63000,"hi":63000,"a1":82.03,"a2":82.03,"c":1,"y":1993,"id":"1248","r":0,"dlo":63000,"dhi":93000,"ca":14,"t":0},{"gu":"중랑구","dong":"묵동","n":"세방","hh":159,"lo":63000,"hi":63000,"a1":84.1,"a2":84.1,"c":1,"y":2000,"id":"3841","r":0,"dlo":63000,"dhi":76000,"ca":3,"t":0},{"gu":"중랑구","dong":"신내동","n":"신내11단지대명","hh":804,"lo":64000,"hi":68000,"a1":68.15,"a2":68.15,"c":13,"y":1996,"id":"809","r":0,"dlo":64000,"dhi":68000,"ca":19,"t":0},{"gu":"중랑구","dong":"면목동","n":"용마동아","hh":174,"lo":64500,"hi":70000,"a1":103.95,"a2":103.96,"c":6,"y":1993,"id":"799","r":0,"dlo":64500,"dhi":70000,"ca":14,"t":0},{"gu":"중랑구","dong":"상봉동","n":"동부","hh":368,"lo":65000,"hi":65000,"a1":82.98,"a2":82.98,"c":2,"y":1999,"id":"895","r":0,"dlo":65000,"dhi":89000,"ca":6,"t":0},{"gu":"중랑구","dong":"신내동","n":"동성3차","hh":800,"lo":65000,"hi":65000,"a1":84.73,"a2":84.73,"c":7,"y":1997,"id":"813","r":0,"dlo":65000,"dhi":106000,"ca":81,"t":0},{"gu":"중랑구","dong":"신내동","n":"동성7차","hh":235,"lo":65000,"hi":65000,"a1":84.35,"a2":84.35,"c":2,"y":1999,"id":"1250","r":0,"dlo":65000,"dhi":95000,"ca":16,"t":0},{"gu":"중랑구","dong":"신내동","n":"새한","hh":532,"lo":65000,"hi":65000,"a1":77.53,"a2":77.53,"c":3,"y":1998,"id":"3849","r":0,"dlo":65000,"dhi":80000,"ca":25,"t":0},{"gu":"중랑구","dong":"묵동","n":"신안1차","hh":285,"lo":65000,"hi":65000,"a1":86.5,"a2":86.5,"c":6,"y":1999,"id":"805","r":0,"dlo":65000,"dhi":85000,"ca":9,"t":0},{"gu":"중랑구","dong":"망우동","n":"예성그린캐슬","hh":191,"lo":65000,"hi":73000,"a1":105.98,"a2":105.98,"c":1,"y":2004,"id":"9054","r":0,"dlo":65000,"dhi":73000,"ca":19,"t":0},{"gu":"중랑구","dong":"면목동","n":"용마한신2차","hh":174,"lo":65000,"hi":75000,"a1":80.92,"a2":80.92,"c":1,"y":1998,"id":"3838","r":0,"dlo":65000,"dhi":85000,"ca":27,"t":0},{"gu":"강북구","dong":"수유동","n":"칸타빌수유팰리스","hh":216,"lo":24000,"hi":38000,"a1":40.12,"a2":49.48,"c":2,"y":2022,"id":"147179","r":0,"dlo":22000,"dhi":150000,"ca":34,"t":0},{"gu":"강북구","dong":"번동","n":"번동주공4단지","hh":900,"lo":40000,"hi":53000,"a1":57.15,"a2":72.95,"c":29,"y":1991,"id":"1302","r":0,"dlo":40000,"dhi":80000,"ca":35,"t":0},{"gu":"강북구","dong":"번동","n":"효성네오인텔리안(주상복합)","hh":121,"lo":40000,"hi":65000,"a1":53.19,"a2":104.87,"c":7,"y":2005,"id":"17631","r":0,"dlo":40000,"dhi":65000,"ca":7,"t":1},{"gu":"강북구","dong":"번동","n":"기산그린","hh":263,"lo":44000,"hi":56000,"a1":82.83,"a2":101.09,"c":4,"y":2000,"id":"3126","r":0,"dlo":44000,"dhi":56000,"ca":4,"t":0},{"gu":"강북구","dong":"번동","n":"신원","hh":285,"lo":44000,"hi":44000,"a1":82.19,"a2":82.19,"c":1,"y":2000,"id":"1008","r":0,"dlo":44000,"dhi":44000,"ca":1,"t":0},{"gu":"강북구","dong":"미아동","n":"미아요진","hh":123,"lo":45000,"hi":65000,"a1":76.09,"a2":108.66,"c":27,"y":2005,"id":"3888","r":0,"dlo":45000,"dhi":65000,"ca":27,"t":0},{"gu":"강북구","dong":"번동","n":"번동솔그린","hh":380,"lo":46000,"hi":70000,"a1":81.7,"a2":106.94,"c":13,"y":1999,"id":"3128","r":0,"dlo":46000,"dhi":70000,"ca":15,"t":0},{"gu":"강북구","dong":"수유동","n":"수유벽산2차","hh":146,"lo":47000,"hi":50000,"a1":71.47,"a2":74.62,"c":15,"y":1994,"id":"1010","r":0,"dlo":47000,"dhi":75000,"ca":27,"t":0},{"gu":"강북구","dong":"번동","n":"금호","hh":284,"lo":48000,"hi":70000,"a1":81.66,"a2":114.11,"c":8,"y":1998,"id":"1336","r":0,"dlo":48000,"dhi":70000,"ca":12,"t":0},{"gu":"강북구","dong":"번동","n":"해모로","hh":430,"lo":50000,"hi":60000,"a1":81.97,"a2":82.02,"c":6,"y":2003,"id":"9345","r":0,"dlo":50000,"dhi":105000,"ca":40,"t":0},{"gu":"강북구","dong":"수유동","n":"수유현대","hh":110,"lo":52000,"hi":70000,"a1":77.09,"a2":108.97,"c":3,"y":2000,"id":"3133","r":0,"dlo":52000,"dhi":70000,"ca":4,"t":0},{"gu":"강북구","dong":"우이동","n":"성원","hh":262,"lo":52500,"hi":57000,"a1":99.79,"a2":99.79,"c":10,"y":1990,"id":"1011","r":0,"dlo":52500,"dhi":57000,"ca":10,"t":0},{"gu":"강북구","dong":"수유동","n":"극동","hh":574,"lo":53000,"hi":65000,"a1":104.99,"a2":104.99,"c":19,"y":1992,"id":"1343","r":0,"dlo":53000,"dhi":74000,"ca":28,"t":0},{"gu":"강북구","dong":"수유동","n":"수유벽산1차","hh":1454,"lo":55000,"hi":65000,"a1":84.85,"a2":84.85,"c":15,"y":1993,"id":"1344","r":0,"dlo":55000,"dhi":90000,"ca":48,"t":0},{"gu":"강북구","dong":"번동","n":"번동한진(꿈의숲)","hh":202,"lo":56000,"hi":79000,"a1":81.02,"a2":114.92,"c":2,"y":2000,"id":"1009","r":0,"dlo":56000,"dhi":79000,"ca":5,"t":0},{"gu":"강북구","dong":"번동","n":"오동공원현대홈타운","hh":245,"lo":57000,"hi":57000,"a1":82.25,"a2":82.25,"c":4,"y":2001,"id":"9086","r":0,"dlo":57000,"dhi":83000,"ca":11,"t":0},{"gu":"강북구","dong":"번동","n":"번동한양","hh":261,"lo":58000,"hi":65000,"a1":100.12,"a2":100.12,"c":7,"y":1992,"id":"1342","r":0,"dlo":58000,"dhi":65000,"ca":7,"t":0},{"gu":"강북구","dong":"번동","n":"삼성","hh":228,"lo":59000,"hi":63000,"a1":80.6,"a2":80.6,"c":8,"y":1998,"id":"3131","r":0,"dlo":59000,"dhi":70000,"ca":9,"t":0},{"gu":"강북구","dong":"우이동","n":"대우","hh":260,"lo":60000,"hi":77000,"a1":80.31,"a2":108.01,"c":4,"y":2000,"id":"3134","r":0,"dlo":60000,"dhi":77000,"ca":7,"t":0},{"gu":"강북구","dong":"번동","n":"번동주공1단지","hh":1430,"lo":60000,"hi":70000,"a1":58.37,"a2":72.15,"c":11,"y":1991,"id":"1337","r":1,"dlo":60000,"dhi":93000,"ca":94,"t":0},{"gu":"강북구","dong":"미아동","n":"현대성우(주상복합)","hh":216,"lo":60000,"hi":60000,"a1":85.37,"a2":85.37,"c":2,"y":1998,"id":"1007","r":0,"dlo":60000,"dhi":90000,"ca":9,"t":1},{"gu":"강북구","dong":"미아동","n":"미아신구","hh":105,"lo":62000,"hi":62000,"a1":107.54,"a2":107.54,"c":1,"y":2000,"id":"3890","r":0,"dlo":62000,"dhi":62000,"ca":1,"t":0},{"gu":"강북구","dong":"수유동","n":"수유래미안","hh":690,"lo":63000,"hi":68000,"a1":82.5,"a2":82.5,"c":4,"y":2001,"id":"3132","r":0,"dlo":63000,"dhi":95000,"ca":17,"t":0},{"gu":"성북구","dong":"종암동","n":"고려","hh":140,"lo":30000,"hi":52000,"a1":53.57,"a2":87.75,"c":23,"y":1983,"id":"11440","r":1,"dlo":30000,"dhi":52000,"ca":24,"t":0},{"gu":"성북구","dong":"안암동3가","n":"대광","hh":346,"lo":30000,"hi":30000,"a1":52.0,"a2":56.96,"c":4,"y":1971,"id":"1184","r":1,"dlo":21000,"dhi":30000,"ca":11,"t":0},{"gu":"성북구","dong":"정릉동","n":"정릉대우","hh":791,"lo":35000,"hi":62000,"a1":59.71,"a2":83.23,"c":37,"y":2001,"id":"1186","r":0,"dlo":35000,"dhi":83000,"ca":87,"t":0},{"gu":"성북구","dong":"정릉동","n":"정릉중앙하이츠","hh":261,"lo":35000,"hi":63000,"a1":71.25,"a2":107.66,"c":11,"y":1999,"id":"1189","r":0,"dlo":35000,"dhi":71000,"ca":15,"t":0},{"gu":"성북구","dong":"석관동","n":"장위아트포레(도시형)","hh":191,"lo":35800,"hi":37100,"a1":49.49,"a2":49.49,"c":10,"y":2025,"id":"176237","r":0,"dlo":21700,"dhi":37600,"ca":32,"t":1},{"gu":"성북구","dong":"정릉동","n":"산장(780)","hh":264,"lo":36000,"hi":55000,"a1":66.12,"a2":85.95,"c":12,"y":1977,"id":"1187","r":0,"dlo":36000,"dhi":55000,"ca":12,"t":0},{"gu":"성북구","dong":"장위동","n":"우방","hh":147,"lo":40000,"hi":63000,"a1":57.84,"a2":83.78,"c":25,"y":2001,"id":"3537","r":0,"dlo":40000,"dhi":90000,"ca":28,"t":0},{"gu":"성북구","dong":"장위동","n":"장위지웰에스테이트(도시형)","hh":173,"lo":41000,"hi":48000,"a1":55.19,"a2":56.67,"c":23,"y":2022,"id":"137835","r":0,"dlo":41000,"dhi":48000,"ca":23,"t":1},{"gu":"성북구","dong":"돈암동","n":"돈암현대","hh":619,"lo":55000,"hi":55000,"a1":51.1,"a2":51.1,"c":3,"y":1991,"id":"583","r":0,"dlo":55000,"dhi":100000,"ca":43,"t":0},{"gu":"성북구","dong":"상월곡동","n":"우남","hh":225,"lo":59000,"hi":66000,"a1":88.14,"a2":88.14,"c":1,"y":1994,"id":"1182","r":0,"dlo":59000,"dhi":120000,"ca":7,"t":0},{"gu":"성북구","dong":"정릉동","n":"정릉성원","hh":271,"lo":59000,"hi":63000,"a1":85.17,"a2":85.17,"c":13,"y":2000,"id":"1188","r":0,"dlo":59000,"dhi":63000,"ca":13,"t":0},{"gu":"성북구","dong":"길음동","n":"길음현대","hh":132,"lo":60000,"hi":60000,"a1":42.97,"a2":42.97,"c":3,"y":2000,"id":"879","r":0,"dlo":60000,"dhi":80000,"ca":6,"t":0},{"gu":"성북구","dong":"정릉동","n":"정릉우방","hh":196,"lo":60000,"hi":60000,"a1":81.91,"a2":81.91,"c":2,"y":1999,"id":"589","r":0,"dlo":51000,"dhi":89000,"ca":8,"t":0},{"gu":"성북구","dong":"길음동","n":"신안파크","hh":252,"lo":62000,"hi":63000,"a1":96.9,"a2":96.9,"c":24,"y":1988,"id":"577","r":0,"dlo":62000,"dhi":63000,"ca":25,"t":0},{"gu":"성북구","dong":"정릉동","n":"정릉쌍용","hh":193,"lo":65000,"hi":72000,"a1":83.31,"a2":83.31,"c":10,"y":1999,"id":"3538","r":0,"dlo":65000,"dhi":85000,"ca":37,"t":0},{"gu":"동대문구","dong":"답십리동","n":"보광타워(도시형)","hh":160,"lo":25000,"hi":28000,"a1":40.95,"a2":41.84,"c":4,"y":2019,"id":"116669","r":0,"dlo":14000,"dhi":28000,"ca":16,"t":1},{"gu":"동대문구","dong":"답십리동","n":"청계푸르지오시티(도시형)","hh":298,"lo":36000,"hi":38000,"a1":42.17,"a2":42.17,"c":4,"y":2015,"id":"105744","r":0,"dlo":13500,"dhi":38000,"ca":15,"t":1},{"gu":"동대문구","dong":"용두동","n":"롯데캐슬피렌체(주상복합)","hh":435,"lo":38000,"hi":58000,"a1":43.88,"a2":54.33,"c":36,"y":2009,"id":"25667","r":0,"dlo":31000,"dhi":150000,"ca":51,"t":1},{"gu":"동대문구","dong":"용두동","n":"동대문푸르지오시티(도시형)","hh":299,"lo":39000,"hi":45500,"a1":42.33,"a2":42.33,"c":28,"y":2016,"id":"108854","r":0,"dlo":16000,"dhi":45500,"ca":34,"t":1},{"gu":"동대문구","dong":"용두동","n":"동대문베네스트(도시형)","hh":130,"lo":50000,"hi":50000,"a1":50.57,"a2":50.57,"c":1,"y":2020,"id":"121719","r":0,"dlo":20000,"dhi":50000,"ca":21,"t":1},{"gu":"동대문구","dong":"답십리동","n":"삼희(주상복합)","hh":150,"lo":50000,"hi":60000,"a1":61.38,"a2":85.41,"c":9,"y":1983,"id":"3272","r":0,"dlo":50000,"dhi":80000,"ca":16,"t":1},{"gu":"동대문구","dong":"답십리동","n":"동답한신","hh":600,"lo":52000,"hi":60000,"a1":47.03,"a2":47.03,"c":19,"y":1992,"id":"333","r":0,"dlo":52000,"dhi":110000,"ca":71,"t":0},{"gu":"동대문구","dong":"회기동","n":"회기역한일베라체캠퍼스(주상복합)","hh":264,"lo":56000,"hi":56000,"a1":81.06,"a2":81.06,"c":1,"y":2013,"id":"103167","r":0,"dlo":23500,"dhi":26000,"ca":21,"t":1},{"gu":"동대문구","dong":"휘경동","n":"휘경리오포레2단지","hh":800,"lo":62000,"hi":70000,"a1":57.6,"a2":57.61,"c":8,"y":2001,"id":"100207","r":0,"dlo":62000,"dhi":105000,"ca":24,"t":0},{"gu":"강동구","dong":"천호동","n":"두산위브센티움(주상복합)","hh":156,"lo":16000,"hi":25000,"a1":40.92,"a2":51.09,"c":5,"y":2004,"id":"14366","r":0,"dlo":16000,"dhi":25000,"ca":5,"t":1},{"gu":"강동구","dong":"길동","n":"경지아리움(주상복합)","hh":124,"lo":28000,"hi":28000,"a1":41.43,"a2":41.43,"c":2,"y":2019,"id":"126639","r":0,"dlo":18500,"dhi":32000,"ca":12,"t":1},{"gu":"강동구","dong":"성내동","n":"SK허브진(주상복합)","hh":325,"lo":33000,"hi":41000,"a1":40.18,"a2":44.77,"c":13,"y":2004,"id":"10634","r":0,"dlo":33000,"dhi":41000,"ca":13,"t":1},{"gu":"강동구","dong":"천호동","n":"한신","hh":224,"lo":55000,"hi":63000,"a1":49.06,"a2":62.01,"c":2,"y":1991,"id":"1335","r":0,"dlo":55000,"dhi":95000,"ca":5,"t":0},{"gu":"강동구","dong":"길동","n":"한빛(주상복합)","hh":317,"lo":65000,"hi":65000,"a1":61.81,"a2":75.94,"c":8,"y":2001,"id":"11980","r":0,"dlo":65000,"dhi":100000,"ca":23,"t":1},{"gu":"성동구","dong":"마장동","n":"삼성홈타운(도시형)","hh":123,"lo":55000,"hi":55000,"a1":59.48,"a2":59.48,"c":1,"y":2015,"id":"112462","r":0,"dlo":17500,"dhi":55000,"ca":9,"t":1},{"gu":"광진구","dong":"중곡동","n":"중곡","hh":270,"lo":62000,"hi":70000,"a1":48.46,"a2":58.12,"c":5,"y":1976,"id":"1060","r":1,"dlo":62000,"dhi":70000,"ca":6,"t":0}];
+const GU = ["노원구", "도봉구", "중랑구", "강북구", "성북구", "동대문구", "강동구", "성동구", "광진구"];
+const MAXHH = 3500;
+
+const won = v => { const e = Math.floor(v/10000), m = v%10000;
+  if(!m) return e + "억";
+  return m%1000===0 ? e + "억 " + (m/1000) + "천" : e + "억 " + m.toLocaleString(); };
+const area = d => d.a1===d.a2 ? d.a1 + "㎡" : d.a1 + "–" + d.a2 + "㎡";
+
+/* 구별 분포 */
+const counts = GU.map(g => {
+  const rows = DATA.filter(d => d.gu===g);
+  return {g, n: rows.length, r: rows.filter(d=>d.r).length};
+});
+const maxN = Math.max(...counts.map(c=>c.n));
+document.getElementById("dist").innerHTML = counts.map(c => {
+  const w = c.n/maxN*100, rw = c.n ? c.r/c.n*100 : 0;
+  return '<div class="bl">' + c.g + '</div>' +
+    '<div class="distrow">' +
+      '<div class="stack' + (c.n?'':' zero') + '" style="width:' + (c.n?w:0) + '%">' +
+        '<div class="s1" style="flex:' + (100-rw) + '"></div>' +
+        '<div class="s2" style="flex:' + rw + '"></div>' +
+      '</div>' +
+      '<div class="distcount"><b>' + c.n + '</b>곳' + (c.r ? ' · 재건축 <em>' + c.r + '</em>' : '') + '</div>' +
+    '</div>';
+}).join("");
+
+/* 컨트롤 */
+const TYPES = [
+  {k:"apt",  label:"일반 아파트", test:d => !d.r && !d.t},
+  {k:"reb",  label:"재건축",     test:d => d.r},
+  {k:"mix",  label:"도시형·주상복합", test:d => !d.r && d.t},
+];
+const SORTS = [
+  {k:"price", label:"가격순", cmp:(a,b)=>a.lo-b.lo || a.n.localeCompare(b.n)},
+  {k:"hh",    label:"세대순", cmp:(a,b)=>b.hh-a.hh || a.lo-b.lo},
+  {k:"cnt",   label:"매물순", cmp:(a,b)=>b.c-a.c || a.lo-b.lo},
+  {k:"year",  label:"준공순", cmp:(a,b)=>b.y-a.y || a.lo-b.lo},
+];
+
+const state = {gu:new Set(GU), type:new Set(TYPES.map(t=>t.k)), sort:"price"};
+const typeOf = d => d.r ? "reb" : (d.t ? "mix" : "apt");
+
+document.getElementById("guChips").innerHTML = GU.map(g =>
+  '<button class="chip" type="button" data-gu="' + g + '" aria-pressed="true">' + g +
+  '<span class="c">' + DATA.filter(d=>d.gu===g).length + '</span></button>').join("");
+document.getElementById("typeChips").innerHTML = TYPES.map(t =>
+  '<button class="chip' + (t.k==="reb"?" mk":"") + '" type="button" data-type="' + t.k + '" aria-pressed="true">' + t.label +
+  '<span class="c">' + DATA.filter(d=>typeOf(d)===t.k).length + '</span></button>').join("");
+document.getElementById("sortChips").innerHTML = SORTS.map(s =>
+  '<button class="chip" type="button" data-sort="' + s.k + '" aria-pressed="' + (s.k===state.sort) + '">' + s.label + '</button>').join("");
+
+/* 목록 */
+const bands = document.getElementById("bands");
+bands.innerHTML = GU.map(g =>
+  '<section class="band" data-gu="' + g + '">' +
+    '<div class="band-head"><span class="band-num">' + g + '</span><span class="band-meta" data-meta></span></div>' +
+    '<ul class="rows" data-list></ul>' +
+  '</section>').join("");
+
+function rowHTML(d){
+  const url = "https://new.land.naver.com/complexes/" + d.id + "?a=APT:JGC&b=A1&e=RETAIL&f=0&g=900000000";
+  const badge = d.r ? '<span class="badge">재건축</span>'
+    : (d.t ? '<span class="badge t">' + (d.n.indexOf("도시형")>-1 ? "도시형" : "주상복합") + '</span>' : '');
+  const nm = d.n.replace(/\((도시형|주상복합)\)/, "").trim();
+  const range = d.dlo===d.dhi ? won(d.dlo) : won(d.dlo) + "–" + won(d.dhi);
+  return '<li class="row' + (d.r?" reb":"") + '">' +
+    '<div class="price"><div class="p">' + won(d.lo) + '</div>' +
+      '<div class="pp">40㎡ 이상 최저</div></div>' +
+    '<div class="who"><h3>' + nm + badge + '</h3>' +
+      '<p class="spec"><span>' + d.dong + '</span>' +
+      '<span class="m">' + area(d) + '</span>' +
+      '<span class="m">' + d.y + '년</span>' +
+      '<span class="m">' + d.hh.toLocaleString() + '세대</span></p>' +
+      '<p class="deal"><b>매매 ' + range + '</b><span>단지 전체 ' + d.ca + '건</span>' +
+      '<span>6.5억 이하 ' + d.c + '건</span></p></div>' +
+    '<div class="right">' +
+      '<div class="rail"><div class="track"><div class="fill" style="width:' +
+        Math.max(3, Math.min(100, d.hh/MAXHH*100)) + '%"></div></div>' +
+        '<div class="lab"><span>세대 <b>' + d.hh.toLocaleString() + '</b></span><span>매매 <b>' + d.ca + '</b>건</span></div></div>' +
+      '<a class="go" href="' + url + '" target="_blank" rel="noopener">네이버 매매 <span>↗</span></a>' +
+    '</div></li>';
+}
+
+function render(){
+  const cmp = SORTS.find(s=>s.k===state.sort).cmp;
+  let shown = 0, arts = 0;
+  GU.forEach(g => {
+    const sec = bands.querySelector('section[data-gu="' + g + '"]');
+    const rows = DATA.filter(d => d.gu===g && state.gu.has(g) && state.type.has(typeOf(d))).sort(cmp);
+    sec.hidden = rows.length === 0;
+    if(!rows.length) return;
+    shown += rows.length;
+    const a = rows.reduce((s,d)=>s+d.c, 0); arts += a;
+    const lo = Math.min(...rows.map(r=>r.lo)), hi = Math.max(...rows.map(r=>r.dhi));
+    const reb = rows.filter(r=>r.r).length;
+    sec.querySelector("[data-meta]").textContent =
+      rows.length + "곳 · 매매 " + won(lo) + "–" + won(hi) + " · 6.5억 이하 매물 " + a + "건" + (reb ? " · 재건축 " + reb + "곳" : "");
+    sec.querySelector("[data-list]").innerHTML = rows.map(rowHTML).join("");
+  });
+  document.getElementById("empty").hidden = shown > 0;
+  document.getElementById("shown").textContent = shown + "곳 / 6.5억 이하 매물 " + arts + "건";
+}
+
+document.querySelector(".controls").addEventListener("click", e => {
+  const b = e.target.closest("button.chip");
+  if(!b) return;
+  if(b.dataset.gu){ const g=b.dataset.gu; state.gu.has(g) ? state.gu.delete(g) : state.gu.add(g); b.setAttribute("aria-pressed", state.gu.has(g)); }
+  else if(b.dataset.type){ const t=b.dataset.type; state.type.has(t) ? state.type.delete(t) : state.type.add(t); b.setAttribute("aria-pressed", state.type.has(t)); }
+  else if(b.dataset.sort){ state.sort=b.dataset.sort;
+    document.querySelectorAll("#sortChips .chip").forEach(x => x.setAttribute("aria-pressed", x.dataset.sort===state.sort)); }
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

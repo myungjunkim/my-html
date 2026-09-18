@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>주택담보대출 체크리스트</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --ink:#1A231D; --muted:#5B6A60;
+  --line:#E0E7DF; --accent:#1E6B4F; --accent-ink:#FFFFFF; --accent-soft:#E2EFE7;
+  --danger:#B23A24; --danger-soft:#F8E9E4;
+  --warn:#8A6112; --warn-soft:#F5EDD9;
+  --note:#4E5D54; --note-soft:#E9EEE8;
+  --shadow:0 1px 2px rgba(26,45,35,.05),0 4px 14px rgba(26,45,35,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121915; --surface:#1A231E; --ink:#E7EDE7; --muted:#98A99E;
+    --line:#2A362F; --accent:#57C296; --accent-ink:#0D1F17; --accent-soft:#1D3529;
+    --danger:#E8836B; --danger-soft:#3B241D;
+    --warn:#D9AB52; --warn-soft:#372D18;
+    --note:#A5B5AA; --note-soft:#232E28;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121915; --surface:#1A231E; --ink:#E7EDE7; --muted:#98A99E;
+  --line:#2A362F; --accent:#57C296; --accent-ink:#0D1F17; --accent-soft:#1D3529;
+  --danger:#E8836B; --danger-soft:#3B241D;
+  --warn:#D9AB52; --warn-soft:#372D18;
+  --note:#A5B5AA; --note-soft:#232E28;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'IBM Plex Sans KR',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  font-size:15px; line-height:1.6; letter-spacing:-0.01em;
+  padding-bottom:72px;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+
+/* ── Header ── */
+header{padding:36px 0 20px}
+header .kicker{color:var(--accent);font-weight:600;font-size:13px;margin-bottom:6px}
+header h1{font-size:26px;font-weight:700;letter-spacing:-0.03em;line-height:1.3}
+header p.lede{color:var(--muted);font-size:14px;margin-top:8px;max-width:34em}
+header .asof{display:inline-block;margin-top:10px;font-size:12px;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+
+/* ── Sticky progress ── */
+.progress{
+  position:sticky;top:0;z-index:20;background:var(--bg);
+  padding:10px 0 12px;border-bottom:1px solid var(--line);
+}
+.progress .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+.progress .must{font-weight:600;font-size:14px}
+.progress .must strong{color:var(--danger)}
+.progress .total{color:var(--muted);font-size:13px}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:3px;background:var(--accent);transition:width .3s ease}
+.progress .done-msg{display:none;margin-top:8px;font-size:13px;color:var(--accent);font-weight:600}
+.progress.all-must-done .done-msg{display:block}
+.sync{margin-top:6px;font-size:12px;color:var(--muted)}
+.sync.shared{color:var(--accent)}
+
+/* ── Filter chips ── */
+.chips{display:flex;gap:8px;padding:16px 0 4px;flex-wrap:wrap}
+.chips.lv{padding-top:8px}
+.conds{display:flex;align-items:center;gap:8px;padding:16px 0 0;flex-wrap:wrap}
+.conds-label{font-size:12.5px;color:var(--muted);font-weight:600}
+.conds-hint{flex:1 1 100%;font-size:12px;color:var(--muted);margin-top:2px}
+.chip{
+  border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;
+  font-family:inherit;cursor:pointer;
+}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:active{transform:scale(.97)}
+
+/* ── Sections ── */
+section{margin-top:28px}
+section>h2{font-size:17px;font-weight:700;letter-spacing:-0.02em;display:flex;align-items:center;gap:8px}
+section>h2 .count{font-size:12px;font-weight:500;color:var(--muted)}
+section>p.desc{color:var(--muted);font-size:13px;margin-top:4px}
+.items{margin-top:12px;display:grid;gap:10px}
+
+/* ── 단계 구분 ── */
+.group{margin-top:34px}
+.group-head{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  background:var(--accent-soft);border-radius:12px;padding:12px 14px;
+}
+.group-tag{font-size:15px;font-weight:700;color:var(--accent);letter-spacing:-0.02em}
+.group-prog{margin-left:auto;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.group-prog strong{color:var(--accent);font-weight:700}
+.group-desc{flex:1 1 100%;font-size:12.5px;color:var(--muted)}
+.group>section:first-of-type{margin-top:18px}
+
+/* ── Item card ── */
+.item{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.item.hidden,.item.excluded{display:none}
+.item-head{
+  display:flex;align-items:flex-start;gap:12px;padding:14px;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+.check{
+  flex:none;width:24px;height:24px;margin-top:1px;border-radius:8px;
+  border:2px solid var(--line);background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;padding:0;
+}
+.check svg{width:14px;height:14px;stroke:var(--accent-ink);stroke-width:3;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;opacity:0;transform:scale(.6);transition:opacity .15s,transform .15s}
+.item.checked .check{background:var(--accent);border-color:var(--accent)}
+.item.checked .check svg{opacity:1;transform:scale(1)}
+.item.checked .q{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line);text-decoration-thickness:1.5px}
+.item-main{flex:1;min-width:0}
+.badge{
+  display:inline-block;font-size:11px;font-weight:700;border-radius:6px;
+  padding:2px 7px;margin-bottom:5px;letter-spacing:0;
+}
+.badge.must{color:var(--danger);background:var(--danger-soft)}
+.badge.imp{color:var(--warn);background:var(--warn-soft)}
+.badge.chk{color:var(--note);background:var(--note-soft)}
+.q{font-weight:600;font-size:15px;line-height:1.45}
+.caret{flex:none;margin-top:6px;color:var(--muted);transition:transform .2s}
+.caret svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.item.open .caret{transform:rotate(180deg)}
+.item-body{display:none;padding:0 14px 14px 50px}
+.item.open .item-body{display:block}
+.item-body h4{font-size:12px;font-weight:700;color:var(--accent);margin:10px 0 3px}
+.item-body h4:first-child{margin-top:0}
+.item-body p{font-size:13.5px;color:var(--ink)}
+.item-body p+h4{margin-top:12px}
+.item-body p.law{color:var(--muted);font-size:12.5px}
+
+/* ── 메모 템플릿 ── */
+.note{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);padding:14px;
+}
+.note h3{font-size:14px;font-weight:700;margin-bottom:6px}
+.note blockquote{
+  font-size:13.5px;color:var(--muted);border-left:3px solid var(--accent);
+  padding:2px 0 2px 10px;margin-bottom:10px;white-space:pre-line;
+}
+.copy{
+  border:1px solid var(--line);background:transparent;color:var(--accent);
+  font-family:inherit;font-size:12.5px;font-weight:600;border-radius:8px;
+  padding:6px 12px;cursor:pointer;
+}
+.copy:active{transform:scale(.97)}
+.copy.copied{background:var(--accent-soft);border-color:var(--accent)}
+
+/* ── 기준표 ── */
+.tbl{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);overflow-x:auto}
+.tbl table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+.tbl th,.tbl td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-weight:600;color:var(--muted);font-size:12px;white-space:nowrap}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td:first-child{font-weight:600;white-space:nowrap}
+.tbl-note{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* ── 용어·법령 ── */
+.terms{margin-top:12px;background:var(--surface);border:1px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.terms details{border-bottom:1px solid var(--line)}
+.terms details:last-child{border-bottom:none}
+.terms summary{
+  list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:12px 14px;font-weight:600;font-size:14px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.terms summary::-webkit-details-marker{display:none}
+.terms summary::after{content:"+";color:var(--muted);font-weight:400;font-size:16px;flex:none}
+.terms details[open] summary::after{content:"−"}
+.terms .def{padding:0 14px 12px;font-size:13.5px;color:var(--muted)}
+.terms .def a{color:var(--accent);text-decoration:none;font-weight:600}
+.terms .def a:hover{text-decoration:underline}
+
+/* ── 서류 & footer ── */
+.prep{margin-top:12px;display:grid;gap:8px}
+.prep .item .item-head{padding:12px 14px}
+footer{margin-top:40px;padding:20px 0 8px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:12.5px}
+footer p+p{margin-top:6px}
+.reset{margin-top:12px;border:1px solid var(--line);background:transparent;color:var(--muted);
+  font-family:inherit;font-size:12.5px;border-radius:8px;padding:7px 12px;cursor:pointer}
+
+button:focus-visible,.item-head:focus-visible,summary:focus-visible,a:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important}
+}
+@media (min-width:640px){
+  body{font-size:16px}
+  header h1{font-size:32px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">자금 준비</div>
+  <h1>주택담보대출 체크리스트</h1>
+  <p class="lede">생애최초 구입자가 계약 전부터 실행 뒤까지 챙길 것들. 항목을 누르면 왜 확인해야 하는지, 무엇을 해야 하는지, 어떤 법령·규정이 근거인지가 열립니다. 체크 상태는 이 기기에 저장됩니다.</p>
+  <span class="asof">2026년 9월 18일 기준 · 수치는 변동될 수 있어요</span>
+</header>
+
+<div class="progress" id="progress">
+  <div class="row">
+    <span class="must">필수 <strong id="mustDone">0</strong>/<span id="mustTotal">0</span> 확인</span>
+    <span class="total">전체 <span id="allDone">0</span>/<span id="allTotal">0</span></span>
+  </div>
+  <div class="bar"><i id="barFill"></i></div>
+  <div class="sync" id="syncMsg">이 기기에만 저장 중</div>
+  <div class="done-msg">필수 항목을 다 확인했어요. 계약서에 도장을 찍기 전에 '계약 전' 단계가 모두 체크돼 있는지 한 번 더 보세요.</div>
+</div>
+
+<div class="conds" role="group" aria-label="내 조건">
+  <span class="conds-label">내 조건</span>
+  <button class="chip cond" data-cond="reg" aria-pressed="false">규제지역 매물</button>
+  <button class="chip cond" data-cond="tenant" aria-pressed="false">세입자 있는 매물</button>
+  <button class="chip cond" data-cond="policy" aria-pressed="true">정책대출 검토</button>
+  <p class="conds-hint">해당 없는 항목은 목록과 문항 수에서 빠집니다. 남양주 다산·장자는 2026년 9월 기준 비규제지역, 구리는 7월부터 규제지역입니다.</p>
+</div>
+
+<div class="chips" role="group" aria-label="단계 필터">
+  <button class="chip cat" data-cat="all" aria-pressed="true">전체</button>
+  <button class="chip cat" data-cat="pre" aria-pressed="false">계약 전</button>
+  <button class="chip cat" data-cat="apply" aria-pressed="false">신청·심사</button>
+  <button class="chip cat" data-cat="close" aria-pressed="false">잔금·등기</button>
+  <button class="chip cat" data-cat="after" aria-pressed="false">실행 후</button>
+</div>
+
+<div class="chips lv" role="group" aria-label="중요도 필터">
+  <button class="chip" data-filter="all" aria-pressed="true">전체</button>
+  <button class="chip" data-filter="must" aria-pressed="false">필수</button>
+  <button class="chip" data-filter="imp" aria-pressed="false">중요</button>
+  <button class="chip" data-filter="chk" aria-pressed="false">확인</button>
+</div>
+
+<div id="sections"></div>
+
+<section>
+  <h2>2026년 기준표</h2>
+  <p class="desc">생애최초 무주택 세대주 기준입니다. 한도는 LTV로 계산한 금액과 총액 상한, DSR로 계산한 금액 중 가장 낮은 값이 실제 한도입니다.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>구분</th><th>디딤돌 (생애최초)</th><th>보금자리론</th><th>은행 주담대</th></tr></thead>
+      <tbody>
+        <tr><td>소득</td><td>부부합산 7,000만 이하 (신혼 8,500만)</td><td>부부합산 7,000만 이하 (신혼 8,500만)</td><td>제한 없음</td></tr>
+        <tr><td>순자산</td><td>5.11억 이하</td><td>없음</td><td>없음</td></tr>
+        <tr><td>대상 주택</td><td>5억 이하 · 85㎡ 이하</td><td>6억 이하</td><td>제한 없음</td></tr>
+        <tr><td>최대 한도</td><td>2.4억</td><td>HF 공시 확인</td><td>6억 (수도권·규제지역 총액 상한)</td></tr>
+        <tr><td>LTV</td><td>80% (수도권·규제지역 70%)</td><td>70%</td><td>생애최초 70% (일반 규제지역 40%)</td></tr>
+        <tr><td>DSR</td><td>DTI 60% (생애최초 80% · 수도권·규제지역 70%)</td><td>DSR 40%</td><td>DSR 40% · 수도권 스트레스 금리 +3.0%p</td></tr>
+        <tr><td>만기</td><td>10·15·20·30년</td><td>10~50년 (수도권 30년 이내)</td><td>수도권·규제지역 30년 이내</td></tr>
+        <tr><td>전입 의무</td><td>1개월</td><td>—</td><td>6개월 (수도권·규제지역)</td></tr>
+        <tr><td>신청처</td><td>기금e든든 → 수탁은행</td><td>한국주택금융공사 · 은행</td><td>각 은행 · 대출비교 플랫폼</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tbl-note">규제지역(서울 전역, 경기 15곳)에서 15억 초과 주택은 총액 4억, 25억 초과는 2억이 상한입니다. 디딤돌·보금자리론 금리와 한도는 매달 바뀌므로 신청 직전에 마이홈·HF에서 다시 확인하세요.</p>
+</section>
+
+<section id="notes-sec">
+  <h2>메모 템플릿</h2>
+  <p class="desc">은행마다 다른 조건을 들으면 하루만 지나도 섞입니다. 복사해서 메모 앱에 붙여넣고 은행 창구나 전화 상담 중에 바로 채우세요.</p>
+  <div class="items" id="notes"></div>
+</section>
+
+<section>
+  <h2>근거 법령·규정</h2>
+  <p class="desc">체크 항목 아래 '근거'에 적힌 조항들입니다. 제목을 누르면 국가법령정보센터 링크가 열립니다. 행정지도(가계부채 관리방안)는 법률이 아니라 금융위 보도자료와 은행 추가약정서로 확인합니다.</p>
+  <div class="terms" id="laws"></div>
+</section>
+
+<section>
+  <h2>용어 사전</h2>
+  <div class="terms" id="terms"></div>
+</section>
+
+<section>
+  <h2>준비 서류</h2>
+  <p class="desc">발급일 기준 1개월 이내 서류를 요구하는 은행이 많습니다. 신청 직전에 한 번에 뽑으세요. 정부24와 홈택스에서 대부분 무료 발급됩니다.</p>
+  <div class="prep" id="prep"></div>
+</section>
+
+<footer>
+  <p>개인 참고용 자료입니다. 2026년 9월 18일 기준으로 공개된 법령, 금융위원회·국토교통부 발표, 주택도시기금·한국주택금융공사 공시를 바탕으로 정리했습니다. 한도·금리·규제지역은 자주 바뀌므로 신청 전 은행과 공식 사이트에서 다시 확인하세요.</p>
+  <p>세금(취득세 감면, 소득공제)은 구청 세무과와 세무사, 계약서 특약은 공인중개사·법무사에게 확인하는 것이 안전합니다. 이 문서는 법률·세무 자문이 아닙니다.</p>
+  <p>현장에서 무엇을 볼지는 임장 체크리스트, 부동산에서 무엇을 물어볼지는 매매 체크리스트에서 이어서 확인하세요.</p>
+  <button class="reset" id="resetBtn">체크 상태 초기화</button>
+</footer>
+
+</div>
+
+<script>
+const DATA = [
+{
+  cat:"pre", title:"자격 확인", desc:"'생애최초'는 은행 우대, 정책대출 한도, 취득세 감면에 각각 다른 기준으로 쓰입니다. 세 가지 모두 서류로 먼저 확인해야 예산이 정해집니다.",
+  items:[
+    {id:"p1",lv:"must",q:"본인과 배우자가 과거에 주택을 소유한 적이 없음을 서류로 확인했는가",
+     why:"은행의 생애최초 LTV 70%, 디딤돌 생애최초 한도, 취득세 감면은 모두 '세대원 전원이 주택을 소유한 사실이 없을 것'을 요구합니다. 상속받은 지분, 분양권, 주거용 오피스텔 같은 이력 하나로 자격이 사라집니다. 부모 명의 주택은 상관없지만 부모와 같은 세대라면 정책대출에서 걸릴 수 있습니다.",
+     act:"정부24에서 본인과 배우자 각각 '주택소유확인서'를 발급하세요. 과거 상속·처분 이력이 의심되면 인터넷등기소 '소유자별 부동산 조회'로 확인하고, 애매한 이력은 계약 전에 은행과 구청 세무과에 서면 문의로 남겨두세요.",
+     law:"지방세특례제한법 제36조의3 제1항(생애최초 취득세 감면 요건) · 은행업감독규정 별표6(생애최초 주택구입자 우대) · 주택도시기금 운용계획(디딤돌 생애최초 요건)"},
+    {id:"p2",lv:"must",cond:"policy",q:"세대주 포함 세대원 전원이 무주택인가 (정책대출 요건)",
+     why:"디딤돌·보금자리론은 세대주를 포함한 세대원 전원의 무주택을 요구합니다. 부모와 같은 주민등록표에 있으면 부모의 주택이 세대의 주택으로 잡힙니다. 세대 분리는 만 30세 이상이거나 혼인·일정 소득 요건을 충족해야 인정됩니다.",
+     act:"주민등록등본상 세대원을 확인하세요. 세대 분리가 필요하면 신청 전에 미리 마쳐야 하고, 분리 직후 신청은 은행이 실거주 여부를 따로 물을 수 있습니다.",
+     law:"주택도시기금법 제9조(기금의 용도) · 주택도시기금 운용계획 · 주택공급에 관한 규칙 제2조(무주택세대구성원 정의 준용)"},
+    {id:"p3",lv:"imp",cond:"policy",q:"소득·순자산·주택가격이 정책대출 기준 안에 있는가",
+     why:"디딤돌 생애최초는 부부합산 연소득 7,000만 원 이하, 순자산 5.11억 이하, 주택 5억·85㎡ 이하입니다. 보금자리론은 소득 7,000만 원, 주택 6억 이하입니다. 하나라도 넘으면 은행 주담대로 내려가고 금리가 1~2%p 올라갑니다.",
+     act:"원천징수영수증의 총급여를 부부 합산하고, 순자산은 예금·전세보증금·차량 등 자산에서 부채를 뺀 값으로 계산하세요. 혼인 7년 이내(신혼)면 소득 8,500만 원까지, 2년 내 출산 가구는 신생아 특례가 따로 있으니 마이홈에서 함께 조회하세요.",
+     law:"주택도시기금 운용계획(내집마련 디딤돌대출 지원 기준) · 한국주택금융공사법 제22조(보금자리론 업무)"},
+    {id:"p4",lv:"chk",q:"신혼·신생아 특례 대상인지 확인했는가",
+     why:"혼인신고 7년 이내거나 대출 신청일 기준 2년 내 출산한 가구는 소득 기준과 한도, 금리가 생애최초 일반 조건보다 유리합니다. 조건이 겹치면 더 나은 쪽을 고를 수 있습니다.",
+     act:"마이홈 포털에서 신혼부부·신생아 특례 디딤돌 조건을 조회하고, 해당되면 은행 상담 때 먼저 말하세요.",
+     law:"주택도시기금 운용계획(신혼부부·신생아 특례 디딤돌)"}
+  ]
+},
+{
+  cat:"pre", title:"한도와 예산", desc:"집값의 70%가 아니라 '내 소득으로 나오는 금액'이 한도입니다. 이 숫자를 먼저 알아야 임장할 가격대가 정해집니다.",
+  items:[
+    {id:"b1",lv:"must",q:"소득 기준 DSR 한도를 은행 앱에서 먼저 뽑았는가",
+     why:"모든 대출의 연간 원리금이 연소득의 40%를 넘을 수 없습니다. 수도권은 여기에 스트레스 금리 3.0%p를 더해 계산하므로 같은 소득이라도 한도가 지방보다 적습니다. 신용대출, 자동차 할부, 카드론, 학자금까지 모두 합산됩니다.",
+     act:"은행 앱과 대출비교 플랫폼에서 2~3곳 한도를 조회하세요. 대략 연소득 × 40%에서 기존 대출의 연 원리금을 뺀 금액이 새 주담대의 연 상환 여력입니다. 계약 전에 한 번, 계약 직후 한 번 다시 조회해 변동이 없는지 보세요.",
+     law:"은행업감독규정 별표6(주택관련 담보대출 리스크관리 기준: 차주단위 DSR 40%, 스트레스 DSR) · 금융위원회 3단계 스트레스 DSR 시행방안(2025.7) · 10.15 주택시장 안정화 대책(수도권 스트레스 금리 3.0%p)"},
+    {id:"b2",lv:"must",q:"LTV와 총액 상한으로 최대 대출액을 계산했는가",
+     why:"생애최초는 수도권·규제지역에서 LTV 70%가 적용되지만 수도권·규제지역 주담대는 총액 6억 원을 넘을 수 없습니다. 기준 가격은 매매가가 아니라 KB시세나 감정가 중 낮은 값이어서, 시세보다 높게 산 집은 매매가의 70%가 나오지 않습니다.",
+     act:"KB부동산에서 해당 단지·평형의 일반가와 하한가를 조회하고 하한가 × 70%를 최대치로 잡으세요. 매매가와 차이가 크면 그 차액은 자기자금으로 채워야 합니다. 규제지역 15억 초과 주택은 4억, 25억 초과는 2억이 상한입니다.",
+     law:"은행업감독규정 별표6(LTV 규제) · 금융위원회 가계부채 관리 강화 방안(2025.6.27, 수도권·규제지역 주담대 6억 상한·생애최초 LTV 70%) · 10.15 대책(주택가격별 한도 차등)"},
+    {id:"b3",lv:"must",q:"자기자금이 잔금과 부대비용을 모두 감당하는지 계산했는가",
+     why:"대출 외에 취득세(6억 이하 1%, 6~9억 1~3% 구간, 9억 초과 3%), 중개보수(6~9억 0.5% 이내), 법무사 보수와 등기 비용, 매매계약서 인지세, 국민주택채권 할인 비용, 이사와 수리비가 한꺼번에 나갑니다. 매매가의 1.5~2.5% 정도가 대출 없이 현금으로 필요합니다.",
+     act:"매매가, 대출 예상액, 부대비용을 한 시트에 놓고 잔금일 필요 현금을 계산하세요. 생애최초 취득세 감면은 12억 이하 주택에 최대 200만 원이니 그만큼만 빼면 됩니다. 인지세는 1억 초과 10억 이하 계약서 15만 원이고 매도인과 나눠 냅니다.",
+     law:"지방세법 제11조(취득세율) · 지방세특례제한법 제36조의3(생애최초 감면 200만 원) · 인지세법 제3조(과세문서·세율) · 공인중개사법 시행규칙 제20조(중개보수 한도) · 주택도시기금법 제8조(국민주택채권 매입)"},
+    {id:"b4",lv:"imp",q:"만기와 상환 방식을 정하고 월 상환액을 계산했는가",
+     why:"수도권·규제지역 주담대는 만기 30년 이내로 제한되어 40·50년 만기로 월 상환액을 낮추는 방법이 막혔습니다. 거치 기간 없는 원리금균등이 표준이고, 만기가 짧으면 DSR 계산상 한도도 줄어듭니다.",
+     act:"30년 원리금균등을 기본으로 월 상환액을 계산하고 소득의 30% 안에 들어오는지 보세요. 소득공제를 받으려면 만기 15년 이상이어야 하니 15년 미만은 피하세요.",
+     law:"금융위원회 가계부채 관리 강화 방안(2025.6.27, 수도권·규제지역 주담대 만기 30년 제한) · 소득세법 제52조 제5항(상환기간 15년 이상 요건)"},
+    {id:"b5",lv:"imp",q:"이자상환액 소득공제 요건을 대출 조건에 반영했는가",
+     why:"무주택 또는 1주택 세대주인 근로소득자가 취득 당시 기준시가 6억 이하 주택을 사면서 만기 15년 이상 주담대를 받으면 이자 납입액을 연 600만~2,000만 원까지 소득공제받습니다. 고정금리이면서 비거치 분할상환이면 한도가 2,000만 원으로 가장 큽니다. 소유권 이전 등기일부터 3개월 안에 차입해야 하고 채무자와 소유자가 같아야 합니다.",
+     act:"부동산 공시가격 알리미에서 해당 호의 공동주택 공시가격을 확인하세요. 6억 이하면 고정(혼합)·비거치 조건으로 공제 한도를 키울지 검토하고, 대출 명의는 등기 명의와 같게 맞추세요.",
+     law:"소득세법 제52조 제5항(장기주택저당차입금 이자상환액 소득공제) · 소득세법 시행령 제112조"}
+  ]
+},
+{
+  cat:"pre", title:"매물·지역 규제", desc:"같은 아파트라도 소재지가 규제지역인지, 세입자가 있는지에 따라 대출 조건과 의무가 달라집니다.",
+  items:[
+    {id:"r1",lv:"must",q:"매물 소재지가 규제지역인지 확인했는가",
+     why:"서울 전역과 경기 15곳이 투기과열지구·조정대상지역이며 2026년 7월 1일부터 화성 동탄구, 용인 기흥구, 구리시가 추가됐습니다. 규제지역이면 일반 LTV가 40%로 떨어지고(생애최초는 70% 유지), 토지거래허가구역이면 허가와 2년 실거주 의무가 붙습니다. 남양주는 2026년 9월 기준 비규제지역입니다.",
+     act:"국토교통부 고시와 지자체 공고에서 매물 주소의 규제지역 여부를 확인하세요. 규제지역이면 위 '내 조건'에서 규제지역 매물을 켜서 추가 항목을 보세요.",
+     law:"주택법 제63조(투기과열지구 지정) · 주택법 제63조의2(조정대상지역 지정) · 부동산 거래신고 등에 관한 법률 제10조(토지거래허가구역 지정) · 국토교통부 고시(2025.10.15, 2026.6.30)"},
+    {id:"r2",lv:"must",cond:"reg",q:"토지거래허가 절차와 실거주 의무를 계약 일정에 넣었는가",
+     why:"토지거래허가구역에서 허가 없이 맺은 계약은 효력이 없습니다. 허가 신청 후 처리에 15일 정도 걸리고, 허가받은 주택은 2년간 직접 거주해야 하며 임대할 수 없습니다.",
+     act:"허가를 먼저 받고 본계약을 하거나, 계약서에 '토지거래허가를 조건으로 하며 불허 시 무효'라는 특약을 넣으세요. 허가 신청 서류(자금조달계획, 이용계획)는 중개사와 함께 준비합니다.",
+     law:"부동산 거래신고 등에 관한 법률 제11조(허가구역 내 토지거래 허가) · 제12조(허가 기준) · 제17조(이용 의무) · 제18조(이행강제금)"},
+    {id:"r3",lv:"imp",q:"자금조달계획서와 증빙 자료를 준비했는가",
+     why:"규제지역은 금액과 관계없이, 비규제 수도권은 6억 원 이상 거래에 자금조달·입주계획서를 제출합니다. 규제지역과 토지거래허가구역은 예금잔액증명, 대출신청서 같은 증빙까지 첨부해야 합니다. 계획서의 대출 예정액과 실제 대출이 어긋나면 소명 요구를 받습니다.",
+     act:"자기자금(예금·주식·증여), 차입금(주담대·신용대출·전세보증금 승계)을 항목별로 미리 정리하고, 은행 한도 조회 결과를 대출 예정액 근거로 남겨두세요. 증여를 받으면 증여세 신고도 같이 챙겨야 합니다.",
+     law:"부동산 거래신고 등에 관한 법률 제3조(실거래 신고) · 같은 법 시행령 제3조 및 시행규칙 제2조(자금조달·입주계획서 제출 대상)"},
+    {id:"r4",lv:"must",cond:"tenant",q:"세입자 만기가 전입 의무·거주 요건과 충돌하지 않는가",
+     why:"수도권·규제지역 주담대는 실행 후 6개월 안에 전입해야 하고, 취득세 감면은 취득 후 3개월 안에 상시거주를 시작해야 합니다. 세입자 만기가 그 뒤라면 두 의무를 모두 어기게 되어 대출 회수와 감면 추징 대상이 됩니다. 세입자의 대항력은 새 집주인에게 그대로 승계됩니다.",
+     act:"임대차계약서로 만기와 갱신 여부를 확인하고, 잔금일을 세입자 퇴거일에 맞추세요. 맞출 수 없으면 계약서에 '잔금일 전 임차인 명도 완료' 특약을 넣거나, 감면과 대출 조건을 포기해도 되는지 계산해 보세요.",
+     law:"주택임대차보호법 제3조(대항력 및 임대인 지위 승계) · 지방세특례제한법 제36조의3 제3항(3개월 내 상시거주) · 은행업감독규정 별표6 및 금융위 가계부채 관리 강화 방안(6개월 전입 의무)"}
+  ]
+},
+{
+  cat:"pre", title:"매매계약서", desc:"대출은 계약서에 도장을 찍은 뒤에 심사됩니다. 심사가 어긋났을 때 계약금을 지키는 장치는 특약 한 줄입니다.",
+  items:[
+    {id:"c1",lv:"must",q:"대출 부결·한도 부족 시 계약 해제 특약을 넣었는가",
+     why:"민법상 계약금은 해약금으로 보기 때문에 특약이 없으면 대출이 나오지 않아도 매수인은 계약금을 포기해야 계약에서 벗어날 수 있습니다. 대출 심사는 계약 뒤에야 확정됩니다.",
+     act:"'매수인의 주택담보대출이 O억 원 이상 승인되지 않을 경우 본 계약은 무효로 하고 매도인은 수령한 계약금을 즉시 반환한다'처럼 금액과 기한을 특정해 넣으세요. 중개사가 '관행상 안 넣는다'고 하면 그 자체가 위험 신호입니다.",
+     law:"민법 제565조(해약금) · 민법 제105조(임의규정, 특약 우선)"},
+    {id:"c2",lv:"must",q:"잔금일을 대출 심사 소요 기간 뒤로 잡았는가",
+     why:"은행 주담대는 신청부터 실행까지 1~3주, 디딤돌은 기금e든든 심사를 포함해 3~4주가 걸립니다. 잔금일을 지키지 못하면 지연이자나 계약 해제 사유가 됩니다.",
+     act:"계약일부터 잔금일까지 최소 6주를 두고, 잔금일은 은행과 등기소가 여는 평일 오전으로 잡으세요. 월말·연말은 은행 대출 총량 관리로 실행이 밀릴 수 있어 피하는 편이 안전합니다.",
+     law:"민법 제387조(이행기) · 은행여신거래기본약관(대출 실행 절차)"},
+    {id:"c3",lv:"imp",q:"매도인의 선순위 근저당을 잔금일에 말소하는 조건을 넣었는가",
+     why:"내 은행은 1순위 근저당을 조건으로 대출합니다. 매도인의 기존 대출이 남아 있으면 잔금일에 매도인이 상환하고 말소하는 것과 내 근저당 설정이 동시에 이뤄져야 합니다.",
+     act:"등기부 을구에서 근저당·채권최고액을 확인하고 특약에 '매도인은 잔금 수령과 동시에 선순위 근저당권을 말소한다'를 넣으세요. 잔금일에는 매도인 은행의 상환 영수증과 말소 서류를 법무사가 확인합니다.",
+     law:"부동산등기법 제75조(근저당권 등기사항) · 민법 제536조(동시이행 항변권)"}
+  ]
+},
+{
+  cat:"apply", title:"상품 선택", desc:"금리 1%p 차이는 3억 30년 기준 총이자 약 6,000만 원 차이입니다. 자격이 되는 가장 싼 대출부터 순서대로 확인합니다.",
+  items:[
+    {id:"a1",lv:"must",q:"정책대출, 보금자리론, 은행 주담대 순으로 자격을 확인했는가",
+     why:"디딤돌이 가장 싸고, 자격이 안 되면 보금자리론, 그 다음이 은행 주담대입니다. 디딤돌 한도 2.4억이 부족하면 은행 주담대를 후순위로 더 받을 수 있습니다. 혼합해 받아도 총액 상한과 DSR은 합산 적용됩니다.",
+     act:"기금e든든에서 디딤돌 사전 자격진단을 돌리고, 한국주택금융공사에서 보금자리론 조건을 확인한 뒤 은행 2~3곳에서 견적을 받으세요. 조합이 필요하면 은행 창구에서 '디딤돌 + 후순위 주담대' 가능 여부를 처음부터 물어보세요.",
+     law:"주택도시기금법 제9조 · 한국주택금융공사법 제22조 · 은행업감독규정 별표6(합산 한도)"},
+    {id:"a2",lv:"imp",q:"은행 2~3곳의 조건을 같은 항목으로 비교했는가",
+     why:"같은 코픽스 기준이라도 가산금리와 우대금리가 은행마다 다릅니다. 급여이체·카드·자동이체 우대는 실제로 유지할 수 있는 조건인지 봐야 하고, 대출비교 플랫폼 금리와 창구 금리가 다를 수 있습니다.",
+     act:"아래 '은행 비교 메모' 템플릿에 은행별로 금리 유형, 최종 금리, 한도, 우대 조건, 중도상환수수료, 실행 소요 기간을 적으세요. 금융소비자보호법상 은행은 상품설명서를 제공해야 하니 설명서를 요구하세요.",
+     law:"금융소비자 보호에 관한 법률 제19조(설명의무) · 은행법 제52조의2(불공정영업행위 금지)"},
+    {id:"a3",lv:"imp",q:"고정(혼합)과 변동 중 어느 쪽인지 근거를 갖고 정했는가",
+     why:"5년 혼합형은 첫 5년 고정 후 변동으로 바뀌고, 변동형은 6개월 코픽스에 연동됩니다. 중도상환수수료는 대출일부터 3년까지만 부과되므로 3년 뒤 갈아타기를 전제로 고르는 사람이 많습니다. 소득공제 한도는 고정·비거치일 때 가장 큽니다.",
+     act:"두 상품의 현재 금리 차이, 3년 후 대환 가능성, 소득공제 한도 차이를 한 표에 놓고 비교하세요. 금리 예측보다 '금리가 2%p 오르면 월 상환액을 감당할 수 있는가'를 먼저 계산하세요.",
+     law:"금융소비자 보호에 관한 법률 제20조 제1항 제4호(중도상환수수료 3년 이내 예외) · 소득세법 제52조 제5항"},
+    {id:"a4",lv:"chk",q:"우대금리 조건을 실제로 채울 수 있는가",
+     why:"급여이체, 신용카드 실적, 자동이체 건수, 청약통장 유지 같은 조건은 하나라도 빠지면 다음 금리 변동 주기에 우대가 사라집니다. 디딤돌은 청약저축 가입 기간에 따라 우대금리가 붙습니다.",
+     act:"우대 조건마다 유지 가능 여부를 O/X로 표시하고 확실한 것만 계산에 넣으세요. 청약통장은 대출 실행 전후로 해지하지 마세요.",
+     law:"은행 상품설명서(우대금리 조건) · 주택도시기금 운용계획(청약저축 우대금리)"}
+  ]
+},
+{
+  cat:"apply", title:"심사 중 주의", desc:"신청서를 낸 뒤 실행일까지 은행은 신용 상태를 다시 조회합니다. 이 기간의 작은 변동이 승인을 뒤집습니다.",
+  items:[
+    {id:"s1",lv:"must",q:"심사 기간 중 새 대출·카드론·할부·연체를 만들지 않았는가",
+     why:"실행 직전 은행은 DSR을 다시 계산합니다. 신용대출, 카드론, 자동차 할부, 휴대폰 할부까지 모두 원리금에 잡히고, 소액 연체 하나로도 승인이 취소될 수 있습니다.",
+     act:"계약일부터 실행일까지 어떤 신용거래도 새로 만들지 마세요. 이사·가전 구입은 실행 뒤로 미루고, 자동이체 계좌 잔액을 확인해 연체를 막으세요.",
+     law:"은행업감독규정 별표6(차주단위 DSR 산정) · 은행여신거래기본약관 제7조(기한이익 상실 사유)"},
+    {id:"s2",lv:"imp",q:"감정가·KB시세가 매매가보다 낮을 때 부족분 계획이 있는가",
+     why:"LTV 기준 가격은 은행이 정한 시세나 감정가 중 낮은 값입니다. 신고가로 사거나 시세 조회가 안 되는 단지는 매매가보다 낮게 평가돼 한도가 줄어듭니다. 수도권에서는 신용대출도 연소득 이내로 제한되어 부족분을 채우기 어렵습니다.",
+     act:"신청 전에 은행에 '어떤 가격을 기준으로 LTV를 계산하는지' 확인하고, 시세보다 높게 사는 경우 그 차액을 자기자금으로 준비하세요.",
+     law:"은행업감독규정 별표6(담보가치 산정) · 금융위 가계부채 관리 강화 방안(수도권 신용대출 연소득 이내)"},
+    {id:"s3",lv:"imp",q:"은행이 인정하는 소득 산정 방식을 확인했는가",
+     why:"증빙소득(원천징수영수증·소득금액증명)과 인정·신고소득(건강보험료·카드 사용액 환산)은 인정 비율이 다릅니다. 이직 직후, 연봉 인상 직후, 프리랜서·사업자는 최근 소득이 그대로 반영되지 않을 수 있습니다.",
+     act:"직전 연도와 당해 연도 중 어느 소득을 쓰는지, 상여·성과급 포함 여부를 은행에 물어보고 서류를 맞춰 준비하세요.",
+     law:"은행업감독규정 별표6 및 은행연합회 여신심사 선진화 가이드라인(소득 산정 기준)"},
+    {id:"s4",lv:"must",q:"전입 의무 추가약정서 내용을 읽고 이해했는가",
+     why:"수도권·규제지역 주담대는 실행 후 6개월 안에 전입하겠다는 추가약정서에 서명합니다. 위반하면 대출금을 회수하고 약정 위반 사실이 신용정보에 등록되어 3년간 주택 관련 대출이 제한됩니다. 디딤돌은 1개월 안에 전입해야 합니다.",
+     act:"약정서의 전입 기한, 예외 사유(기존 임차인 만기 등), 위반 시 조치 문구를 사진으로 남겨두세요. 전입이 늦어질 사정이 있으면 서명 전에 은행에 예외 인정 가능 여부를 확인하세요.",
+     law:"은행업감독규정 별표6 · 금융위원회 가계부채 관리 강화 방안(2025.6.27, 6개월 전입 의무) · 주택담보대출 추가약정서(은행연합회 표준)"},
+    {id:"s5",lv:"chk",q:"약정서의 연체이율·기한이익상실 조항을 확인했는가",
+     why:"원리금을 정해진 횟수 이상 연체하면 은행은 남은 대출 전액을 한 번에 갚으라고 할 수 있습니다. 주담대는 보통 2회 연체 시 기한이익이 상실되고 연체이율이 붙습니다.",
+     act:"상품설명서에서 기한이익상실 조건과 연체이율, 상실 전 사전 통지 방식을 확인하세요.",
+     law:"은행여신거래기본약관 제7조(기한 전의 채무변제 의무) · 금융소비자 보호에 관한 법률 제19조(설명의무)"}
+  ]
+},
+{
+  cat:"close", title:"잔금과 등기", desc:"잔금일 하루에 대출 실행, 소유권 이전, 근저당 설정, 취득세 납부가 한꺼번에 일어납니다. 순서가 어긋나면 그날 등기가 안 됩니다.",
+  items:[
+    {id:"k1",lv:"must",q:"잔금일 아침에 등기부등본을 다시 발급해 확인했는가",
+     why:"계약 뒤 잔금 전에도 매도인 앞으로 가압류나 새 근저당이 들어올 수 있습니다. 은행 법무사도 확인하지만 매수인이 직접 봐야 잔금 송금 전에 멈출 수 있습니다.",
+     act:"잔금 송금 직전 인터넷등기소에서 등기사항전부증명서를 발급해 갑구(소유자·가압류)와 을구(근저당)를 계약 시점과 대조하세요. 새 등기가 있으면 송금을 멈추고 중개사·법무사와 상의하세요.",
+     law:"부동산등기법 제19조(등기사항의 열람과 증명) · 민법 제536조(동시이행)"},
+    {id:"k2",lv:"must",q:"소유권 이전과 근저당 설정이 같은 날 동시에 접수되는가",
+     why:"은행은 1순위 근저당을 조건으로 대출금을 내보냅니다. 소유권 이전 등기와 근저당 설정 등기가 같은 날 접수되어야 하고, 채권최고액은 보통 대출액의 110~120%로 설정됩니다. 근저당 설정 비용은 은행이 부담합니다.",
+     act:"은행이 지정한 법무사가 근저당을, 소유권 이전은 같은 법무사나 내가 고른 법무사가 할 수 있습니다. 소유권 이전 법무사 보수는 견적을 2곳 이상 비교하세요. 등기 신청은 잔금일부터 60일 안에 해야 합니다.",
+     law:"부동산등기법 제75조(근저당권 채권최고액) · 부동산등기 특별조치법 제2조(60일 내 등기 신청 의무) · 은행 대출 관련 비용 부담 기준(근저당 설정비 은행 부담)"},
+    {id:"k3",lv:"must",q:"취득세를 신고·납부하면서 생애최초 감면을 함께 신청했는가",
+     why:"취득세는 취득일부터 60일 안에 신고·납부해야 하지만 등기에 납부 영수증이 필요해 실제로는 잔금일에 냅니다. 감면은 신청해야 적용되며, 신청을 빼먹으면 일반 세율로 납부하고 나중에 경정청구를 해야 합니다. 2026년 1월 1일 이후 취득분은 2028년 12월 31일까지 연장된 개정 조항이 적용됩니다.",
+     act:"위택스나 구청 세무과에서 취득세 신고 시 '생애최초 주택 취득세 감면 신청서'를 함께 제출하세요. 주택소유확인서, 가족관계증명서, 매매계약서가 필요합니다. 법무사에게 맡길 때는 감면 신청 여부를 명시적으로 확인하세요.",
+     law:"지방세법 제20조(취득세 신고·납부, 60일) · 지방세특례제한법 제36조의3(생애최초 주택 구입 취득세 감면) · 지방세특례제한법 제183조(감면 신청)"},
+    {id:"k4",lv:"imp",q:"부동산 실거래 신고를 30일 안에 했는지 확인했는가",
+     why:"매매계약 체결일부터 30일 안에 실거래 신고를 해야 하고, 중개 거래는 중개사가 신고합니다. 자금조달계획서도 이때 함께 제출됩니다. 신고가 늦으면 과태료가 부과됩니다.",
+     act:"중개사에게 신고 완료 확인서(신고필증)를 받아두세요. 대출 실행액이 계획서와 크게 달라졌으면 그 사유를 설명할 자료를 준비하세요.",
+     law:"부동산 거래신고 등에 관한 법률 제3조(부동산 거래의 신고) · 제28조(과태료)"},
+    {id:"k5",lv:"chk",q:"국민주택채권과 인지세 비용을 확인했는가",
+     why:"소유권 이전 등기 시 시가표준액에 따라 국민주택채권을 매입해야 하고, 대부분 매입 즉시 할인 매도해 차액만 부담합니다. 매매계약서 인지세는 1억 초과 10억 이하 15만 원이며 매도인과 절반씩 내는 것이 관행입니다.",
+     act:"법무사 견적서에서 채권 할인 비용과 인지세가 따로 적혀 있는지 확인하고, 주택도시기금 사이트에서 채권 매입액을 직접 계산해 견적과 비교하세요.",
+     law:"주택도시기금법 제8조(국민주택채권 매입 의무) · 인지세법 제3조(과세문서 및 세액)"},
+    {id:"k6",lv:"chk",q:"대출 실행 전 은행이 요구하는 부대 조건을 마쳤는가",
+     why:"화재보험 가입, 자동이체 계좌 개설, 급여이체 등록 같은 조건이 실행 전 완료되어야 하는 경우가 있습니다. 하나라도 빠지면 잔금일 당일 실행이 지연됩니다.",
+     act:"실행 3일 전 은행 담당자에게 '실행 전 완료해야 할 조건이 남아 있는지' 서면으로 확인받으세요.",
+     law:"은행 대출 약정서 부대조건 · 금융소비자 보호에 관한 법률 제20조(불공정영업행위 금지: 끼워팔기 금지)"}
+  ]
+},
+{
+  cat:"after", title:"실행 후 의무", desc:"대출과 감면에는 지켜야 할 기한이 붙어 있습니다. 어기면 대출 회수나 세금 추징으로 돌아옵니다.",
+  items:[
+    {id:"f1",lv:"must",q:"대출 실행일부터 6개월 안에 전입신고를 했는가 (디딤돌 1개월)",
+     why:"수도권·규제지역 주담대의 전입 의무를 어기면 대출금 회수와 3년간 주택 관련 대출 제한을 받습니다. 디딤돌은 1개월 안에 전입해야 하고, 규제지역 토지거래허가 주택은 2년 실거주 의무가 별도로 붙습니다.",
+     act:"잔금일에 바로 전입신고를 하는 것이 가장 안전합니다. 전입 후 은행이 확인 서류(등본)를 요구하면 제출하고, 은행 앱 알림이나 캘린더에 기한을 등록하세요.",
+     law:"은행업감독규정 별표6 · 주택담보대출 추가약정서(전입 의무) · 주택도시기금 운용계획(디딤돌 1개월 전입) · 부동산 거래신고 등에 관한 법률 제17조(허가 주택 이용 의무)"},
+    {id:"f2",lv:"must",q:"취득세 감면 유지 조건(3개월 내 거주 시작, 3년 거주)을 지키고 있는가",
+     why:"취득일부터 3개월 안에 상시거주를 시작하지 않거나, 3개월 안에 다른 주택을 추가로 취득하거나, 거주 3년이 되기 전에 매각·증여·임대하면 감면받은 취득세가 추징됩니다. 2026년 개정으로 실거주 목적이 아닌 취득은 감면에서 빠졌습니다.",
+     act:"전입일과 3년 만기일을 기록해 두고, 그 전에 이사·임대·명의 변경을 검토할 때는 추징액을 먼저 계산하세요. 부득이한 사정(근무지 이전 등)이 있으면 구청 세무과에 예외 인정 여부를 문의하세요.",
+     law:"지방세특례제한법 제36조의3 제3항 및 제4항(감면 배제·추징 사유)"},
+    {id:"f3",lv:"imp",q:"연말정산에서 이자상환액 소득공제를 신청했는가",
+     why:"요건을 갖춘 주담대 이자는 연 최대 2,000만 원까지 근로소득에서 공제됩니다. 은행이 국세청에 자료를 보내므로 홈택스 간소화에 자동으로 뜨지만, 세대주 요건과 기준시가 6억 이하는 본인이 판단해 신청해야 합니다.",
+     act:"첫 연말정산 때 홈택스 간소화 자료에 '장기주택저당차입금 이자상환액'이 있는지 확인하고, 없으면 은행에서 이자납입증명서를 발급받아 제출하세요.",
+     law:"소득세법 제52조 제5항 · 소득세법 시행령 제112조"},
+    {id:"f4",lv:"imp",q:"승진·연봉 인상 시 금리인하요구권을 행사할 계획이 있는가",
+     why:"대출 후 소득 증가, 신용점수 상승, 승진처럼 신용 상태가 좋아지면 은행에 금리 인하를 요구할 법적 권리가 있습니다. 은행은 10영업일 안에 수용 여부와 사유를 알려야 합니다.",
+     act:"연봉 계약서나 재직증명서가 바뀔 때마다 은행 앱에서 금리인하요구를 신청하세요. 거절되면 사유를 서면으로 받아두고 다음 신청 때 참고하세요.",
+     law:"은행법 제30조의2(금리인하 요구) · 은행법 시행령 제18조의4"},
+    {id:"f5",lv:"imp",q:"대출 3년이 지나면 중도상환수수료 없이 갈아탈 수 있음을 알고 있는가",
+     why:"중도상환수수료는 대출일부터 3년 이내에만 부과할 수 있습니다. 3년 뒤에는 수수료 없이 전액 상환이나 더 싼 대출로 대환이 가능하고, 온라인 대환대출 인프라로 은행 방문 없이 옮길 수 있습니다.",
+     act:"대출 실행일 3년 뒤를 캘린더에 등록하고, 그 시점에 금리를 비교해 대환을 검토하세요. 혼합형이면 고정 기간 종료 시점과 함께 보세요.",
+     law:"금융소비자 보호에 관한 법률 제20조 제1항 제4호 · 같은 법 시행령 제15조(중도상환수수료 부과 요건)"},
+    {id:"f6",lv:"chk",q:"14일 청약철회권이 있음을 알고 있는가",
+     why:"대출 계약 후 14일 안에는 위약금 없이 계약을 철회할 수 있습니다. 다만 원금과 이자, 은행이 부담한 근저당 설정 비용 등을 돌려줘야 하므로 주담대에서 실제로 쓰는 경우는 드물지만, 잘못된 상품에 서명했을 때 되돌릴 마지막 수단입니다.",
+     act:"실행 후 14일 안에 약정서를 다시 읽고 금리·만기·상환 방식이 상담 내용과 같은지 대조하세요. 다르면 은행에 설명의무 위반을 근거로 조정을 요구하고, 안 되면 철회를 검토하세요.",
+     law:"금융소비자 보호에 관한 법률 제46조(청약의 철회) · 제19조(설명의무)"},
+    {id:"f7",lv:"chk",cond:"policy",q:"디딤돌 대출 유지 조건(무주택·실거주)을 지키고 있는가",
+     why:"디딤돌은 대출 기간 중 다른 주택을 취득하면 회수 대상이 되고, 전입 후 실거주를 유지해야 합니다. 소득이 늘어난 것은 문제되지 않지만 주택 수와 거주 여부는 계속 확인됩니다.",
+     act:"상속·증여 등으로 주택을 취득할 상황이 생기면 먼저 수탁은행에 처분 기한과 예외를 문의하세요.",
+     law:"주택도시기금 운용계획 및 기금 대출 업무 처리 기준(대출 회수 사유)"},
+    {id:"f8",lv:"chk",q:"자동이체 계좌 잔액을 관리해 연체를 막고 있는가",
+     why:"원리금 연체가 반복되면 기한이익이 상실되어 전액 상환을 요구받고, 신용점수 하락으로 다른 대출과 대환에도 영향을 줍니다.",
+     act:"상환일 이틀 전 자동 입금이나 잔액 알림을 설정하고, 상환일을 급여일 직후로 조정할 수 있는지 은행에 문의하세요.",
+     law:"은행여신거래기본약관 제7조(기한이익 상실) · 신용정보의 이용 및 보호에 관한 법률(연체 정보 등록)"}
+  ]
+}
+];
+
+const NOTES = [
+ {t:"은행 비교 메모",
+  c:`[은행명 / 상담일]
+상품명:
+금리 유형: 변동 6개월 / 혼합 5년 / 고정
+기준금리 + 가산금리 − 우대금리 = 최종 %
+우대 조건 (유지 가능 O/X):
+한도 (기준 가격 · LTV · DSR 중 걸린 것):
+만기 / 상환 방식:
+중도상환수수료율 (3년 이내):
+실행까지 소요 기간:
+필요 서류 추가 요청:
+담당자 / 연락처:`},
+ {t:"잔금일 역산 일정",
+  c:`잔금일 (D-day):
+D-45 이전: 생애최초 자격·DSR 한도 확인, 계약서 특약 확정
+D-42: 매매계약 체결, 계약금 송금, 실거래 신고 (30일 내)
+D-30: 대출 신청 (디딤돌은 기금e든든 먼저), 서류 제출
+D-14: 승인 결과 · 최종 한도 확인, 부족분 자기자금 확정
+D-7: 법무사 견적 비교, 취득세·채권·인지세 현금 준비
+D-3: 은행 실행 전 조건 완료 확인, 잔금 송금 계좌 확인
+D-day 오전: 등기부 재확인 → 대출 실행 → 잔금 → 등기 접수 → 취득세 납부(감면 신청)
+D+0~7: 전입신고 (디딤돌 1개월, 은행 6개월 기한)
+D+3개월: 취득세 감면 상시거주 요건 시작 확인
+D+3년: 중도상환수수료 종료, 거주 3년 요건 완료`},
+ {t:"잔금일 당일 순서",
+  c:`1. 인터넷등기소에서 등기부등본 발급 → 갑구·을구 계약 시점과 대조
+2. 은행 대출 실행 확인 (매도인 계좌 직접 입금 여부)
+3. 자기자금 잔금 송금 → 매도인 영수증 수령
+4. 매도인 선순위 근저당 상환·말소 서류 확인
+5. 법무사: 소유권 이전 + 근저당 설정 동시 접수
+6. 취득세 신고·납부 + 생애최초 감면 신청서 제출
+7. 관리비·공과금 정산, 열쇠·카드키 인수
+8. 전입신고 (당일 또는 최대한 빨리)`}
+];
+
+const LAWS = [
+ ["지방세특례제한법 제36조의3", "생애최초 주택 구입 취득세 감면. 취득가액 12억 이하 주택에 200만 원 한도(인구감소지역 소형주택 300만 원). 취득 후 3개월 내 상시거주 시작, 3년 거주 유지, 3개월 내 추가 주택 취득 금지. 2026.1.1 취득분부터 2028.12.31까지 연장 적용.", "https://www.law.go.kr/법령/지방세특례제한법/제36조의3"],
+ ["지방세법 제11조·제20조", "제11조는 주택 취득세율(6억 이하 1%, 6~9억 1~3%, 9억 초과 3%), 제20조는 취득일부터 60일 내 신고·납부 의무.", "https://www.law.go.kr/법령/지방세법/제20조"],
+ ["소득세법 제52조 제5항", "장기주택저당차입금 이자상환액 소득공제. 무주택·1주택 세대주 근로자, 기준시가 6억 이하, 만기 15년 이상, 등기 후 3개월 내 차입. 공제 한도 연 600만~2,000만 원.", "https://www.law.go.kr/법령/소득세법/제52조"],
+ ["은행업감독규정 별표6", "주택 관련 담보대출 리스크관리 기준. LTV·DTI·DSR 비율, 규제지역 구분, 생애최초·서민실수요자 우대, 스트레스 DSR의 규정상 근거. 금융위원회 고시(행정규칙).", "https://www.law.go.kr/행정규칙/은행업감독규정"],
+ ["금융위원회 가계부채 관리 강화 방안 (2025.6.27) · 10.15 대책", "법률이 아닌 행정지도. 수도권·규제지역 주담대 6억 상한, 생애최초 LTV 70%, 6개월 전입 의무, 만기 30년 제한, 신용대출 연소득 이내, 수도권 스트레스 금리 3.0%p, 주택가격별(15억·25억) 한도 차등. 은행 추가약정서로 차주에게 적용됩니다.", "https://www.fsc.go.kr/no010101/84824"],
+ ["주택법 제63조·제63조의2", "투기과열지구(제63조)와 조정대상지역(제63조의2) 지정 근거. 규제지역이 되면 LTV·DSR 강화, 취득세 중과, 전매 제한 등이 따라옵니다. 지정·해제는 국토교통부 고시.", "https://www.law.go.kr/법령/주택법/제63조"],
+ ["부동산 거래신고 등에 관한 법률 제3조·제10조~제18조", "제3조는 계약 후 30일 내 실거래 신고와 자금조달계획서 제출. 제10조 이하는 토지거래허가구역 지정, 허가 없는 계약의 무효, 허가 주택 2년 실거주 의무와 이행강제금.", "https://www.law.go.kr/법령/부동산거래신고등에관한법률"],
+ ["민법 제565조", "해약금. 계약금을 준 매수인은 계약금을 포기하고, 받은 매도인은 배액을 돌려주고 해제할 수 있다는 규정. 대출 부결 시 계약금을 지키려면 이 규정을 대신할 특약이 필요합니다.", "https://www.law.go.kr/법령/민법/제565조"],
+ ["부동산등기법 제75조 · 부동산등기 특별조치법 제2조", "근저당권 등기의 채권최고액 기재(제75조)와 잔금일부터 60일 내 소유권 이전 등기 신청 의무(특별조치법 제2조).", "https://www.law.go.kr/법령/부동산등기특별조치법/제2조"],
+ ["주택임대차보호법 제3조", "임차인의 대항력과 임대인 지위 승계. 세입자가 있는 집을 사면 임대차 계약이 그대로 새 집주인에게 넘어옵니다.", "https://www.law.go.kr/법령/주택임대차보호법/제3조"],
+ ["주택도시기금법 제8조·제9조", "제8조는 등기 시 국민주택채권 매입 의무, 제9조는 기금의 용도(디딤돌 등 주택구입 자금 융자). 디딤돌의 세부 조건은 매년 국토교통부 주택도시기금 운용계획으로 정합니다.", "https://www.law.go.kr/법령/주택도시기금법/제9조"],
+ ["한국주택금융공사법 제22조", "보금자리론·적격대출 등 공사의 업무 범위. 보금자리론 조건은 공사 홈페이지 공시로 확인합니다.", "https://www.law.go.kr/법령/한국주택금융공사법/제22조"],
+ ["금융소비자 보호에 관한 법률 제19조·제20조·제46조", "제19조 설명의무, 제20조 불공정영업행위 금지(중도상환수수료는 대출일부터 3년 이내만 예외적으로 부과, 끼워팔기 금지), 제46조 대출성 상품 14일 청약철회권.", "https://www.law.go.kr/법령/금융소비자보호에관한법률/제46조"],
+ ["은행법 제30조의2", "금리인하요구권. 신용 상태가 개선된 차주는 금리 인하를 요구할 수 있고, 은행은 10영업일 내 결과와 사유를 통지해야 합니다.", "https://www.law.go.kr/법령/은행법/제30조의2"],
+ ["인지세법 제3조", "부동산 매매계약서 인지세. 기재금액 1억 초과 10억 이하 15만 원, 10억 초과 35만 원.", "https://www.law.go.kr/법령/인지세법/제3조"],
+ ["은행여신거래기본약관 제7조", "기한이익 상실. 원리금 연체가 일정 횟수를 넘으면 은행이 대출 전액의 즉시 상환을 요구할 수 있는 근거. 공정거래위원회 표준약관.", "https://www.kfb.or.kr"]
+];
+
+const TERMS = [
+ ["LTV (담보인정비율)","담보 가치 대비 대출 가능 비율. 기준 가격은 매매가가 아니라 은행이 정한 시세나 감정가 중 낮은 값입니다."],
+ ["DSR (총부채원리금상환비율)","연소득 대비 모든 대출의 연간 원리금 비율. 은행권 40%가 상한이며 주담대 한도를 실제로 결정하는 숫자입니다."],
+ ["스트레스 DSR","미래 금리 상승을 가정해 실제 금리에 가산금리를 더해 DSR을 계산하는 방식. 2026년 수도권 주담대는 3.0%p를 더합니다."],
+ ["DTI (총부채상환비율)","주담대 연 원리금과 기타 대출 연 이자를 연소득으로 나눈 비율. 디딤돌 같은 정책대출에서 주로 씁니다."],
+ ["생애최초 주택구입자","본인과 배우자가 과거에 주택을 소유한 적이 없는 사람. 은행 우대·정책대출·취득세 감면에서 각각 세부 요건이 조금씩 다릅니다."],
+ ["규제지역","투기과열지구·조정대상지역으로 지정된 곳. 2026년 9월 기준 서울 전역과 경기 15곳(과천·광명·성남 분당·수정·중원·수원 영통·장안·팔달·안양 동안·용인 수지·기흥·의왕·하남·화성 동탄·구리)."],
+ ["토지거래허가구역","일정 면적 이상 토지(주택 포함) 거래에 지자체 허가가 필요한 구역. 허가 주택은 2년 실거주 의무가 있습니다."],
+ ["채권최고액","근저당 설정 시 등기부에 적는 담보 한도. 보통 대출액의 110~120%로 설정되며 실제 빚이 아닙니다."],
+ ["기한이익상실","연체 등으로 은행이 만기 전에 대출 전액 상환을 요구할 수 있게 되는 것."],
+ ["혼합형 금리","일정 기간(보통 5년) 고정 후 변동으로 바뀌는 금리. 은행에서 '고정금리'로 부르는 상품 대부분이 이 형태입니다."],
+ ["코픽스 (COFIX)","은행연합회가 매달 발표하는 자금조달비용지수. 변동금리 주담대의 기준금리로 쓰입니다."],
+ ["원리금균등 · 원금균등","원리금균등은 매달 같은 금액, 원금균등은 원금을 균등하게 갚아 초기 부담이 크고 총이자가 적습니다."],
+ ["거치기간","원금은 갚지 않고 이자만 내는 기간. 수도권 주담대는 사실상 거치가 허용되지 않습니다."],
+ ["기준시가 · 공시가격","국세청과 국토부가 정하는 세금 계산용 주택 가격. 소득공제 6억 요건은 매매가가 아닌 이 가격으로 판단합니다."],
+ ["자금조달계획서","집값을 어떤 돈으로 마련하는지 항목별로 적는 신고 서류. 규제지역은 금액 무관, 비규제 수도권은 6억 이상 거래에 제출합니다."],
+ ["기금e든든","주택도시기금 대출(디딤돌·버팀목)을 온라인으로 신청하고 자격을 진단하는 사이트."],
+ ["마이홈 포털","주거복지·정책대출 정보를 모아둔 국토부 사이트. 디딤돌 조건과 금리를 공식적으로 확인합니다."]
+];
+
+const PREP = [
+ {id:"d1",q:"주택소유확인서 (본인·배우자, 정부24)"},
+ {id:"d2",q:"주민등록등본·초본 (주소 이력 포함), 가족관계증명서, 혼인관계증명서"},
+ {id:"d3",q:"재직증명서, 근로소득원천징수영수증 2년분, 최근 3개월 급여명세서"},
+ {id:"d4",q:"소득금액증명원 (홈택스), 건강보험 자격득실확인서·납부확인서"},
+ {id:"d5",q:"매매계약서 원본, 계약금 영수증 또는 이체 확인서"},
+ {id:"d6",q:"등기사항전부증명서 (계약 시점·잔금일 당일)"},
+ {id:"d7",q:"인감증명서·인감도장 또는 본인서명사실확인서"},
+ {id:"d8",q:"신분증, 통장 사본 (자동이체·잔금 송금 계좌)"},
+ {id:"d9",q:"자금조달계획서 증빙 (예금잔액증명, 증여 계약서 등)"},
+ {id:"d10",q:"청약통장 가입 확인서 (디딤돌 우대금리용)"},
+ {id:"d11",q:"생애최초 취득세 감면 신청서 (구청 세무과·위택스)"}
+];
+
+const CATS = [
+ {id:"pre", name:"계약 전", desc:"도장을 찍기 전에 끝내야 하는 것들입니다. 여기서 확인한 숫자가 임장할 가격대와 계약서 특약을 정합니다."},
+ {id:"apply", name:"신청·심사", desc:"계약 후 잔금일까지. 상품을 고르고, 심사가 뒤집히지 않게 신용을 지키는 단계입니다."},
+ {id:"close", name:"잔금·등기", desc:"잔금일 하루에 몰리는 일들입니다. 순서가 어긋나면 그날 등기가 안 됩니다."},
+ {id:"after", name:"실행 후", desc:"전입·거주 의무와 세금 혜택, 그리고 3년 뒤 갈아타기까지 챙길 권리와 의무입니다."}
+];
+
+const LV = {must:"필수",imp:"중요",chk:"확인"};
+const KEY = "loan-checklist-v1";
+const CONDKEY = "loan-cond-v1";
+
+/* ── 내 조건 (규제지역·세입자·정책대출 여부에 따라 해당 없는 항목을 뺀다) ── */
+let conds = {reg:false, tenant:false, policy:true};
+try{ const c = JSON.parse(localStorage.getItem(CONDKEY)); if(c) conds = {...conds, ...c}; }catch(e){}
+function saveConds(){ try{ localStorage.setItem(CONDKEY, JSON.stringify(conds)); }catch(e){} }
+function relevant(it){
+  if(!it.cond) return true;
+  return !!conds[it.cond];
+}
+
+let state = {};
+try{ state = JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ state = {}; }
+function saveLocal(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+/* ── 공유 저장 (링크를 받은 사람과 체크 상태 동기화) ── */
+let checksRef = null, shared = false;
+const syncEl = () => document.getElementById("syncMsg");
+function setSync(msg, isShared){
+  const el = syncEl(); if(!el) return;
+  el.textContent = msg;
+  el.classList.toggle("shared", !!isShared);
+}
+function applyState(){
+  document.querySelectorAll(".item").forEach(card=>{
+    card.classList.toggle("checked", !!state[card.dataset.id]);
+  });
+  refresh();
+}
+async function writeShared(id, val){
+  try{
+    await checksRef.update({items: {[id]: !!val}});
+  }catch(err){
+    if(err && err.code === "invalid_argument"){
+      try{
+        const items = {}; Object.keys(state).forEach(k=>items[k]=true);
+        await checksRef.set({items});
+      }catch(e2){
+        shared = false;
+        setSync("공유 저장 권한이 없어 이 기기에만 저장돼요", false);
+        saveLocal();
+      }
+    }else{
+      shared = false;
+      setSync("공유 저장 권한이 없어 이 기기에만 저장돼요", false);
+      saveLocal();
+    }
+  }
+}
+function setCheck(id, val){
+  if(val) state[id] = true; else delete state[id];
+  refresh();
+  if(shared && checksRef){ writeShared(id, val); }
+  else{ saveLocal(); }
+}
+(async ()=>{
+  try{
+    if(!(window.claude && window.claude.use)) return;
+    const db = await claude.use("db");
+    if(!db) return;
+    checksRef = db.doc("shared/checks");
+    let first = true;
+    checksRef.onSnapshot(snap=>{
+      const d = (typeof snap.data === "function" ? snap.data() : null) || null;
+      if(first){
+        first = false;
+        if(!d && Object.keys(state).length){
+          const items = {}; Object.keys(state).forEach(k=>items[k]=true);
+          shared = true;
+          setSync("링크를 받은 사람과 체크가 함께 보여요", true);
+          checksRef.set({items}).catch(()=>{
+            shared = false;
+            setSync("공유 저장 권한이 없어 이 기기에만 저장돼요", false);
+          });
+          return;
+        }
+      }
+      const items = (d && d.items) || {};
+      state = {};
+      for(const k in items){ if(items[k]) state[k] = true; }
+      shared = true;
+      setSync("링크를 받은 사람과 체크가 함께 보여요", true);
+      applyState();
+    }, ()=>{
+      shared = false; checksRef = null;
+      setSync("이 기기에만 저장 중", false);
+    });
+  }catch(e){}
+})();
+
+const checkSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5"/></svg>';
+const caretSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+
+function itemHTML(it, withBody){
+  return `<article class="item${state[it.id]?" checked":""}" data-id="${it.id}" data-lv="${it.lv||""}">
+    <div class="item-head" tabindex="0" role="button" aria-expanded="false">
+      <button class="check" aria-label="완료 표시">${checkSvg}</button>
+      <div class="item-main">
+        ${it.lv?`<span class="badge ${it.lv}">${LV[it.lv]}</span>`:""}
+        <div class="q">${it.q}</div>
+      </div>
+      ${withBody?`<span class="caret">${caretSvg}</span>`:""}
+    </div>
+    ${withBody?`<div class="item-body">
+      <h4>왜 확인하나요</h4><p>${it.why}</p>
+      <h4>확인 후 할 일</h4><p>${it.act}</p>
+      ${it.law?`<h4>근거</h4><p class="law">${it.law}</p>`:""}
+    </div>`:""}
+  </article>`;
+}
+
+const sectionsEl = document.getElementById("sections");
+sectionsEl.innerHTML = CATS.map(cat=>{
+  const secs = DATA.filter(s=>s.cat===cat.id);
+  const total = secs.reduce((n,s)=>n+s.items.length, 0);
+  return `<div class="group" data-cat="${cat.id}">
+    <div class="group-head">
+      <span class="group-tag">${cat.name}</span>
+      <span class="group-prog"><strong data-gdone="${cat.id}">0</strong>/<span data-gtotal="${cat.id}">${total}</span></span>
+      <p class="group-desc">${cat.desc}</p>
+    </div>
+    ${secs.map(sec=>`
+    <section data-sec>
+      <h2>${sec.title} <span class="count">${sec.items.length}문항</span></h2>
+      ${sec.desc?`<p class="desc">${sec.desc}</p>`:""}
+      <div class="items">${sec.items.map(it=>itemHTML(it,true)).join("")}</div>
+    </section>`).join("")}
+  </div>`;
+}).join("");
+
+document.getElementById("notes").innerHTML = NOTES.map((cl,i)=>`
+  <div class="note">
+    <h3>${cl.t}</h3>
+    <blockquote>${cl.c}</blockquote>
+    <button class="copy" data-i="${i}">템플릿 복사</button>
+  </div>`).join("");
+
+document.getElementById("laws").innerHTML = LAWS.map(([t,d,u])=>`
+  <details><summary>${t}</summary><div class="def">${d}${u?` <a href="${u}" target="_blank" rel="noopener">원문 보기</a>`:""}</div></details>`).join("");
+
+document.getElementById("terms").innerHTML = TERMS.map(([t,d])=>`
+  <details><summary>${t}</summary><div class="def">${d}</div></details>`).join("");
+
+document.getElementById("prep").innerHTML = PREP.map(it=>itemHTML(it,false)).join("");
+
+const BYID = {}; DATA.forEach(s=>s.items.forEach(it=>BYID[it.id]=it));
+let curCat = "all", curLv = "all";
+
+function refresh(){
+  document.querySelectorAll("[data-sec] .item").forEach(card=>{
+    const it = BYID[card.dataset.id];
+    card.classList.toggle("excluded", !!it && !relevant(it));
+    card.classList.toggle("hidden", curLv!=="all" && card.dataset.lv!==curLv);
+  });
+  document.querySelectorAll("[data-sec]").forEach(sec=>{
+    const cnt = sec.querySelector(".count");
+    if(cnt) cnt.textContent = sec.querySelectorAll(".item:not(.excluded)").length+"문항";
+    sec.style.display = sec.querySelectorAll(".item:not(.excluded):not(.hidden)").length ? "" : "none";
+  });
+  document.querySelectorAll(".group").forEach(g=>{
+    const catOk = curCat==="all" || g.dataset.cat===curCat;
+    const visible = g.querySelectorAll(".item:not(.excluded):not(.hidden)").length;
+    g.style.display = (catOk && visible) ? "" : "none";
+  });
+
+  const live = DATA.flatMap(s=>s.items).filter(relevant);
+  const allIds = [...live, ...PREP];
+  const mustIds = live.filter(i=>i.lv==="must");
+  const done = allIds.filter(i=>state[i.id]).length;
+  const mustDone = mustIds.filter(i=>state[i.id]).length;
+  document.getElementById("allDone").textContent = done;
+  document.getElementById("allTotal").textContent = allIds.length;
+  document.getElementById("mustDone").textContent = mustDone;
+  document.getElementById("mustTotal").textContent = mustIds.length;
+  document.getElementById("barFill").style.width = (allIds.length? done/allIds.length*100 : 0)+"%";
+  document.getElementById("progress").classList.toggle("all-must-done", mustDone===mustIds.length && mustIds.length>0);
+  CATS.forEach(cat=>{
+    const items = DATA.filter(s=>s.cat===cat.id).flatMap(s=>s.items).filter(relevant);
+    const doneEl = document.querySelector(`[data-gdone="${cat.id}"]`);
+    const totEl = document.querySelector(`[data-gtotal="${cat.id}"]`);
+    if(doneEl) doneEl.textContent = items.filter(i=>state[i.id]).length;
+    if(totEl) totEl.textContent = items.length;
+  });
+}
+refresh();
+
+document.body.addEventListener("click", e=>{
+  const check = e.target.closest(".check");
+  if(check){
+    const card = check.closest(".item");
+    const id = card.dataset.id;
+    const val = !state[id];
+    card.classList.toggle("checked", val);
+    setCheck(id, val);
+    return;
+  }
+  const head = e.target.closest(".item-head");
+  if(head && head.parentElement.querySelector(".item-body")){
+    const card = head.parentElement;
+    const open = card.classList.toggle("open");
+    head.setAttribute("aria-expanded", open ? "true" : "false");
+    return;
+  }
+  const copy = e.target.closest(".copy");
+  if(copy){
+    const text = NOTES[+copy.dataset.i].c;
+    const ok = ()=>{ copy.textContent="복사됨"; copy.classList.add("copied");
+      setTimeout(()=>{copy.textContent="템플릿 복사";copy.classList.remove("copied");},1600); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(ok).catch(()=>fallbackCopy(text, ok));
+    }else{ fallbackCopy(text, ok); }
+  }
+});
+document.body.addEventListener("keydown", e=>{
+  if((e.key==="Enter"||e.key===" ") && e.target.classList.contains("item-head")){
+    e.preventDefault(); e.target.click();
+  }
+});
+function fallbackCopy(text, ok){
+  const ta = document.createElement("textarea");
+  ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); ok(); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+document.querySelectorAll(".chip.cond").forEach(chip=>{
+  chip.setAttribute("aria-pressed", conds[chip.dataset.cond] ? "true" : "false");
+});
+document.querySelectorAll(".chip").forEach(chip=>{
+  chip.addEventListener("click", ()=>{
+    if(chip.dataset.cond){
+      const on = chip.getAttribute("aria-pressed") !== "true";
+      chip.setAttribute("aria-pressed", on ? "true" : "false");
+      conds[chip.dataset.cond] = on;
+      saveConds();
+    }else{
+      const row = chip.parentElement;
+      row.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
+      chip.setAttribute("aria-pressed","true");
+      if(chip.dataset.cat) curCat = chip.dataset.cat; else curLv = chip.dataset.filter;
+    }
+    refresh();
+  });
+});
+
+document.getElementById("resetBtn").addEventListener("click", ()=>{
+  state = {}; saveLocal();
+  if(shared && checksRef){ checksRef.set({items:{}}).catch(()=>{}); }
+  document.querySelectorAll(".item.checked").forEach(c=>c.classList.remove("checked"));
+  refresh();
+});
+</script>
+</body>
+</html>
