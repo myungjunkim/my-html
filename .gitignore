@@ -1,2 +1,8 @@
 # Serena 로컬 메타데이터
 .serena/
+
+# macOS 파인더 메타데이터
+.DS_Store
+
+# Playwright MCP 로그·스냅샷
+.playwright-mcp/
